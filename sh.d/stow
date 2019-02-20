@@ -1,0 +1,48 @@
+#
+# Stow helper functions
+#
+
+#
+# mr set stow target
+#
+mr_set_stow_target () {
+    export STOW_TARGET=${HOME}/.local
+    export STOW_DIR=${HOME}/.local/.STOW
+}
+
+#
+# Mr init stow package
+#
+mr_init_stow_package () {
+    STOW_PKG_TYPE=directory
+    STOW_NO_AUTOMATIC_ACTIONS=yes
+    set_stow_common_opts
+}
+
+#
+# Install/Uninstall stow info hooks
+#
+mr_stow_info_hooks () {
+    mr_pre_unstow () {
+        stow_uninstall_info
+    }
+    mr_post_stow () {
+        stow_install_info
+    }
+}
+
+#
+# Intended to be called from mr_pre_unstow
+#
+stow_uninstall_info () {
+    install-info --delete --quiet --info-dir=$HOME/share/info $STOW_PKG_PATH/share/info/*.info
+}
+
+#
+# Intended to be called from mr_post_stow info
+#
+stow_install_info () {
+    install-info --info-dir=$HOME/share/info $STOW_PKG_PATH/share/info/*.info
+}
+
+# vim:fenc=utf-8:ft=sh:

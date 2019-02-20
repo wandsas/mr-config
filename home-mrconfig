@@ -1,0 +1,192 @@
+
+# This file will be pointed to by an ~/.mrconfig symlink
+# created in the fixups section below.
+
+[DEFAULT]
+include =
+    if [ -e ~/.config/mr/library-loaders ]; then
+        # mr-config already checked out
+        . ~/.config/mr/library-loaders
+        include_mr_extensions
+        load_libraries ~/.config/mr/sh.d/*
+        include_lib_dirs ~/.config/mr/lib.d
+    fi
+
+[.config/mr]
+order = 1
+name = mr-config
+chain = true
+checkout = git clone ssh://git@github.com/wandsas/mr-config $MR_REPO
+post_checkout =
+  cd $MR_REPO && git remote add ssh://git@rpi.gnu.local/mr-config
+fixups =
+  ln -sf "$MR_REPO/home-mrconfig" ~/.mrconfig
+  ln -sf "$MR_REPO/.stow-global-ignore" ~
+
+[$HOME/.GIT/wandsas/dotfiles]
+stowable = true
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
+
+[$HOME/.ssh]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/ssh $MR_REPO
+fixups = set_confidential_repo
+
+[$HOME/.gnupg]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/gnupg $MR_REPO
+
+[$HOME/.password-store]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/pass $MR_REPO
+
+[$HOME/.GIT/3rd-party/alacritty]
+stowable = true
+checkout = git clone git://github.com/jwilm/alacritty
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/alacritty
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  make clean
+  cargo build --release
+  install -d ${STOW_PKG_PATH}/bin
+  install -d ${STOW_PKG_PATH}/share/info
+  install -d ${STOW_PKG_PATH}/share/man/man1
+  install -d ${STOW_PKG_PATH}/share/applications
+  install -d ${STOW_PKG_PATH}/share/zsh/site-functions
+  install -m 755 target/release/alacritty -t ${STOW_PKG_PATH}/bin
+  install -m 644 alacritty.desktop -t ${STOW_PKG_PATH}/share/applications
+  install -m 644 alacritty.info -t ${STOW_PKG_PATH}/share/info
+  cp alacritty.man alacritty.1 && cp alacritty-completions.zsh _alacritty
+  install -m 644 alacritty.1 -t ${STOW_PKG_PATH}/share/man/man1
+  #install -m 644 _alacritty -t ${STOW_PKG_PATH}/share/zsh/site-functions/
+  rm -f alacritty.1 _alacritty
+  # User settings
+  if ! [ -d "${XDG_CONFIG_HOME:-~/.config}/alacritty" ]; then
+    install -d ${XDG_CONFIG_HOME:-$HOME/.config}/alacritty
+    install -m 644 alacritty.yml -d ${XDG_CONFIG_HOME:-$HOME/.config}/alacritty
+  fi
+  mr_restow_regardless
+skip = true
+
+[$HOME/.GIT/3rd-party/neovim-gtk]
+stowable = true
+checkout = git clone git://github.com/daa84/neovim-gtk
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  install -d ${STOW_PKG_PATH}
+  cargo build --release
+  make PREFIX=${STOW_PKG_PATH} install
+  mr_restow_regardless
+skip = true
+
+[$HOME/.emacs.d]
+checkout = git clone --recursive git://github.com/coldnew/coldnew-spacemacs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
+
+[$HOME/.cask]
+checkout = git clone git://github.com/cask/cask $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
+fixups = cask install
+
+[$HOME/.GIT/3rd-party/translate-shell]
+stowable = true
+checkout = git clone git://github.com/soimort/translate-shell
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/translate-shell
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  make PREFIX=$STOW_PKG_PATH install
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/pngquant]
+stowable = true
+checkout = git clone git://github.com/kornelski/pngquant.git
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/pngquant
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  make clean
+  ./configure --prefix=/usr/local
+  make PREFIX=${STOW_PKG_PATH} install
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/ympd]
+stowable = true
+checkout = git clone git://github.com/notandy/ympd
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
+  make install
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/betterlockscreen]
+stowable = true
+checkout = git clone git://github.com/pavanjadhaw/betterlockscreen
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/betterlockscreen
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  install -d $STOW_PKG_PATH/bin
+  install -m 755 betterlockscreen $STOW_PKG_PATH/bin
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/i3ipcpp]
+checkout = git clone git://github.com/drmgc/i3ipcpp $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipcpp
+
+[$HOME/.GIT/3rd-party/xpp]
+checkout = git clone git://github.com/jaagr/xpp $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/xpp
+
+[$HOME/.GIT/3rd-party/i3ipc-python]
+checkout = git clone git://github.com/acrisci/i3ipc-python $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipc-python
+
+[$HOME/.GIT/3rd-party/i3ipc-rs]
+checkout = git clone git://github.com/tmerr/i3ipc-rs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipc-rs
+
+[$HOME/.GIT/3rd-party/rofi-pass]
+stowable = true
+checkout = git clone git://github.com/carnager/rofi-pass
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-pass
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  install -d $STOW_PKG_PATH/bin
+  install -m 755 rofi-pass $STOW_PKG_PATH/bin
+  install -m 755 addpass $STOW_PKG_PATH/bin
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/rofi-scripts]
+stowable = true
+checkout = git clone git://github.com/carnager/rofi-scripts
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-scripts
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  install -d $STOW_PKG_PATH/bin
+  install -d $STOW_PKG_PATH/share/doc
+  install -d $STOW_PKG_PATH/etc
+  install -m 755 move_window_to_current $STOW_PKG_PATH/bin
+  install -m 755 rofi-surfraw/rofi-surfraw $STOW_PKG_PATH/bin
+  install -m 644 rofi-surfraw/searchengines $STOW_PKG_PATH/share/doc
+  install -m 644 rofi-surfraw/config $STOW_PKG_PATH/etc/rofi-surfraw.conf
+  install -m 644 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
+  mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/spacefm-bashscripts]
+checkout = git clone git://github.com/tri1976/bashscripts $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacefm-bashscripts
+
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:

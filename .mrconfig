@@ -1,0 +1,10 @@
+
+[DEFAULT]
+include =
+    . ~/.config/mr/library-loaders
+    include_lib_dirs ~/.config/mr/groups.d
+
+# N.B. anything placed here (i.e. after the above include) will not
+# any impact any repositories pulled in by the include.
+
+# vim:fenc=utf-8:ft=dosini:

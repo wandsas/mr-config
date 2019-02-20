@@ -1,0 +1,56 @@
+#
+# Test confidential/public repositories
+#
+
+debug () {
+    if [ -n "$MR_DEBUG_SKIP" ]; then
+        echo "# SKIP $MR_NAME?  $*"
+    fi
+}
+
+# set repo confidential
+set_confidential_repo () {
+    if [ $# != 0 ]; then
+        error "$MR_REPO: invoked set_confidential_repo $*"
+        exit 1
+    fi
+    MR_CONFIDENTIAL_REPO=yes
+}
+
+# set repo public
+set_public_repo () {
+    if [ $# != 0 ]; then
+        error "$MR_REPO: invoked set_public_repo $*"
+        exit 1
+    fi
+    MR_CONFIDENTIAL_REPO=no
+}
+
+# Check if repos is confidential or public.
+# Repo is confidential if it's name has the extension *.sec,
+# or set it manual to $MR_CONFIDENTIAL_REPO = "yes/no" with the functions
+# set_confidential_repo/set_public_repo.
+confidential_repo () {
+    if [ "$MR_CONFIDENTIAL_REPO" = 'yes' ]; then
+        debug "! Repo manually set as confidential via \$MR_CONFIDENTIAL_REPO"
+        return 0 # true
+    fi
+
+    if [ "$MR_CONFIDENTIAL_REPO" = 'no' ]; then
+        debug "! Repo manually set as public via \$MR_CONFIDENTIAL_REPO"
+        return 1 # false
+    fi
+
+    case "$MR_NAME" in
+        *.sec)
+            debug "! Repo auto-detected as confidential"
+            return 0 # true
+            ;;
+        *)
+            debug ". Repo is not confidential"
+            return 1 # false
+            ;;
+    esac
+}
+
+# vim:fenc=utf-8:ft=sh:
