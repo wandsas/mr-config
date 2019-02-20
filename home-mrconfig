@@ -82,10 +82,12 @@ fixups =
 skip = true
 
 [$HOME/.emacs.d]
-checkout = git clone --recursive git://github.com/coldnew/coldnew-spacemacs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
+order = 15
+checkout = git clone git://github.com/coldnew/coldnew-spacemacs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/coldnew-spacemacs
 
 [$HOME/.cask]
+order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
 fixups = cask install
