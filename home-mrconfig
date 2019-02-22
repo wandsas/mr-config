@@ -83,8 +83,8 @@ skip = true
 
 [$HOME/.emacs.d]
 order = 15
-checkout = git clone git://github.com/coldnew/coldnew-spacemacs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/coldnew-spacemacs
+checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
 
 [$HOME/.cask]
 order = 20
