@@ -65,7 +65,6 @@ fixups =
   #  install -m 644 alacritty.yml -d ${XDG_CONFIG_HOME:-$HOME/.config}/alacritty
   #fi
   mr_restow_regardless
-skip = true
 
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
