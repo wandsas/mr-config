@@ -1,0 +1,374 @@
+
+MR_GIT=$HOME/.GIT
+GIT_MY_ROOT=$MR_GIT/wandsas
+GIT_MY_UPSTREAM=github.com/wandsas
+
+
+check_repo_name () {
+    [ -n "$MR_NAME" ] || error "\$MR_NAME not set for $MR_REPO"
+}
+
+debug () {
+    if [ -n "$MR_DEBUG_SKIP" ]; then
+        echo "# SKIP $MR_NAME?  $*"
+    fi
+}
+
+set_confidential_repo () {
+    if [ $# != 0 ]; then
+        error "$MR_REPO: invoked set_confidential_repo $*"
+        exit 1
+    fi
+    MR_CONFIDENTIAL_REPO=yes
+}
+
+set_public_repo () {
+    if [ $# != 0 ]; then
+        error "$MR_REPO: invoked set_public_repo $*"
+        exit 1
+    fi
+    MR_CONFIDENTIAL_REPO=no
+}
+
+confidential_repo () {
+    if [ "$MR_CONFIDENTIAL_REPO" = 'yes' ]; then
+        debug "! Repo manually set as confidential via \$MR_CONFIDENTIAL_REPO"
+        return 0 # true
+    fi
+
+    if [ "$MR_CONFIDENTIAL_REPO" = 'no' ]; then
+        debug "! Repo manually set as public via \$MR_CONFIDENTIAL_REPO"
+        return 1 # false
+    fi
+
+    case "$MR_NAME" in
+        *.sec)
+            debug "! Repo auto-detected as confidential"
+            return 0 # true
+            ;;
+        *)
+            debug ". Repo is not confidential"
+            return 1 # false
+            ;;
+    esac
+}
+
+is_branch_present () {
+    local branch="$1"
+    git rev-parse "$branch" >/dev/null 2>&1
+}
+
+ensure_remote_tracked_locally () {
+    # Return true (0) if managed to ensure the remote is tracked locally
+    local remote="$1"
+    local upstream="$2"
+    #
+    if ! is_branch_present "$upstream"; then
+        info "$upstream is not tracked locally; fetching from $remote ..."
+        ggf "$remote" || return 1
+    else
+        info "Already tracking $upstream"
+    fi
+    return 0
+}
+
+fetch_and_switch_upstream_to () {
+    # Return true (0) if the switch was made
+    local remote="$1"
+    local upstream="$remote/$remote_branch"
+    #
+    ensure_remote_tracked_locally "$remote" "$upstream" || return 1
+    ggsup "$upstream"
+}
+
+configure_upstream () {
+    # Return true (0) iff the upstream was configured
+    local remote="$1"
+    #
+    if [ -z `git config "remote.$remote.url"` ]; then
+        mr remotes
+    else
+        echo "$remote remote already set up"
+        return 0
+    fi
+    if [ -z `git config "remote.$remote.url"` ]; then
+        error "'mr remotes' failed to configure $remote remote; cannot proceed."
+        return 1
+    fi
+    return 0
+}
+
+configure_upstream_and_switch_to () {
+    # Return true (0) if the switch was made
+    local remote="$1"
+    #
+    configure_upstream "$remote" || return 1
+    fetch_and_switch_upstream_to "$remote"
+}
+
+is_remote_in_use () {
+    # Return true (0) if the given remote is "in use", i.e.
+    # there is a local branch tracking it.
+    remote="$1"
+    git config --list | grep -q "^branch\..*\.remote=$remote\$"
+}
+
+remove_remote () {
+    remote="$1"
+
+    if git remote rm $remote; then
+        info "Removed $remote remote"
+        return 0
+    else
+        error "Failed to remove $remote remote."
+        return 1
+    fi
+}
+
+clean_unused_remote_matching_URL () {
+    # Removes any unused remote with a URL matching the given extended regexp.
+    # Returns true (0) iff a remote was successfully removed, or there
+    # was no need to remove a remote.
+    remote="$1"
+    eregexp="$2"
+
+    if is_remote_in_use "$remote"; then
+        using_branches=$( perl -lne "/^branch\.(.*)\.remote=$remote/ && print \$1" )
+        warning "$remote is still in use by the following local branches:"
+        warning "$using_branches"
+        return 1
+    fi
+
+    remote_url=`git config "remote.$remote.url"`
+    if [ -z "$remote_url" ]; then
+        return 0 # wasn't there in the first place
+    fi
+
+    if ! echo "$remote_url" | grep -Eq "$eregexp"; then
+        info "Not removing $remote remote with URL $remote_url (!~ /$eregexp/)"
+        return 0
+    fi
+
+    remove_remote $remote
+}
+
+# Utilities for ensuring that a git repository has the right remotes
+# set.  Particularly handy when several machines need to be set up as
+# mutual peers, in which case it automatically avoids adding a remote
+# pointing to the local machine.  For this to work, the
+# localhost-nickname module is also required (you can find this in the
+# same directory of the git repository where you found this module).
+#
+# Sample usage from within an .mrconfig file:
+#
+#   [repo]
+#   checkout = git clone ...
+#   remotes = git_add_remotes "
+#       remote1  git@github.com:$MY_GITHUB_USERNAME/$MR_NAME.git
+#       mydomain ssh://foo@REMOTE.com/path/to/git/repo
+#       ...
+#       "
+#
+# or even
+#
+#   [repo]
+#   checkout = git clone ...
+#   fixups = git_add_remotes "..."
+
+git_add_new_remote () {
+    remote="$1"
+    url="$2"
+    if git remote add "$remote" "$url"; then
+        info "Added remote $remote -> $url"
+        return 0
+    else
+        error "Failed to add remote $remote"
+        return 1
+    fi
+}
+
+git_set_remote () {
+    remote="$1"
+    url="$2"
+    existing_url="$3"
+    if git remote set-url "$remote" "$url"; then
+        info "Repointed remote $remote -> $url (was $existing_url)"
+        return 0
+    else
+        error "Failed to repoint remote $remote"
+        return 1
+    fi
+}
+
+# git_add_remote REMOTE-NAME URL
+git_add_remote () {
+    remote="$1"
+    url="$2"
+    existing_url=$( git config "remote.$remote.url" ) || true
+    if [ -n "$existing_url" ]; then
+        if [ "$url" = "$existing_url" ]; then
+            #info "Remote $remote already points to $url"
+            return
+        fi
+
+        if [ -n "$MR_OVERWRITE_REMOTES" ]; then
+            git_set_remote "$remote" "$url" "$existing_url"
+            return
+        else
+            warning "Remote $remote already points to $existing_url not $url"
+            warning "Use MR_OVERWRITE_REMOTES=y to rewrite URL."
+            return
+        fi
+    fi
+
+    git_add_new_remote "$remote" "$url"
+}
+
+# git_add_remotes REMOTES
+#
+# REMOTES is a multi-line string where each line is
+#
+#   REMOTE URL [EXCEPTION]
+#
+# Invokes git_add_remote for each line,
+# substituting 'REMOTE' for REMOTE in URL,
+# except for lines where localhost nickname equals EXCEPTION
+git_add_remotes () {
+    cd "$MR_REPO"
+    read_localhost_nickname
+    # Needs to be exported to while-read subshell
+    export LOCALHOST_NICKNAME="$localhost_nickname"
+    echo "$*" | while read remote url exception; do
+        if [ -z "$remote$url" ]; then
+            # presumably got a blank line
+            continue
+        fi
+        url=$( echo "$url" | sed "s/REMOTE/$remote/g" )
+
+        if [ -z "$exception" ]; then
+            exception="$remote"
+        fi
+        if [ "$LOCALHOST_NICKNAME" = "$exception" ]; then
+            #info "Won't add remote $url for $exception"
+            continue
+        fi
+
+        git_add_remote "$remote" "$url"
+    done
+}
+
+debug () {
+    if [ -n "$MR_DEBUG_SKIP" ]; then
+        echo "# SKIP $MR_NAME?  $*"
+    fi
+}
+
+not_linux () {
+    [ `uname` != Linux ]
+}
+
+missing_exe () {
+    if [ $# != 1 ]; then
+	echo >&2 "BUG: missing_exe called with parameters: $*"
+	exit 1
+    fi
+    if which "$1" >/dev/null 2>&1; then
+        debug ". Found $1 in \$PATH"
+        return 1 # false
+    else
+        debug "! Didn't find $1 in \$PATH"
+        return 0 # true
+    fi
+}
+
+missing_exes () {
+    for i in "$@"; do
+	if missing_exe "$i"; then
+	    return 0 # true
+	fi
+    done
+    return 1 # false
+}
+
+missing_file () {
+    if [ -f "$1" ]; then
+        debug ". Found $1"
+        return 1 # false
+    else
+        debug "! Didn't find $1"
+        return 0 # true
+    fi
+}
+
+missing_dir () {
+    if [ -d "$1" ]; then
+        debug ". Found $1"
+        return 1 # false
+    else
+        debug "! Didn't find $1"
+        return 0 # true
+    fi
+}
+
+mr_set_stow_target () {
+    export STOW_TARGET=/usr/local
+    export STOW_DIR=/usr/local/.STOW
+}
+
+mr_init_stow_package () {
+    STOW_PKG_TYPE=directory
+    STOW_NO_AUTOMATIC_ACTIONS=yes
+    set_stow_common_opts
+}
+
+mr_stow_info_hooks () {
+    mr_pre_unstow () {
+        stow_uninstall_info
+    }
+    mr_post_stow () {
+        stow_install_info
+    }
+}
+
+stow_uninstall_info () {
+    install-info --delete --quiet --info-dir=$HOME/share/info $STOW_PKG_PATH/share/info/*.info
+}
+
+stow_install_info () {
+    install-info --info-dir=$HOME/share/info $STOW_PKG_PATH/share/info/*.info
+}
+
+hours_since () {
+    [ "$1" = update ] && ! hours_since "$1" 12
+}
+
+on () {
+    for host in $@; do
+        if [ "${host%@*}" != "${host#*@}" ]; then
+            if [ "$(whoami)" != "${host%@*}" ]; then
+                continue
+            fi
+            host="${host#*@}"
+        fi
+        if [ "$(hostname)" = "$host" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+myworkstation () {
+    on wandsas@z800
+}
+
+z800 () {
+    [[ "$(hostname)" = "z800" ]]     
+}
+
+wandsas () {
+    [[ "$USER" = "wandsas" ]]
+}
+
+root () {
+    [[ "$USER" = "root" ]]
+}

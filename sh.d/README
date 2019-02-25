@@ -1,3 +1,0 @@
-Files in this directory are source'd within the 'lib' context,
-typically via files in the ../lib.d/ directory, and so should contain
-raw shell script.
