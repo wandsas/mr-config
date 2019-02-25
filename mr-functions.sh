@@ -1,7 +1,4 @@
 
-STOW_TARGET=${HOME}/.local
-STOW_DIR=${STOW_TARGET}/.STOW
-
 check_repo_name () {
     [ -n "$MR_NAME" ] || error "\$MR_NAME not set for $MR_REPO"
 }
