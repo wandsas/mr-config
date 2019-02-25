@@ -1,0 +1,22 @@
+
+[$HOME/.GIT/3rd-party/i3ipcpp]
+checkout = git clone git://github.com/drmgc/i3ipcpp $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipcpp
+skip = true
+
+[$HOME/.GIT/3rd-party/xpp]
+checkout = git clone git://github.com/jaagr/xpp $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/xpp
+skip = true
+
+[$HOME/.GIT/3rd-party/i3ipc-python]
+checkout = git clone git://github.com/acrisci/i3ipc-python $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipc-python
+skip = true
+
+[$HOME/.GIT/3rd-party/i3ipc-rs]
+checkout = git clone git://github.com/tmerr/i3ipc-rs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/i3ipc-rs
+skip = true
+
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:
