@@ -306,6 +306,7 @@ missing_dir () {
 }
 
 mr_set_stow_target () {
+	:
     #export STOW_TARGET=${HOME}/.local
     #export STOW_DIR=${STOW_TARGET}/.STOW
 }

@@ -9,12 +9,10 @@ lib = . ~/.config/mr/mr-functions.sh
 order = 1
 name = mr-config
 chain = true
-checkout = git clone ssh://git@github.com/wandsas/mr-config $MR_REPO
-post_checkout =
-  cd $MR_REPO && git remote add ssh://git@rpi.gnu.local/mr-config
+checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/mr-config $MR_REPO
 fixups =
-  ln -sf "$MR_REPO/home-mrconfig" ~/.mrconfig
-  ln -sf "$MR_REPO/.stow-global-ignore" ~
+  ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
+  ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
 
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
