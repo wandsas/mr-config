@@ -34,9 +34,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/pass $MR_REPO
 stowable = true
 checkout = git clone git://github.com/jwilm/alacritty
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/alacritty
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   make clean
   cargo build --release
@@ -60,9 +58,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/daa84/neovim-gtk
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   install -d ${STOW_PKG_PATH}
   cargo build --release
@@ -84,9 +80,7 @@ fixups = cask install
 stowable = true
 checkout = git clone git://github.com/soimort/translate-shell
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/translate-shell
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   make PREFIX=$STOW_PKG_PATH install
   mr_restow_regardless
@@ -95,9 +89,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/pngquant
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   make clean
   ./configure --prefix=/usr/local
@@ -108,9 +100,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/notandy/ympd
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
   make install
@@ -120,9 +110,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/pavanjadhaw/betterlockscreen
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/betterlockscreen
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   install -d $STOW_PKG_PATH/bin
   install -m 755 betterlockscreen $STOW_PKG_PATH/bin
@@ -132,9 +120,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-pass
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   install -d $STOW_PKG_PATH/bin
   install -m 755 rofi-pass $STOW_PKG_PATH/bin
@@ -145,9 +131,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-scripts
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-scripts
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
+lib = mr_init_stow_package
 fixups =
   install -d $STOW_PKG_PATH/bin
   install -d $STOW_PKG_PATH/share/doc

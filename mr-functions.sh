@@ -1,8 +1,6 @@
 
-MR_GIT=$HOME/.GIT
-GIT_MY_ROOT=$MR_GIT/wandsas
-GIT_MY_UPSTREAM=github.com/wandsas
-
+STOW_TARGET=${HOME}/.local
+STOW_DIR=${STOW_TARGET}/.STOW
 
 check_repo_name () {
     [ -n "$MR_NAME" ] || error "\$MR_NAME not set for $MR_REPO"
@@ -311,8 +309,8 @@ missing_dir () {
 }
 
 mr_set_stow_target () {
-    export STOW_TARGET=/usr/local
-    export STOW_DIR=/usr/local/.STOW
+    export STOW_TARGET=${HOME}/.local
+    export STOW_DIR=${STOW_TARGET}/.STOW
 }
 
 mr_init_stow_package () {
