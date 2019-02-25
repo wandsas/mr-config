@@ -306,11 +306,13 @@ missing_dir () {
 }
 
 mr_set_stow_target () {
-    export STOW_TARGET=${HOME}/.local
-    export STOW_DIR=${STOW_TARGET}/.STOW
+    #export STOW_TARGET=${HOME}/.local
+    #export STOW_DIR=${STOW_TARGET}/.STOW
 }
 
 mr_init_stow_package () {
+    STOW_TARGET=${HOME}/.local
+    STOW_DIR=${STOW_TARGET}/.STOW
     STOW_PKG_TYPE=directory
     STOW_NO_AUTOMATIC_ACTIONS=yes
     set_stow_common_opts
