@@ -40,12 +40,18 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/pass $MR_REPO
 [$HOME/.GIT/wandsas/gitolite-admin]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
 
-[$HOME/.local/share/fonts]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
-
 [$HOME/.GIT/wandsas/neomutt-config]
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/neomutt-config $MR_REPO
+
+[$HOME/.GIT/wandsas/wandsas.github.io]
+checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
+
+[$HOME/vimwiki]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
+
+[$HOME/.local/share/fonts]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
 
 # -----------------------------------------------------------------------------
@@ -65,7 +71,7 @@ fixups =
   make install
   mr_restow_regardless
 skip = true
-  
+
 
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
