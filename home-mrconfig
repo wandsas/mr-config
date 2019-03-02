@@ -85,7 +85,6 @@ fixups =
   cargo build --release
   make PREFIX=${STOW_PKG_PATH} install
   mr_restow_regardless
-skip = true
 
 [$HOME/.emacs.d]
 order = 15
@@ -128,7 +127,6 @@ fixups =
   [ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
   [ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
   mr_restow_regardless
-skip = true
 
 
 # -----------------------------------------------------------------------------
