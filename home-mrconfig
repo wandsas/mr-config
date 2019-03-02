@@ -43,6 +43,10 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
+[$HOME/.GIT/wandsas/neomutt-config]
+stowable = true
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/neomutt-config $MR_REPO
+
 
 # -----------------------------------------------------------------------------
 # Editors
