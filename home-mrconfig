@@ -5,6 +5,10 @@ include =
 
 lib = . ~/.config/mr/mr-functions.sh
 
+# -----------------------------------------------------------------------------
+# Dotfiles
+# -----------------------------------------------------------------------------
+
 [.config/mr]
 order = 1
 name = mr-config
@@ -17,6 +21,11 @@ fixups =
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
+
+
+# -----------------------------------------------------------------------------
+# Confidential repositories
+# -----------------------------------------------------------------------------
 
 [$HOME/.ssh]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/ssh $MR_REPO
@@ -33,6 +42,41 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
 
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
+
+
+# -----------------------------------------------------------------------------
+# Editors
+# -----------------------------------------------------------------------------
+
+[$HOME/.GIT/3rd-party/neovim-gtk]
+stowable = true
+checkout = git clone git://github.com/daa84/neovim-gtk
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
+lib =
+  mr_set_stow_target
+  mr_init_stow_package
+fixups =
+  install -d ${STOW_PKG_PATH}
+  cargo build --release
+  make PREFIX=${STOW_PKG_PATH} install
+  mr_restow_regardless
+skip = true
+
+[$HOME/.emacs.d]
+order = 15
+checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
+
+[$HOME/.cask]
+order = 20
+checkout = git clone git://github.com/cask/cask $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
+fixups = cask install
+
+
+# -----------------------------------------------------------------------------
+# X11 applications
+# -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/alacritty]
 stowable = true
@@ -59,30 +103,12 @@ fixups =
   [ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
   [ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
   mr_restow_regardless
+skip = true
 
-[$HOME/.GIT/3rd-party/neovim-gtk]
-stowable = true
-checkout = git clone git://github.com/daa84/neovim-gtk
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
-lib =
-  mr_set_stow_target
-  mr_init_stow_package
-fixups =
-  install -d ${STOW_PKG_PATH}
-  cargo build --release
-  make PREFIX=${STOW_PKG_PATH} install
-  mr_restow_regardless
 
-[$HOME/.emacs.d]
-order = 15
-checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
-
-[$HOME/.cask]
-order = 20
-checkout = git clone git://github.com/cask/cask $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
-fixups = cask install
+# -----------------------------------------------------------------------------
+# Cmdline
+# -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/translate-shell]
 stowable = true
@@ -162,17 +188,5 @@ fixups =
   install -m 644 rofi-surfraw/config $STOW_PKG_PATH/etc/rofi-surfraw.conf
   install -m 644 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
   mr_restow_regardless
-
-[$HOME/.GIT/3rd-party/spacefm-bashscripts]
-checkout = git clone git://github.com/tri1976/bashscripts $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacefm-bashscripts
-
-[$HOME/.GIT/3rd-party/tor-ramdisk]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk $MR_REPO
-remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
-
-[$HOME/.GIT/3rd-party/lh-bootstrap]
-checkout = git clone ssh://git@rpi.gnu.local/lh-bootstrap $MR_REPO
-remotes = git_add_remote ssh://git@github.com/skaware/lh-bootstrap
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:
