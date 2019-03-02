@@ -1,6 +1,18 @@
 
-check_repo_name () {
-    [ -n "$MR_NAME" ] || error "\$MR_NAME not set for $MR_REPO"
+info () {
+	echo -e "\e[1;34mINFO\e[0m: ${@}"
+}
+
+warn () {
+	echo -e "\e[1;33mWARN\e[0m: ${@}" >&2
+}
+
+error () {
+	echo -e "\e[1;31mERROR\e[0m: ${@}" >&2
+}
+
+die () {
+	local ret="$?"; error "$@"; exit "$ret"
 }
 
 debug () {
@@ -8,6 +20,15 @@ debug () {
         echo "# SKIP $MR_NAME?  $*"
     fi
 }
+
+check_repo_name () {
+    [ -n "$MR_NAME" ] || error "\$MR_NAME not set for $MR_REPO"
+}
+
+
+# -----------------------------------------------------------------------------
+# Confidential repositories
+# -----------------------------------------------------------------------------
 
 set_confidential_repo () {
     if [ $# != 0 ]; then
@@ -47,6 +68,11 @@ confidential_repo () {
             ;;
     esac
 }
+
+
+# -----------------------------------------------------------------------------
+# Git helper functions
+# -----------------------------------------------------------------------------
 
 is_branch_present () {
     local branch="$1"
@@ -252,11 +278,10 @@ git_add_remotes () {
     done
 }
 
-debug () {
-    if [ -n "$MR_DEBUG_SKIP" ]; then
-        echo "# SKIP $MR_NAME?  $*"
-    fi
-}
+
+# -----------------------------------------------------------------------------
+# Skippers
+# -----------------------------------------------------------------------------
 
 not_linux () {
     [ `uname` != Linux ]
@@ -307,12 +332,10 @@ missing_dir () {
 
 mr_set_stow_target () {
 	:
-    #export STOW_TARGET=${HOME}/.local
-    #export STOW_DIR=${STOW_TARGET}/.STOW
 }
 
 mr_init_stow_package () {
-    STOW_TARGET=${HOME}/.local
+    STOW_TARGET=${1:-$HOME/.local}
     STOW_DIR=${STOW_TARGET}/.STOW
     STOW_PKG_TYPE=directory
     STOW_NO_AUTOMATIC_ACTIONS=yes

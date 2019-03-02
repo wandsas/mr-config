@@ -52,6 +52,21 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/neomutt-config $MR_REPO
 # Editors
 # -----------------------------------------------------------------------------
 
+[$HOME/.GIT/3rd-party/neovim]
+stowable = true
+checkout = git clone git://github.com/neovim/neovim
+lib = mr_init_stow_package ~/.local
+fixups =
+  rm -rf build/
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH} -DCMAKE_BUILD_TYPE=Release ..
+  make
+  make install
+  mr_restow_regardless
+skip = true
+  
+
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
 checkout = git clone git://github.com/daa84/neovim-gtk
