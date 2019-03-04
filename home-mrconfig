@@ -28,11 +28,11 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
 # -----------------------------------------------------------------------------
 
 [$HOME/.ssh]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/ssh $MR_REPO
+checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/ssh $MR_REPO
 fixups = set_confidential_repo
 
 [$HOME/.gnupg]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/gnupg $MR_REPO
+checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/gnupg $MR_REPO
 
 [$HOME/.password-store]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/pass $MR_REPO
@@ -95,7 +95,6 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
 order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
-fixups = cask install
 
 
 # -----------------------------------------------------------------------------
