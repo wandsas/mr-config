@@ -144,6 +144,15 @@ fixups =
   mr_restow_regardless
 skip = lazy
 
+[$HOME/.GIT/3rd-party/wmutils]
+stowable = true
+checkout = git clone git://github.com/wmutils/core
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/wmutils
+lib = mr_init_stow_package ~/.local
+fixups =
+    make clean && make PREFIX=${STOW_PKG_PATH} install
+    mr_restow_regardless
+
 # -----------------------------------------------------------------------------
 # Cmdline
 # -----------------------------------------------------------------------------
