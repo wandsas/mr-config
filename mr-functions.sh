@@ -27,7 +27,7 @@ check_repo_name () {
 
 
 # -----------------------------------------------------------------------------
-# Confidential repositories
+# Confidential Repositories
 # -----------------------------------------------------------------------------
 
 set_confidential_repo () {
@@ -330,12 +330,13 @@ missing_dir () {
     fi
 }
 
+# @deprecated
 mr_set_stow_target () {
 	:
 }
 
 mr_init_stow_package () {
-    STOW_TARGET=${1:-$HOME/.local}
+    STOW_TARGET=${1:-$HOME}
     STOW_DIR=${STOW_TARGET}/.STOW
     STOW_PKG_TYPE=directory
     STOW_NO_AUTOMATIC_ACTIONS=yes
@@ -383,7 +384,7 @@ myworkstation () {
 }
 
 z800 () {
-    [[ "$(hostname)" = "z800" ]]     
+    [[ "$(hostname)" = "z800" ]]
 }
 
 wandsas () {
@@ -392,4 +393,20 @@ wandsas () {
 
 root () {
     [[ "$USER" = "root" ]]
+}
+
+# -----------------------------------------------------------------------------
+# Helper Functions
+# -----------------------------------------------------------------------------
+
+read_localhost_nickname () {
+    if [ -n "$localhost_nickname" ]; then
+        return 0 # already got it
+    fi
+    HOST_NAME_FILE=$HOME/.localhost-nickname
+    [ -f "$HOST_NAME_FILE" ] && localhost_nickname="$(cat $HOST_NAME_FILE)"
+    if [ -z "$localhost_nickname" ]; then
+        echo "Put host nickname in $HOST_NAME_FILE" >&2
+        exit 1
+    fi
 }
