@@ -183,7 +183,7 @@ fixups =
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-pass
-lib = mr_init_stow_package
+lib = mr_init_stow_package ~/.local
 fixups =
   install -d $STOW_PKG_PATH/bin
   install -m 755 rofi-pass $STOW_PKG_PATH/bin
