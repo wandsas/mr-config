@@ -31,6 +31,16 @@ remotes = git_add_remotes "
     upstream git://github.com/aspiers/kitenet-mr
     joeyh git://git.joeyh.name/myrepos"
 lib = mr_init_stow_package ~/.local
+fixups =
+    for exe in mr mrdir mr-recache; do
+        ep=${MR_REPO}/${exe}
+        [ -x "${ep}" ] && ln -sf "$ep" ~/.local/bin
+    done
+    for fn in mrcd _mr _mr_repositories; do
+        fp="${MR_REPO}/zsh/$fn"
+        [ -e "${fp}" ] && ln -sf ${fp} ~/.local/share/zsh/site-functions
+    done
+    zsh -c zrec
 skip = true
 
 [$HOME/.local/share/vimwiki]
