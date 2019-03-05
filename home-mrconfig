@@ -146,12 +146,13 @@ skip = lazy
 
 [$HOME/.GIT/3rd-party/wmutils]
 stowable = true
-checkout = git clone git://github.com/wmutils/core
+checkout = git clone git://github.com/wmutils/core $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/wmutils
 lib = mr_init_stow_package ~/.local
 fixups =
     make clean && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
+
 
 # -----------------------------------------------------------------------------
 # Cmdline
@@ -233,7 +234,7 @@ fixups =
     done
     symlink_repo_from ~/.local/lib/zsh-morpho
 
-[$HOME/.GIT/3rd.party/zsh-autosuggestions]
+[$HOME/.GIT/3rd-party/zsh-autosuggestions]
 checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-autosuggestions
 fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
