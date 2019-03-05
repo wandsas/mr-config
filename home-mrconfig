@@ -229,12 +229,12 @@ checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-completions
 fixups =
     zcpath=~/.local/share/zsh/site-functions
-    [[ -d "$zcpath" ]] || install -d ${zcpath}
-    for sh in ${MR_REPO}/src/*; do
-        [[ -r "$sh" ]] && ln -sf ${MR_REPO}/${sh} ${zcpath}
-    done
+    [[ -d "$zcpath" ]]      || install -d ${zcpath}
     [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
-    echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zshenv.d/zsh-completions
+    for sh in ${MR_REPO}/src/*; do
+        [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
+    done
+    echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
     zsh -c zrec
 
 [$HOME/.GIT/3rd-party/gentoo-zsh-completions]
@@ -242,11 +242,11 @@ checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gentoo-zsh-completions
 fixups =
     zcpath=~/.local/share/zsh/site-functions
-    [ -d "$zcpath" ] || install -d ${zcpath}
-    for sh in ${MR_REPO}/src/*; do
-        [[ -r "$sh" ]] && ln -sf ${MR_REPO}/${sh} ${zcpath}
-    done
+    [ -d "$zcpath" ]        || install -d ${zcpath}
     [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
+    for sh in ${MR_REPO}/src/*; do
+        [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
+    done
     echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zshenv.d/gentoo-zsh-completions
     zsh -c zrec
 
@@ -255,5 +255,6 @@ checkout = git clone git://github.com/endaaman/lxd-completion-zsh $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
 fixups =
     ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
+    zsh -c zrec
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
