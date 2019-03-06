@@ -1,6 +1,7 @@
 [DEFAULT]
 include =
     cat /usr/share/mr/stow 2>/dev/null || true
+    cat /usr/share/mr/download 2>/dev/null || true
     cat ~/.config/mr/mr-hooks.sh
 
 lib = . ~/.config/mr/mr-functions.sh
@@ -41,7 +42,29 @@ fixups =
         [ -e "${fp}" ] && ln -sf ${fp} ~/.local/share/zsh/site-functions
     done
     zsh -c zrec
-skip = true
+skip = lazy
+
+[$HOME/downloads/scm/stow]
+name = stow-release
+lib = mr_set_download_url http://ftp.gnu.org/gnu/stow/stow-latest.tar.bz2
+# lib = mr_set_download_url http://ftp.halifax.rwth-aachen.de/gnu/stow/stow-latest.tar.bz2
+checkout = mr_download_checkout
+fixups =
+    cd "$MR_REPO"
+    ./configure --prefix=$HOME
+    make install
+
+[$HOME/.GIT/3rd-party/stow]
+checkout = git clone git://git.savannah.gnu.org/git/stow $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/stow $MR_REPO
+fixups =
+    cd $MR_REPO
+    autoconf
+    automake --add-missing
+    ./configure --prefix=${HOME}/.local
+    make install
+skip = lazy
+
 
 [$HOME/.local/share/vimwiki]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
