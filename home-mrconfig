@@ -6,6 +6,7 @@ include =
 
 lib = . ~/.config/mr/mr-functions.sh
 
+
 # -----------------------------------------------------------------------------
 # Dotfiles
 # -----------------------------------------------------------------------------
@@ -20,11 +21,13 @@ fixups =
     ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
 
 [$HOME/.GIT/wandsas/dotfiles]
+order = 2
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
 remotes = git_add_remote github ssh://git@github.com/wandsas/myrepos
 
 [$HOME/.GIT/wandsas/myrepos]
+order = 3
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/myrepos
 remotes = git_add_remotes "
@@ -45,16 +48,18 @@ fixups =
 skip = lazy
 
 [$HOME/downloads/scm/stow]
+order = 4
 name = stow-release
 lib = mr_set_download_url http://ftp.gnu.org/gnu/stow/stow-latest.tar.bz2
 # lib = mr_set_download_url http://ftp.halifax.rwth-aachen.de/gnu/stow/stow-latest.tar.bz2
 checkout = mr_download_checkout
 fixups =
-    cd "$MR_REPO"
-    ./configure --prefix=$HOME
+    cd $MR_REPO
+    ./configure --prefix=${HOME}/.local
     make install
 
 [$HOME/.GIT/3rd-party/stow]
+order = 5
 checkout = git clone git://git.savannah.gnu.org/git/stow $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/stow $MR_REPO
 fixups =
@@ -64,7 +69,6 @@ fixups =
     ./configure --prefix=${HOME}/.local
     make install
 skip = lazy
-
 
 [$HOME/.local/share/vimwiki]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
@@ -98,6 +102,7 @@ checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
 remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
 fixups = set_confidential_repo
 
+
 # -----------------------------------------------------------------------------
 # Neovim/Spacemacs Editors
 # -----------------------------------------------------------------------------
@@ -114,7 +119,6 @@ fixups =
     make && make install
     mr_restow_regardless
 skip = lazy
-
 
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
@@ -155,7 +159,6 @@ fixups =
   install -d ${STOW_PKG_PATH}/share/man/man1
   install -d ${STOW_PKG_PATH}/share/applications
   install -d ${STOW_PKG_PATH}/share/zsh/site-functions
-
   install -m 755 target/release/alacritty -t ${STOW_PKG_PATH}/bin/
   install -m 644 alacritty.desktop -t ${STOW_PKG_PATH}/share/applications
   install -m 644 alacritty.info -t ${STOW_PKG_PATH}/share/info
