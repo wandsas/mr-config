@@ -57,6 +57,7 @@ fixups =
     cd $MR_REPO
     ./configure --prefix=${HOME}/.local
     make install
+skip = true
 
 [$HOME/.GIT/3rd-party/stow]
 order = 5
@@ -68,7 +69,7 @@ fixups =
     automake --add-missing
     ./configure --prefix=${HOME}/.local
     make install
-skip = lazy
+skip = true
 
 [$HOME/.local/share/vimwiki]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
