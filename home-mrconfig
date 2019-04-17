@@ -16,6 +16,7 @@ order = 1
 name = mr-config
 chain = true
 checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/mr-config $MR_REPO
+remotes = github ssh://git@github.com/wandsas/mr-config
 fixups =
     ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
     ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
@@ -24,6 +25,7 @@ fixups =
 order = 2
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
+remotes = github ssh://git@github.com/wandsas/dotfiles
 remotes = git_add_remote github ssh://git@github.com/wandsas/myrepos
 
 [$HOME/.GIT/wandsas/myrepos]
