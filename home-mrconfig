@@ -25,7 +25,6 @@ fixups =
 order = 2
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
-remotes = github ssh://git@github.com/wandsas/dotfiles
 remotes = git_add_remote github ssh://git@github.com/wandsas/myrepos
 
 [$HOME/.GIT/wandsas/myrepos]
