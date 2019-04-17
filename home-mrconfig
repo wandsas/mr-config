@@ -82,6 +82,11 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 [$HOME/templates]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/templates $MR_REPO
 
+[$HOME/.GIT/wandsas/wandsas.github.io]
+checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
+remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
+fixups = set_confidential_repo
+
 # -----------------------------------------------------------------------------
 # Confidential repositories
 # -----------------------------------------------------------------------------
@@ -101,12 +106,6 @@ fixups = set_confidential_repo
 [$HOME/.GIT/wandsas/gitolite-admin]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
 fixups = set_confidential_repo
-
-[$HOME/.GIT/wandsas/wandsas.github.io]
-checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
-remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
-fixups = set_confidential_repo
-
 
 # -----------------------------------------------------------------------------
 # Neovim/Spacemacs Editors
