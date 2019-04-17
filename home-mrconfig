@@ -77,6 +77,8 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
+[$HOME/templates]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/templates $MR_REPO
 
 # -----------------------------------------------------------------------------
 # Confidential repositories
