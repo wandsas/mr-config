@@ -306,4 +306,8 @@ fixups =
     ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
     zsh -c zrec
 
+[$HOME/.config/tor-bundle]
+checkout = git clone git://github.com/andy-portmen/tor-bundle
+remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
+
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
