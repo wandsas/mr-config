@@ -217,6 +217,7 @@ fixups =
   cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
   make install
   mr_restow_regardless
+skip = true
 
 [$HOME/.GIT/3rd-party/betterlockscreen]
 stowable = true
@@ -271,7 +272,10 @@ fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/z
 [$HOME/.GIT/3rd-party/fast-syntax-highlighting]
 checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-syntax-highlighting
-fixups = ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
+fixups =
+    ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
+    ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
+    ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
 
 [$HOME/.GIT/3rd-party/zsh-completions]
 checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
