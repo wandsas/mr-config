@@ -182,6 +182,42 @@ fixups =
     make clean && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
 
+[$HOME/.GIT/3rd-party/xdo]
+stowable = true
+checkout = git clone git://github.com/baskerville/xdo $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xdo
+lib = mr_init_stow_package ~/.local
+fixups =
+    make clean && make PREFIX=${STOW_PKG_PATH} install
+    mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/sutils]
+stowable = true
+checkout = git clone git://github.com/baskerville/sutils $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/sutils
+lib = mr_init_stow_package ~/.local
+fixups =
+    make clean && make PREFIX=${STOW_PKG_PATH} install
+    mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/xtitle]
+stowable = true
+checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xtitle
+lib = mr_init_stow_package ~/.local
+fixups =
+    make clean && make PREFIX=${STOW_PKG_PATH} install
+    mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/bar]
+stowable = true
+checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/bar
+lib = mr_init_stow_package ~/.local
+fixups =
+    make clean && make PREFIX=${STOW_PKG_PATH} install
+    mr_restow_regardless
+
 
 # -----------------------------------------------------------------------------
 # Cmdline
