@@ -171,7 +171,7 @@ fixups =
   [ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
   [ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
   mr_restow_regardless
-skip = lazy
+skip = true
 
 [$HOME/.GIT/3rd-party/wmutils]
 stowable = true
@@ -188,7 +188,7 @@ checkout = git clone git://github.com/baskerville/xdo $MR_REPO
 remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xdo
 lib = mr_init_stow_package ~/.local
 fixups =
-    make clean && make PREFIX=${STOW_PKG_PATH} install
+    make clean && make && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/sutils]
@@ -197,7 +197,7 @@ checkout = git clone git://github.com/baskerville/sutils $MR_REPO
 remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/sutils
 lib = mr_init_stow_package ~/.local
 fixups =
-    make clean && make PREFIX=${STOW_PKG_PATH} install
+    make clean && make && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/xtitle]
@@ -206,7 +206,7 @@ checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
 remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xtitle
 lib = mr_init_stow_package ~/.local
 fixups =
-    make clean && make PREFIX=${STOW_PKG_PATH} install
+    make clean && make && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/bar]
@@ -215,7 +215,7 @@ checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
 remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/bar
 lib = mr_init_stow_package ~/.local
 fixups =
-    make clean && make PREFIX=${STOW_PKG_PATH} install
+    make clean && make && make PREFIX=${STOW_PKG_PATH} install
     mr_restow_regardless
 
 
