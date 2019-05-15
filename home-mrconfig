@@ -78,6 +78,15 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
+[$HOME/src/wandsas/dev-utils]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/dev-utils $MR_REPO
+
+[$HOME/src/wandsas/install-toolbox]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/install-toolbox $MR_REPO
+
+[$HOME/src/wandsas/templates]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/templates $MR_REPO
+
 [$HOME/.GIT/wandsas/wandsas.github.io]
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
 remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
