@@ -1,8 +1,8 @@
 [DEFAULT]
 include =
-    cat /usr/share/mr/stow 2>/dev/null || true
-    cat /usr/share/mr/download 2>/dev/null || true
-    cat ~/.config/mr/mr-hooks.sh
+	cat /usr/share/mr/stow 2>/dev/null || true
+	cat /usr/share/mr/download 2>/dev/null || true
+	cat ~/.config/mr/mr-hooks.sh
 
 lib = . ~/.config/mr/mr-functions.sh
 
@@ -18,8 +18,8 @@ chain = true
 checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/mr-config $MR_REPO
 remotes = github ssh://git@github.com/wandsas/mr-config
 fixups =
-    ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
-    ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
+	ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
+	ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
 
 [$HOME/.GIT/wandsas/dotfiles]
 order = 2
@@ -32,20 +32,20 @@ order = 3
 stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/myrepos
 remotes = git_add_remotes "
-    github ssh://git@github.com/wandsas/myrepos
-    upstream git://github.com/aspiers/kitenet-mr
-    joeyh git://git.joeyh.name/myrepos"
+	github ssh://git@github.com/wandsas/myrepos
+	upstream git://github.com/aspiers/kitenet-mr
+	joeyh git://git.joeyh.name/myrepos"
 lib = mr_init_stow_package ~/.local
 fixups =
-    for exe in mr mrdir mr-recache; do
-        ep=${MR_REPO}/${exe}
-        [ -x "${ep}" ] && ln -sf "$ep" ~/.local/bin
-    done
-    for fn in mrcd _mr _mr_repositories; do
-        fp="${MR_REPO}/zsh/$fn"
-        [ -e "${fp}" ] && ln -sf ${fp} ~/.local/share/zsh/site-functions
-    done
-    zsh -c zrec
+	for exe in mr mrdir mr-recache; do
+	    ep=${MR_REPO}/${exe}
+	    [ -x "${ep}" ] && ln -sf "$ep" ~/.local/bin
+	done
+	for fn in mrcd _mr _mr_repositories; do
+	    fp="${MR_REPO}/zsh/$fn"
+	    [ -e "${fp}" ] && ln -sf ${fp} ~/.local/share/zsh/site-functions
+	done
+	zsh -c zrec
 skip = lazy
 
 [$HOME/downloads/scm/stow]
@@ -55,9 +55,9 @@ lib = mr_set_download_url http://ftp.gnu.org/gnu/stow/stow-latest.tar.bz2
 # lib = mr_set_download_url http://ftp.halifax.rwth-aachen.de/gnu/stow/stow-latest.tar.bz2
 checkout = mr_download_checkout
 fixups =
-    cd $MR_REPO
-    ./configure --prefix=${HOME}/.local
-    make install
+	cd $MR_REPO
+	./configure --prefix=${HOME}/.local
+	make install
 skip = true
 
 [$HOME/.GIT/3rd-party/stow]
@@ -65,29 +65,16 @@ order = 5
 checkout = git clone git://git.savannah.gnu.org/git/stow $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/stow $MR_REPO
 fixups =
-    cd $MR_REPO
-    autoconf
-    automake --add-missing
-    ./configure --prefix=${HOME}/.local
-    make install
+	cd $MR_REPO
+	autoconf
+	automake --add-missing
+	./configure --prefix=${HOME}/.local
+	make install
 skip = true
 
-[$HOME/.local/share/vimwiki]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
-
-[$HOME/.local/share/fonts]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
-
-[$HOME/src/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
-
-[$HOME/.GIT/wandsas/wandsas.github.io]
-checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
-remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
-fixups = set_confidential_repo
 
 # -----------------------------------------------------------------------------
-# Confidential repositories
+# Confidential Repositories
 # -----------------------------------------------------------------------------
 
 [$HOME/.ssh]
@@ -106,117 +93,107 @@ fixups = set_confidential_repo
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
 fixups = set_confidential_repo
 
+
 # -----------------------------------------------------------------------------
-# Neovim/Spacemacs Editors
+# Static Helper Repos
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/neovim]
-stowable = true
-checkout = git clone git://github.com/neovim/neovim
-lib = mr_init_stow_package ~/.local
-fixups =
-    rm -rf build/
-    mkdir build
-    cd build
-    cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH} -DCMAKE_BUILD_TYPE=Release ..
-    make && make install
-    mr_restow_regardless
-skip = lazy
+[$HOME/.local/share/vimwiki]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
 
-[$HOME/.GIT/3rd-party/neovim-gtk]
-stowable = true
-checkout = git clone git://github.com/daa84/neovim-gtk
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
-lib = mr_init_stow_package ~/.local
-fixups =
-  install -d ${STOW_PKG_PATH}
-  cargo build --release
-  make PREFIX=${STOW_PKG_PATH} install
-  mr_restow_regardless
+[$HOME/.GIT/wandsas/wandsas.github.io]
+checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
+remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
+fixups = set_confidential_repo
 
-[$HOME/.emacs.d]
-order = 15
-checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
-
-[$HOME/.cask]
-order = 20
-checkout = git clone git://github.com/cask/cask $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
+[$HOME/.local/share/fonts]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
 
 # -----------------------------------------------------------------------------
-# X11 applications
+# Embedded Build-Tools & Cross-Toolchains
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/alacritty]
-stowable = true
-checkout = git clone git://github.com/jwilm/alacritty
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/alacritty
-lib = mr_init_stow_package ~/.local
-fixups =
-  make clean
-  cargo build --release
-  install -d ${STOW_PKG_PATH}/bin
-  install -d ${STOW_PKG_PATH}/share/info
-  install -d ${STOW_PKG_PATH}/share/man/man1
-  install -d ${STOW_PKG_PATH}/share/applications
-  install -d ${STOW_PKG_PATH}/share/zsh/site-functions
-  install -m 755 target/release/alacritty -t ${STOW_PKG_PATH}/bin/
-  install -m 644 alacritty.desktop -t ${STOW_PKG_PATH}/share/applications
-  install -m 644 alacritty.info -t ${STOW_PKG_PATH}/share/info
-  install -m 644 alacritty.man ${STOW_PKG_PATH}/share/man/man1/alacritty.1
-  install -m 644 alacritty-completions.zsh ${STOW_PKG_PATH}/share/zsh/site-functions/_alacritty
-  # User configs
-  [ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
-  [ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
-  mr_restow_regardless
-skip = true
+[$HOME/src/buildroot]
+checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 
-[$HOME/.GIT/3rd-party/wmutils]
-stowable = true
-checkout = git clone git://github.com/wmutils/core $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/wmutils
-lib = mr_init_stow_package ~/.local
-fixups =
-    make clean && make PREFIX=${STOW_PKG_PATH} install
-    mr_restow_regardless
+[$HOME/src/busybox]
+checkout = git clone 'git://git.busybox.net/busybox' 'busybox'
 
-[$HOME/.GIT/3rd-party/xdo]
-stowable = true
-checkout = git clone git://github.com/baskerville/xdo $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xdo
-lib = mr_init_stow_package ~/.local
-fixups =
-    make clean && make && make PREFIX=${STOW_PKG_PATH} install
-    mr_restow_regardless
+[$HOME/src/wandsas-build-tools]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
-[$HOME/.GIT/3rd-party/sutils]
-stowable = true
-checkout = git clone git://github.com/baskerville/sutils $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/sutils
-lib = mr_init_stow_package ~/.local
-fixups =
-    make clean && make && make PREFIX=${STOW_PKG_PATH} install
-    mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/xtitle]
-stowable = true
-checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xtitle
-lib = mr_init_stow_package ~/.local
-fixups =
-    make clean && make && make PREFIX=${STOW_PKG_PATH} install
-    mr_restow_regardless
+# -----------------------------------------------------------------------------
+# Musl Libc & Helper
+# -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/bar]
-stowable = true
-checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/bar
-lib = mr_init_stow_package ~/.local
+[$HOME/src/musl/musl]
+checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+
+[$HOME/src/musl/musl-utils]
+checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
+
+[$HOME/src/musl/musl-locales]
+checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
+
+
+# -----------------------------------------------------------------------------
+# Zsh Shell Libraries
+# -----------------------------------------------------------------------------
+
+[$HOME/.GIT/3rd-party/zsh-morpho]
+checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
 fixups =
-    make clean && make && make PREFIX=${STOW_PKG_PATH} install
-    mr_restow_regardless
+	for cfg in morlib pmorpho zblank zmandelbrot zmorpho; do
+	    [[ -r "${cfg}" ]] && chmod +x ${cfg}
+	done
+	symlink_repo_from ~/.local/lib/zsh-morpho
+[$HOME/.GIT/3rd-party/zsh-autosuggestions]
+checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-autosuggestions
+fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
+
+[$HOME/.GIT/3rd-party/fast-syntax-highlighting]
+checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-syntax-highlighting
+fixups =
+	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
+	ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
+	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
+[$HOME/.GIT/3rd-party/zsh-completions]
+checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-completions
+fixups =
+	zcpath=~/.local/share/zsh/site-functions
+	[[ -d "$zcpath" ]]      || install -d ${zcpath}
+	# [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
+	for sh in ${MR_REPO}/src/*; do
+	    [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
+	done
+	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
+	# zsh -c zrec
+[$HOME/.GIT/3rd-party/gentoo-zsh-completions]
+checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gentoo-zsh-completions
+fixups =
+	zcpath=~/.local/share/zsh/site-functions
+	[ -d "$zcpath" ]        || install -d ${zcpath}
+	# [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
+	for sh in ${MR_REPO}/src/*; do
+	    [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
+	done
+	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/gentoo-zsh-completions
+	# zsh -c zrec
+[$HOME/.GIT/3rd-party/lxd-completion]
+checkout = git clone git://github.com/endaaman/lxd-completion-zsh $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
+fixups =
+	ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
+	zsh -c zrec
+[$HOME/.config/tor-bundle]
+checkout = git clone git://github.com/andy-portmen/tor-bundle
+remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
 
 
 # -----------------------------------------------------------------------------
@@ -229,31 +206,99 @@ checkout = git clone git://github.com/soimort/translate-shell
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/translate-shell
 lib = mr_init_stow_package ~/.local
 fixups =
-  make PREFIX=$STOW_PKG_PATH install
-  mr_restow_regardless
+	make PREFIX=$STOW_PKG_PATH install
+	mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/pngquant]
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/pngquant
 lib =
-  mr_init_stow_package ~/.local
+	mr_init_stow_package ~/.local
 fixups =
-  make clean
-  ./configure --prefix=/usr/local
-  make PREFIX=${STOW_PKG_PATH} install
-  mr_restow_regardless
+	make clean
+	./configure --prefix=/usr/local
+	make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/ympd]
+
+# -----------------------------------------------------------------------------
+# X11 Tools
+# -----------------------------------------------------------------------------
+
+[$HOME/.GIT/3rd-party/alacritty]
 stowable = true
-checkout = git clone git://github.com/notandy/ympd
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
+checkout = git clone git://github.com/jwilm/alacritty
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/alacritty
 lib = mr_init_stow_package ~/.local
 fixups =
-  cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
-  make install
-  mr_restow_regardless
+	make clean
+	cargo build --release
+	install -d ${STOW_PKG_PATH}/bin
+	install -d ${STOW_PKG_PATH}/share/info
+	install -d ${STOW_PKG_PATH}/share/man/man1
+	install -d ${STOW_PKG_PATH}/share/applications
+	install -d ${STOW_PKG_PATH}/share/zsh/site-functions
+	install -m 755 target/release/alacritty -t ${STOW_PKG_PATH}/bin/
+	install -m 644 alacritty.desktop -t ${STOW_PKG_PATH}/share/applications
+	install -m 644 alacritty.info -t ${STOW_PKG_PATH}/share/info
+	install -m 644 alacritty.man ${STOW_PKG_PATH}/share/man/man1/alacritty.1
+	install -m 644 alacritty-completions.zsh ${STOW_PKG_PATH}/share/zsh/site-functions/_alacritty
+	# User configs
+	[ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
+	[ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
+	mr_restow_regardless
 skip = true
+
+[$HOME/.GIT/3rd-party/wmutils]
+stowable = true
+checkout = git clone git://github.com/wmutils/core $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/wmutils
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/xdo]
+stowable = true
+checkout = git clone git://github.com/baskerville/xdo $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xdo
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/sutils]
+stowable = true
+checkout = git clone git://github.com/baskerville/sutils $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/sutils
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/xtitle]
+stowable = true
+checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xtitle
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
+[$HOME/.GIT/3rd-party/bar]
+stowable = true
+checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
+remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/bar
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
+
+# -----------------------------------------------------------------------------
+# Window-Manager Helper-Scripts
+# -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/betterlockscreen]
 stowable = true
@@ -261,9 +306,9 @@ checkout = git clone git://github.com/pavanjadhaw/betterlockscreen
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/betterlockscreen
 lib = mr_init_stow_package ~/.local
 fixups =
-  install -d $STOW_PKG_PATH/bin
-  install -m 755 betterlockscreen $STOW_PKG_PATH/bin
-  mr_restow_regardless
+	install -d $STOW_PKG_PATH/bin
+	install -m 755 betterlockscreen $STOW_PKG_PATH/bin
+	mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/rofi-pass]
 stowable = true
@@ -271,10 +316,10 @@ checkout = git clone git://github.com/carnager/rofi-pass
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-pass
 lib = mr_init_stow_package ~/.local
 fixups =
-  install -d $STOW_PKG_PATH/bin
-  install -m 755 rofi-pass $STOW_PKG_PATH/bin
-  install -m 755 addpass $STOW_PKG_PATH/bin
-  mr_restow_regardless
+	install -d $STOW_PKG_PATH/bin
+	install -m 755 rofi-pass $STOW_PKG_PATH/bin
+	install -m 755 addpass $STOW_PKG_PATH/bin
+	mr_restow_regardless
 
 [$HOME/.GIT/3rd-party/rofi-scripts]
 stowable = true
@@ -282,72 +327,63 @@ checkout = git clone git://github.com/carnager/rofi-scripts
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-scripts
 lib = mr_init_stow_package ~/.local
 fixups =
-    install -d $STOW_PKG_PATH/bin
-    install -m 755 move_window_to_current $STOW_PKG_PATH/bin
-    install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
-    mr_restow_regardless
+	install -d $STOW_PKG_PATH/bin
+	install -m 755 move_window_to_current $STOW_PKG_PATH/bin
+	install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
+	mr_restow_regardless
 
 
 # -----------------------------------------------------------------------------
-# Zsh Libraries
+# Multimedia Applications
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/zsh-morpho]
-checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
+[$HOME/.GIT/3rd-party/ympd]
+stowable = true
+checkout = git clone git://github.com/notandy/ympd
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
+lib = mr_init_stow_package ~/.local
 fixups =
-    for cfg in morlib pmorpho zblank zmandelbrot zmorpho; do
-        [[ -r "${cfg}" ]] && chmod +x ${cfg}
-    done
-    symlink_repo_from ~/.local/lib/zsh-morpho
+	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
+	make install
+	mr_restow_regardless
+skip = true
 
-[$HOME/.GIT/3rd-party/zsh-autosuggestions]
-checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-autosuggestions
-fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
 
-[$HOME/.GIT/3rd-party/fast-syntax-highlighting]
-checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-syntax-highlighting
+# -----------------------------------------------------------------------------
+# Neovim & Spacemacs Editors
+# -----------------------------------------------------------------------------
+
+[$HOME/.GIT/3rd-party/neovim]
+stowable = true
+checkout = git clone git://github.com/neovim/neovim
+lib = mr_init_stow_package ~/.local
 fixups =
-    ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
-    ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
-    ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
+	rm -rf build/
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH} -DCMAKE_BUILD_TYPE=Release ..
+	make && make install
+	mr_restow_regardless
+skip = lazy
 
-[$HOME/.GIT/3rd-party/zsh-completions]
-checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-completions
+[$HOME/.GIT/3rd-party/neovim-gtk]
+stowable = true
+checkout = git clone git://github.com/daa84/neovim-gtk
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
+lib = mr_init_stow_package ~/.local
 fixups =
-    zcpath=~/.local/share/zsh/site-functions
-    [[ -d "$zcpath" ]]      || install -d ${zcpath}
-    # [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
-    for sh in ${MR_REPO}/src/*; do
-        [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
-    done
-    # echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
-    # zsh -c zrec
+	install -d ${STOW_PKG_PATH}
+	cargo build --release
+	make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+[$HOME/.emacs.d]
+order = 15
+checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
 
-[$HOME/.GIT/3rd-party/gentoo-zsh-completions]
-checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gentoo-zsh-completions
-fixups =
-    zcpath=~/.local/share/zsh/site-functions
-    [ -d "$zcpath" ]        || install -d ${zcpath}
-    # [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
-    for sh in ${MR_REPO}/src/*; do
-        [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
-    done
-    # echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/gentoo-zsh-completions
-    # zsh -c zrec
+[$HOME/.cask]
+order = 20
+checkout = git clone git://github.com/cask/cask $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
 
-[$HOME/.GIT/3rd-party/lxd-completion]
-checkout = git clone git://github.com/endaaman/lxd-completion-zsh $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
-fixups =
-    ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
-    zsh -c zrec
-
-[$HOME/.config/tor-bundle]
-checkout = git clone git://github.com/andy-portmen/tor-bundle
-remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
-
-# vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:
