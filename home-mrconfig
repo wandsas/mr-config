@@ -3,7 +3,6 @@ include =
 	cat /usr/share/mr/stow 2>/dev/null || true
 	cat /usr/share/mr/download 2>/dev/null || true
 	cat ~/.config/mr/mr-hooks.sh
-
 lib = . ~/.config/mr/mr-functions.sh
 
 
@@ -20,7 +19,6 @@ remotes = github ssh://git@github.com/wandsas/mr-config
 fixups =
 	ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
 	ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
-
 [$HOME/.GIT/wandsas/dotfiles]
 order = 2
 stowable = true
@@ -111,6 +109,14 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
 
 # -----------------------------------------------------------------------------
+# Linux Kernel
+# -----------------------------------------------------------------------------
+
+[$HOME/src/kernel/linux-stable]
+checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git $MR_REPO
+
+
+# -----------------------------------------------------------------------------
 # Embedded Build-Tools & Cross-Toolchains
 # -----------------------------------------------------------------------------
 
@@ -130,6 +136,9 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REP
 
 [$HOME/src/musl/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+
+[src/musl/meroot]
+checkout = git clone git://github.com/bradfa/meroot $MR_REPO
 
 [$HOME/src/musl/musl-utils]
 checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
@@ -208,7 +217,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make PREFIX=$STOW_PKG_PATH install
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/pngquant]
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
@@ -220,8 +228,6 @@ fixups =
 	./configure --prefix=/usr/local
 	make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
-
 # -----------------------------------------------------------------------------
 # X11 Tools
 # -----------------------------------------------------------------------------
@@ -258,7 +264,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/xdo]
 stowable = true
 checkout = git clone git://github.com/baskerville/xdo $MR_REPO
@@ -267,7 +272,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
@@ -276,7 +280,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/xtitle]
 stowable = true
 checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
@@ -285,7 +288,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/bar]
 stowable = true
 checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
@@ -294,8 +296,6 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
-
-
 # -----------------------------------------------------------------------------
 # Window-Manager Helper-Scripts
 # -----------------------------------------------------------------------------
@@ -309,7 +309,6 @@ fixups =
 	install -d $STOW_PKG_PATH/bin
 	install -m 755 betterlockscreen $STOW_PKG_PATH/bin
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/rofi-pass]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
@@ -320,7 +319,6 @@ fixups =
 	install -m 755 rofi-pass $STOW_PKG_PATH/bin
 	install -m 755 addpass $STOW_PKG_PATH/bin
 	mr_restow_regardless
-
 [$HOME/.GIT/3rd-party/rofi-scripts]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-scripts
@@ -331,8 +329,6 @@ fixups =
 	install -m 755 move_window_to_current $STOW_PKG_PATH/bin
 	install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
 	mr_restow_regardless
-
-
 # -----------------------------------------------------------------------------
 # Multimedia Applications
 # -----------------------------------------------------------------------------
