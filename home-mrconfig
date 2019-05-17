@@ -137,7 +137,10 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REP
 [$HOME/src/musl/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
 
-[src/musl/meroot]
+[$HOME/src/musl/musl-cross]
+checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
+
+[$HOME/src/musl/meroot]
 checkout = git clone git://github.com/bradfa/meroot $MR_REPO
 
 [$HOME/src/musl/musl-utils]
@@ -145,6 +148,19 @@ checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
 
 [$HOME/src/musl/musl-locales]
 checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
+
+[$HOME/src/skaware/lh-bootstrap]
+checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
+
+
+# -----------------------------------------------------------------------------
+# uClibc Tor-Ramdisk
+# -----------------------------------------------------------------------------
+
+[$HOME/src/tor-ramdisk]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk' $MR_REPO
+remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
 
 
 # -----------------------------------------------------------------------------
