@@ -25,6 +25,7 @@ stowable = true
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
 remotes = git_add_remote github ssh://git@github.com/wandsas/myrepos
 
+
 [$HOME/.GIT/wandsas/myrepos]
 order = 3
 stowable = true
@@ -114,17 +115,35 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
 [$HOME/src/kernel/linux-stable]
 checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git $MR_REPO
+update = git pull origin v5.1.3
 
 
 # -----------------------------------------------------------------------------
-# Embedded Build-Tools & Cross-Toolchains
+# Embedded Build-Tools
 # -----------------------------------------------------------------------------
 
-[$HOME/src/buildroot]
+[$HOME/src/embedded/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
 
-[$HOME/src/busybox/busybox]
-checkout = git clone 'git://git.busybox.net/busybox' 'busybox'
+[HOME/src/embedded/crosstool-ng]
+checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
+
+[$HOME/src/enbedded/musl-cross]
+checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
+
+[$HOME/src/embedded/musl-cross-make]
+checkout = git clone git://github.com/just-containers/musl-cross-make $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-cross-make
+
+[$HOME/src/toolchains/meroot]
+checkout = git clone git://github.com/bradfa/meroot $MR_REPO
+
+[$HOME/src/embedded/busybox]
+checkout = git clone git://git.busybox.net/busybox $MR_REPO
+update = git pull origin 1_30_1
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 
 [$HOME/src/wandsas-build-tools]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
@@ -134,33 +153,49 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REP
 # Musl Libc & Helper
 # -----------------------------------------------------------------------------
 
-[$HOME/src/musl/musl]
+[$HOME/src/libs/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
 
-[$HOME/src/musl/musl-cross]
-checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
-
-[$HOME/src/musl/meroot]
-checkout = git clone git://github.com/bradfa/meroot $MR_REPO
-
-[$HOME/src/musl/musl-utils]
+[$HOME/src/libs/musl-utils]
 checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
 
 [$HOME/src/musl/musl-locales]
 checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
 
-[$HOME/src/skaware/lh-bootstrap]
+
+# -----------------------------------------------------------------------------
+# Examples to build minimal runnable Linux images with busybox & musl/uclibc
+# -----------------------------------------------------------------------------
+
+[$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
 
-
-# -----------------------------------------------------------------------------
-# uClibc Tor-Ramdisk
-# -----------------------------------------------------------------------------
-
-[$HOME/src/tor-ramdisk]
+[$HOME/src/rootfs/tor-ramdisk]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk' $MR_REPO
 remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
+
+
+# -----------------------------------------------------------------------------
+# Emulation Container/Virtualization/Chroot
+# -----------------------------------------------------------------------------
+
+[$HOME/src/emulation/proot]
+checkout = git clone 'https://github.com/proot-me/proot.git' 'proot'
+
+[$HOM/src/emulation/just-containers/busybox-chroots]
+checkout = git clone 'git://github.com/just-containers/busybox-chroots' 'busybox-chroots'
+
+[$HOME/src/emulation/just-containers/skaware]
+checkout = git clone 'git://github.com/just-containers/skaware' 'skaware'
+
+[$HOME/src/emulation/qemu]
+checkout = git clone git://git.qemu.org/qemu $MR_REPO
+
+[$HOME/src/emulation/resin-qemu]
+checkout = git clone git://github.com/balena-io/qemu $MR_REPO
 
 
 # -----------------------------------------------------------------------------
@@ -398,4 +433,4 @@ order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
 
-# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:
