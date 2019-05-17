@@ -123,7 +123,7 @@ checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-
 [$HOME/src/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 
-[$HOME/src/busybox]
+[$HOME/src/busybox/busybox]
 checkout = git clone 'git://git.busybox.net/busybox' 'busybox'
 
 [$HOME/src/wandsas-build-tools]
