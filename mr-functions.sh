@@ -1,4 +1,8 @@
 
+MR_GIT=$HOME/.GIT
+GIT_MY_ROOT=$MR_GIT/wandsas
+GIT_MY_UPSTREAM=wandsas:
+
 info () {
 	echo -e "\e[1;34mINFO\e[0m: ${@}"
 }
@@ -278,6 +282,13 @@ git_add_remotes () {
     done
 }
 
+my_upstream_url () {
+    echo "${GIT_MY_UPSTREAM}${MR_NAME}.git"
+}
+
+my_upstream_remote () {
+    git_add_remote rpi `my_upstream_url`
+}
 
 # -----------------------------------------------------------------------------
 # Skippers

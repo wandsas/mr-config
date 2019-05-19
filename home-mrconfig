@@ -172,7 +172,7 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
 checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
 
-[$HOME/src/musl/musl-locales]
+[$HOME/src/libs/musl-locales]
 checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
 
 
@@ -186,7 +186,7 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
 
 
 # -----------------------------------------------------------------------------
-# Examples to build minimal runnable Linux images with busybox & musl/uclibc
+# Build custom system images for qemu/bare metal
 # -----------------------------------------------------------------------------
 
 [$HOME/src/rootfs/lh-bootstrap]
@@ -196,6 +196,15 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
 [$HOME/src/rootfs/tor-ramdisk]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk' $MR_REPO
 remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
+
+# mkroot is the successor of Aboriginal Linux
+[$HOME/src/rootfs/mkroot]
+checkout = git clone git://github.com/landley/mkroot $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkroot
+
+[$HOME/src/roots/sabotage]
+checkout = git clone https://github.com/sabotage-linux/sabotage $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
 
 
 # -----------------------------------------------------------------------------
