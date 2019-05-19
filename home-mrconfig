@@ -69,7 +69,7 @@ fixups =
 	automake --add-missing
 	./configure --prefix=${HOME}/.local
 	make install
-skip = true
+skip = lazy
 
 
 # -----------------------------------------------------------------------------
@@ -104,6 +104,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
 remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
 fixups = set_confidential_repo
+skip = lazy
 
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
@@ -116,28 +117,25 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 [$HOME/src/kernel/linux-stable]
 checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git $MR_REPO
 update = git pull origin v5.1.3
+skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Native Toolchains
+# Native/Cross Toolchains
 # -----------------------------------------------------------------------------
 
-[$HOME/toolchains/native/clang_toolchain]
+[$HOME/src/toolchains/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
-
-
-# -----------------------------------------------------------------------------
-# Cross Toolchains
-# -----------------------------------------------------------------------------
 
 [$HOME/src/toolchains/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
 
-[HOME/src/toolchains/crosstool-ng]
+[$HOME/src/toolchains/crosstool-ng]
 checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
+skip = lazy
 
 [$HOME/src/toolchains/musl-cross]
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
@@ -163,6 +161,14 @@ checkout = git clone git://github.com/bradfa/meroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/meroot
 skip = lazy
 
+[$HOME/src/toolchains/wandsas-musl-gcc]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
+skip = lazy
+
+[$HOME/src/toolchains/wandsas-musl-llvm]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
 # Embedded Build-Tools
@@ -178,6 +184,7 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 
 [$HOME/src/embedded/mdev-like-a-boss]
 checkout = git clone git://github.com/slashbeast/mdev-like-a-boss $MR_REPO
+skip = lazy
 
 
 # -----------------------------------------------------------------------------
@@ -204,7 +211,7 @@ skip = lazy
 [$HOME/src/libs/newlib]
 checkout =  git clone git://sourceware.org/git/newlib-cygwin $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
-
+skip = lazy
 
 # -----------------------------------------------------------------------------
 # Build custom system images for qemu/bare metal
@@ -213,10 +220,12 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
 [$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
+skip = lazy
 
 [$HOME/src/rootfs/tor-ramdisk]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk' $MR_REPO
 remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
+skip = lazy
 
 # mkroot is the successor of Aboriginal Linux
 [$HOME/src/rootfs/mkroot]
@@ -248,10 +257,12 @@ skip = lazy
 
 [$HOME/src/emulation/qemu]
 checkout = git clone git://git.qemu.org/qemu $MR_REPO
+skip = lazy
 
 [$HOME/src/emulation/resin-qemu]
 checkout = git clone git://github.com/balena-io/qemu $MR_REPO
-
+remotes = my_upstream_remote
+skip = lazy
 
 # -----------------------------------------------------------------------------
 # Zsh Shell Libraries
@@ -264,6 +275,7 @@ fixups =
 	    [[ -r "${cfg}" ]] && chmod +x ${cfg}
 	done
 	symlink_repo_from ~/.local/lib/zsh-morpho
+
 [$HOME/.GIT/3rd-party/zsh-autosuggestions]
 checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-autosuggestions
@@ -276,6 +288,7 @@ fixups =
 	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 	ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
+
 [$HOME/.GIT/3rd-party/zsh-completions]
 checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-completions
@@ -288,6 +301,7 @@ fixups =
 	done
 	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
 	# zsh -c zrec
+
 [$HOME/.GIT/3rd-party/gentoo-zsh-completions]
 checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gentoo-zsh-completions
@@ -300,6 +314,7 @@ fixups =
 	done
 	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/gentoo-zsh-completions
 	# zsh -c zrec
+
 [$HOME/.GIT/3rd-party/lxd-completion]
 checkout = git clone git://github.com/endaaman/lxd-completion-zsh $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
@@ -320,6 +335,7 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make PREFIX=$STOW_PKG_PATH install
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/pngquant]
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
@@ -359,7 +375,7 @@ fixups =
 	[ -d "${XDG_CONFIG_HOME}/alacritty" ] || install -d ${XDG_CONFIG_HOME}/alacritty
 	[ -f "${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ] || install -d ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
 	mr_restow_regardless
-skip = true
+skip = lazy
 
 [$HOME/.GIT/3rd-party/wmutils]
 stowable = true
@@ -369,6 +385,7 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/xdo]
 stowable = true
 checkout = git clone git://github.com/baskerville/xdo $MR_REPO
@@ -377,6 +394,7 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
@@ -385,14 +403,16 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/xtitle]
 stowable = true
 checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xtitle
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/xtitle
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/bar]
 stowable = true
 checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
@@ -401,6 +421,8 @@ lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
+
 # -----------------------------------------------------------------------------
 # Window-Manager Helper-Scripts
 # -----------------------------------------------------------------------------
@@ -414,6 +436,7 @@ fixups =
 	install -d $STOW_PKG_PATH/bin
 	install -m 755 betterlockscreen $STOW_PKG_PATH/bin
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/rofi-pass]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
@@ -424,6 +447,7 @@ fixups =
 	install -m 755 rofi-pass $STOW_PKG_PATH/bin
 	install -m 755 addpass $STOW_PKG_PATH/bin
 	mr_restow_regardless
+
 [$HOME/.GIT/3rd-party/rofi-scripts]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-scripts
