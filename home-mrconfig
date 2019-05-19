@@ -126,10 +126,6 @@ update = git pull origin v5.1.3
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
 
-# -----------------------------------------------------------------------------
-# Embedded Build-Tools
-# -----------------------------------------------------------------------------
-
 [$HOME/src/embedded/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
@@ -142,11 +138,19 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
 
 [$HOME/src/embedded/musl-cross-make]
-checkout = git clone git://github.com/just-containers/musl-cross-make $MR_REPO
+checkout = git clone git://github.com/richfelker/musl-cross-make $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-cross-make
 
 [$HOME/src/toolchains/meroot]
 checkout = git clone git://github.com/bradfa/meroot $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/meroot
+
+# -----------------------------------------------------------------------------
+# Embedded Build-Tools
+# -----------------------------------------------------------------------------
+
+[$HOME/src/wandsas-build-tools]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
 [$HOME/src/embedded/busybox]
 checkout = git clone git://git.busybox.net/busybox $MR_REPO
@@ -155,9 +159,6 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 
 [$HOME/embedded/mdev-like-a-boss]
 checkout = git clone git://github.com/slashbeast/mdev-like-a-boss $MR_REPO
-
-[$HOME/src/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
 
 # -----------------------------------------------------------------------------
