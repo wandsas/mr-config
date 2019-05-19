@@ -119,31 +119,50 @@ update = git pull origin v5.1.3
 
 
 # -----------------------------------------------------------------------------
-# Clang Toolchain
+# Native Toolchains
 # -----------------------------------------------------------------------------
 
 [$HOME/toolchains/native/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
 
-[$HOME/src/embedded/buildroot]
+
+# -----------------------------------------------------------------------------
+# Cross Toolchains
+# -----------------------------------------------------------------------------
+
+[$HOME/src/toolchains/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
 
-[HOME/src/embedded/crosstool-ng]
+[HOME/src/toolchains/crosstool-ng]
 checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
 
-[$HOME/src/enbedded/musl-cross]
+[$HOME/src/toolchains/musl-cross]
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
+skip = lazy
 
-[$HOME/src/embedded/musl-cross-make]
+# musl gcc-patches collection by musl-cross
+[$HOME/src/toolchains/musl-gcc-patches]
+checkout = git clone git://github.com/GregorR/musl-gcc-patches $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-gcc-patches
+skip = lazy
+
+[$HOME/src/toolchains/musl-cross-make]
 checkout = git clone git://github.com/richfelker/musl-cross-make $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-cross-make
+
+[$HOME/src/toolchains/musl-cross-compiler]
+checkout = git clone git://github.com/pikhq/musl-cross-compiler $MR_REPO
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/musl-cross-compiler
+skip = lazy
 
 [$HOME/src/toolchains/meroot]
 checkout = git clone git://github.com/bradfa/meroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/meroot
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
 # Embedded Build-Tools
@@ -157,7 +176,7 @@ checkout = git clone git://git.busybox.net/busybox $MR_REPO
 update = git pull origin 1_30_1
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 
-[$HOME/embedded/mdev-like-a-boss]
+[$HOME/src/embedded/mdev-like-a-boss]
 checkout = git clone git://github.com/slashbeast/mdev-like-a-boss $MR_REPO
 
 
@@ -175,6 +194,7 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
 
 [$HOME/src/libs/musl-locales]
 checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
+skip = lazy
 
 
 # -----------------------------------------------------------------------------
@@ -202,10 +222,12 @@ remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
 [$HOME/src/rootfs/mkroot]
 checkout = git clone git://github.com/landley/mkroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkroot
+skip = lazy
 
 [$HOME/src/roots/sabotage]
 checkout = git clone https://github.com/sabotage-linux/sabotage $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
+skip = lazy
 
 
 # -----------------------------------------------------------------------------
@@ -214,12 +236,15 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
 
 [$HOME/src/emulation/proot]
 checkout = git clone 'https://github.com/proot-me/proot.git' 'proot'
+skip = lazy
 
 [$HOM/src/emulation/just-containers/busybox-chroots]
 checkout = git clone 'git://github.com/just-containers/busybox-chroots' 'busybox-chroots'
+skip = lazy
 
 [$HOME/src/emulation/just-containers/skaware]
 checkout = git clone 'git://github.com/just-containers/skaware' 'skaware'
+skip = lazy
 
 [$HOME/src/emulation/qemu]
 checkout = git clone git://git.qemu.org/qemu $MR_REPO
@@ -281,9 +306,6 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
 fixups =
 	ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
 	zsh -c zrec
-[$HOME/.config/tor-bundle]
-checkout = git clone git://github.com/andy-portmen/tor-bundle
-remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
 
 
 # -----------------------------------------------------------------------------
@@ -309,6 +331,8 @@ fixups =
 	./configure --prefix=/usr/local
 	make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
+
 # -----------------------------------------------------------------------------
 # X11 Tools
 # -----------------------------------------------------------------------------
@@ -410,20 +434,6 @@ fixups =
 	install -m 755 move_window_to_current $STOW_PKG_PATH/bin
 	install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
 	mr_restow_regardless
-# -----------------------------------------------------------------------------
-# Multimedia Applications
-# -----------------------------------------------------------------------------
-
-[$HOME/.GIT/3rd-party/ympd]
-stowable = true
-checkout = git clone git://github.com/notandy/ympd
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
-lib = mr_init_stow_package ~/.local
-fixups =
-	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
-	make install
-	mr_restow_regardless
-skip = true
 
 
 # -----------------------------------------------------------------------------
@@ -462,5 +472,31 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
 order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
+
+
+# -----------------------------------------------------------------------------
+# Multimedia Applications
+# -----------------------------------------------------------------------------
+
+[$HOME/.GIT/3rd-party/ympd]
+stowable = true
+checkout = git clone git://github.com/notandy/ympd
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
+lib = mr_init_stow_package ~/.local
+fixups =
+	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
+	make install
+	mr_restow_regardless
+skip = lazy
+
+
+# -----------------------------------------------------------------------------
+# www-clients
+# -----------------------------------------------------------------------------
+
+[$HOME/.config/tor-bundle]
+checkout = git clone git://github.com/andy-portmen/tor-bundle
+remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
+skip = lazy
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:
