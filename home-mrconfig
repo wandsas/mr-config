@@ -519,7 +519,6 @@ fixups =
 	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
 	make install
 	mr_restow_regardless
-skip = lazy
 
 
 # -----------------------------------------------------------------------------
