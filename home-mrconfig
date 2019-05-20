@@ -245,24 +245,32 @@ skip = lazy
 
 [$HOME/src/emulation/proot]
 checkout = git clone 'https://github.com/proot-me/proot.git' 'proot'
+remotes = my_upstream_remote
 skip = lazy
 
 [$HOM/src/emulation/just-containers/busybox-chroots]
 checkout = git clone 'git://github.com/just-containers/busybox-chroots' 'busybox-chroots'
+remotes = my_upstream_remote
 skip = lazy
 
 [$HOME/src/emulation/just-containers/skaware]
 checkout = git clone 'git://github.com/just-containers/skaware' 'skaware'
+remotes = my_upstream_remote
 skip = lazy
 
 [$HOME/src/emulation/qemu]
 checkout = git clone git://git.qemu.org/qemu $MR_REPO
+remotes = my_upstream_remote
 skip = lazy
 
 [$HOME/src/emulation/resin-qemu]
 checkout = git clone git://github.com/balena-io/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
+
+[$HOME/src/emulation/docker-rust-arm-musl]
+checkout = git clone git://github.com/nastevens/docker-rust-arm-musl $MR_REPO
+remotes = my_upstream_remote
 
 # -----------------------------------------------------------------------------
 # Zsh Shell Libraries
