@@ -247,8 +247,21 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Embedded Build-Tools
+# Build-Tools
 # -----------------------------------------------------------------------------
+
+[$HOME/src/compiler/cmake]
+stowable = true
+checkout = git clone https://gitlab.kitware.com/cmake/cmake
+post_checkout = git checkout v3.14.4
+update = git pull v3.14.4
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/cmake
+fixups =
+  sed -i 's@__GNUC__@__GLIBC__@g' Source/kwsys/SystemInformation.cxx
+  ./configure --prefix=${STOW_PKG_PATH}
+  make -j${PM}
+  make install
+skip = lazy
 
 [$HOME/src/wandsas-build-tools]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
