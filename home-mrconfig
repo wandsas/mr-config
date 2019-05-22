@@ -123,6 +123,53 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
+# Build-Tools
+# -----------------------------------------------------------------------------
+
+[$HOME/src/wandsas-build-tools]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
+
+[$HOME/src/compiler/cmake]
+stowable = true
+checkout = git clone https://gitlab.kitware.com/cmake/cmake
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/cmake
+post_checkout = git checkout v3.14.4
+update = git pull v3.14.4
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/cmake
+fixups =
+  sed -i 's@__GNUC__@__GLIBC__@g' Source/kwsys/SystemInformation.cxx
+  ./configure --prefix=${STOW_PKG_PATH}
+  make -j${PM}
+  make install
+skip = lazy
+
+
+[$HOME/src/compiler/binutils]
+stowable = true
+checkout = git clone git://sourceware.org/git/binutils-gdb.git
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/binutils
+skip = lazy
+
+[$HOME/src/compiler/gmp]
+stowable = true
+checkout = hg clone https://gmplib.org/repo/gmp/ $MR_REPO
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/gmp
+skip = lazy
+
+[$HOME/src/compiler/mpc]
+stowable = true
+checkout = git clone https://scm.gforge.inria.fr/anonscm/git/mpc/mpc.git $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpc
+skip = lazy
+
+[$HOME/src/compiler/mpfr]
+stowable = true
+checkout = svn checkout https://scm.gforge.inria.fr/anonscm/svn/mpfr/trunk $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpfr
+skip = lazy
+
+
+# -----------------------------------------------------------------------------
 # Compiler
 # -----------------------------------------------------------------------------
 
@@ -203,10 +250,12 @@ skip = lazy
 [$HOME/src/toolchains/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
+skip = lazy
 
 [$HOME/src/toolchains/buildroot]
 checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
+skip = lazy
 
 [$HOME/src/toolchains/crosstool-ng]
 checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
@@ -247,62 +296,40 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Build-Tools
+# Libc
 # -----------------------------------------------------------------------------
 
-[$HOME/src/compiler/cmake]
-stowable = true
-checkout = git clone https://gitlab.kitware.com/cmake/cmake
-post_checkout = git checkout v3.14.4
-update = git pull v3.14.4
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/cmake
-fixups =
-  sed -i 's@__GNUC__@__GLIBC__@g' Source/kwsys/SystemInformation.cxx
-  ./configure --prefix=${STOW_PKG_PATH}
-  make -j${PM}
-  make install
+[$HOME/src/libs/musl]
+checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
 skip = lazy
 
-[$HOME/src/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
+[$HOME/src/libs/musl-utils]
+checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
+skip = lazy
+
+[$HOME/src/libs/musl-locales]
+checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
+skip = lazy
+
+[$HOME/src/libs/newlib]
+checkout =  git clone git://sourceware.org/git/newlib-cygwin $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
+skip = lazy
+
+
+# -----------------------------------------------------------------------------
+# Busybox
+# -----------------------------------------------------------------------------
 
 [$HOME/src/embedded/busybox]
 checkout = git clone git://git.busybox.net/busybox $MR_REPO
 post_checkout = git checkout 1_30_1
 update = git pull origin 1_30_1
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
-
-[$HOME/src/embedded/mdev-like-a-boss]
-checkout = git clone git://github.com/slashbeast/mdev-like-a-boss $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mdev-like-a-boss
 skip = lazy
 
-
-# -----------------------------------------------------------------------------
-# Musl libc
-# -----------------------------------------------------------------------------
-
-[$HOME/src/libs/musl]
-checkout = git clone git://git.musl-libc.org/musl $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
-
-[$HOME/src/libs/musl-utils]
-checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
-
-[$HOME/src/libs/musl-locales]
-checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
-skip = lazy
-
-
-# -----------------------------------------------------------------------------
-# Newlib libc
-# -----------------------------------------------------------------------------
-
-[$HOME/src/libs/newlib]
-checkout =  git clone git://sourceware.org/git/newlib-cygwin $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
-skip = lazy
 
 # -----------------------------------------------------------------------------
 # Build custom system images for qemu/bare metal
