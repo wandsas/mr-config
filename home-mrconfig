@@ -197,7 +197,7 @@ skip = lazy
 
 [$HOME/src/toolchains/gcc]
 stowable = true
-checkout = git clone git://gcc.gnu.org/git/gcc.git
+checkout = git clone git://github.com/gcc-mirror/gcc
 post_checkout = git checkout
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gcc
 skip = lazy
