@@ -201,8 +201,7 @@ checkout =
     curl https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz \
       -o /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
     tar xvf /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz --xattrs -C $HOME/toolchains/cross
-fixups =
-  ln -s $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf
+update = :
 skip = lazy
 
 [$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
@@ -213,8 +212,10 @@ checkout =
         -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
       tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/cross
   fi
+update = :
 fixups =
-  ln -s $HOME/toolchains/cross/x86_64-linux-musl-8.3.0 $HOME/toolchains/cross/x86_64-linux-musl
+  ensure_symlink_exists $HOME/toolchains/cross/x86_64-linux-musl \
+    $HOME/toolchains/cross/x86_64-linux-musl
 skip = lazy
 
 [$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
@@ -225,8 +226,10 @@ checkout =
       -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
     tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/cross
   fi
+update = :
 fixups =
-  ln -s $HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid $HOME/toolchains/cross/arm-linux-musleabihf
+  ensure_symlink_exists $HOME/toolchains/cross/arm-linux-musleabihf \
+    $HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid
 skip = lazy
 
 [$HOME/toolchains/native/x86_64-linux-musl-8.3.0]
@@ -237,9 +240,10 @@ checkout =
       -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
     tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/native
   fi
-checkout = mr_download_checkout
+update = :
 fixups =
-  ln -s $HOME/toolchains/native/x86_64-linux-musl-8.3.0 $HOME/toolchains/native/x86_64-linux-musl
+  ensure_symlink_exists $HOME/toolchains/native/x86_64-linux-musl \
+    $HOME/toolchains/native/x86_64-linux-musl-8.3.0
 skip = lazy
 
 [$HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid]
@@ -250,9 +254,10 @@ checkout =
       -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
     tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/native
   fi
-checkout = mr_download_checkout
+update = :
 fixups =
-  ln -s $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid $HOME/toolchains/native/arm-linux-musleabihf
+  ensure_symlink_exists $HOME/toolchains/native/arm-linux-musleabihf \
+    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0
 skip = lazy
 
 
@@ -267,8 +272,7 @@ checkout =
       -o /tmp/gcc-9.1.0.tar.xz
     tar xvf /tmp/gcc-9.1.0.tar.xz --xattrs -C $HOME/src/toolchains
   fi
-fixups =
-  ln -s $HOME/src/toolchains/gcc-9.1.0 $HOME/src/toolchains/gcc
+update = :
 skip = lazy
 
 [$HOME/src/toolchains/llvm]
