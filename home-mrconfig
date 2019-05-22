@@ -142,6 +142,7 @@ skip = lazy
 
 [$HOME/src/libs/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+post_checkout = git checkout v1.1.22
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
 skip = lazy
 
@@ -152,61 +153,8 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Build-Tools
+# Compiler
 # -----------------------------------------------------------------------------
-
-[$HOME/src/toolchains/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
-
-[$HOME/src/toolchains/cmake]
-checkout = git clone https://gitlab.kitware.com/cmake/cmake
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/cmake
-post_checkout = git checkout v3.14.4
-update = git pull v3.14.4
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/cmake
-fixups =
-  sed -i 's@__GNUC__@__GLIBC__@g' Source/kwsys/SystemInformation.cxx
-  ./configure --prefix=${STOW_PKG_PATH}
-  make -j${PM}
-  make install
-skip = lazy
-
-[$HOME/src/toolchains/binutils]
-checkout = git clone git://sourceware.org/git/binutils-gdb.git
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/binutils
-skip = lazy
-
-[$HOME/src/toolchains/gmp]
-checkout = hg clone https://gmplib.org/repo/gmp/ $MR_REPO
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/gmp
-skip = lazy
-
-[$HOME/src/toolchains/mpc]
-checkout = git clone https://scm.gforge.inria.fr/anonscm/git/mpc/mpc.git $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpc
-skip = lazy
-
-[$HOME/src/toolchains/mpfr]
-checkout = svn checkout https://scm.gforge.inria.fr/anonscm/svn/mpfr/trunk $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpfr
-skip = lazy
-
-
-# -----------------------------------------------------------------------------
-# Binary Compiler
-# -----------------------------------------------------------------------------
-
-[$HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf]
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz \
-      -o /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
-    tar xvf /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz --xattrs -C $HOME/toolchains/cross
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf \
-    $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf
-skip = true
 
 [$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
 name = x86_64-linux-musl-8.3.0-cross
@@ -264,82 +212,6 @@ fixups =
     $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid
 skip = lazy
 
-
-# -----------------------------------------------------------------------------
-# Compiler
-# -----------------------------------------------------------------------------
-
-[$HOME/src/toolchains/gcc-9.1.0]
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-9.1.0/gcc-9.1.0.tar.xz \
-      -o /tmp/gcc-9.1.0.tar.xz
-    tar xvf /tmp/gcc-9.1.0.tar.xz --xattrs -C $HOME/src/toolchains
-  fi
-update = :
-skip = lazy
-
-[$HOME/src/toolchains/llvm]
-checkout = git clone --depth 1 http://llvm.org/git/llvm $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/llvm
-fixups =
-  curl -LO https://gist.github.com/jhuntwork/5800888/raw/80538b7f5aaad6427e5f22d2428b9d644d2c93c8/llvm-musl_compat.patch
-  curl -LO https://raw.github.com/path64/compiler/master/src/csu/elf-x86_64/crtbegin.S
-  curl -LO https://raw.github.com/path64/compiler/master/src/csu/elf-x86_64/crtend.S
-  patch -Np1 -i ../llvm-musl_compat.patch
-skip = lazy
-
-[$HOME/src/toolchains/clang]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/clang
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang
-fixups =
-  ensure_symlink_exists ~/src/compiler/llvm/tools/clang $MR_REPO
-  sed -i 's@/lib64/ld-linux-x86-64.so.2@/lib/ld-musl-x86_64.so.1@' $MR_REPO/lib/Driver/Tools.cpp
-  # avoid hardcoded dependency on libgcc
-  sed -i -e 's@"-lgcc[^"]*"@"-lunwind"@g' $MR_REPO/lib/Driver/Tools.cpp
-skip = lazy
-
-[$HOME/src/toolchains/compiler-rt]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/compiler-rt
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/compiler-rt
-fixups =
-  curl -LO https://gist.github.com/jhuntwork/5800919/raw/89b3fe54925888007ef4f9ec0906bffae1176979/compiler-rt-musl_compat.patch
-  patch -Np1 -i ../../../compiler-rt-musl_compat.patch
-skip = lazy
-
-[$HOME/src/toolchains/test-suite]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/test-suite
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/test-suite
-skip = lazy
-
-[$HOME/src/toolchains/libunwind]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/libunwind
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libunwind
-skip = lazy
-
-# Pathscale
-[$HOME/src/toolchains/libcxxrt]
-stowable = true
-checkout = git clone --depth 1 git://github.com/pathscale/libcxxrt.git
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxrt
-skip = lazy
-
-[$HOME/src/toolchains/libcxxabi]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/libcxxabi
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxabi
-skip = lazy
-
-[$HOME/src/toolchains/libcxx]
-stowable = true
-checkout = git clone --depth 1 http://llvm.org/git/libcxx
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxx
-skip = lazy
-
 [$HOME/src/toolchains/wandsas-musl-gcc]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
 skip = lazy
@@ -347,6 +219,9 @@ skip = lazy
 [$HOME/src/toolchains/wandsas-musl-llvm]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
 skip = lazy
+
+[$HOME/src/toolchains/wandsas-build-tools]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
 
 # -----------------------------------------------------------------------------
@@ -371,11 +246,6 @@ checkout = git clone git://github.com/pikhq/musl-cross-compiler $MR_REPO
 remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/musl-cross-compiler
 skip = lazy
 
-[$HOME/src/toolchains/meroot]
-checkout = git clone git://github.com/bradfa/meroot $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/meroot
-skip = lazy
-
 [$HOME/src/toolchains/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
@@ -397,10 +267,11 @@ skip = lazy
 # -----------------------------------------------------------------------------
 
 [$HOME/src/embedded/busybox]
-checkout = git clone git://git.busybox.net/busybox $MR_REPO
-post_checkout = git checkout 1_30_1
-update = git pull origin 1_30_1
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
+lib = BUSYBOX_VERSION=1_30_1
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/busybox $MR_REPO
+post_checkout = git checkout $BUSYBOX_VERSION
+update = git pull origin $BUSYBOX_VERSION
+remotes = git_add_remote upstream git://git.busybox.net/busybox
 skip = lazy
 
 
@@ -409,8 +280,8 @@ skip = lazy
 # -----------------------------------------------------------------------------
 
 [$HOME/src/rootfs/lh-bootstrap]
-checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/lh-bootstrap $MR_REPO
+remotes = git_add_remote upstream git://github.com/skarnet/lh-bootstrap
 fixups =
   ensure_symlink_exists ~/src/skaware/lh-bootstrap $MR_REPO
 skip = lazy
