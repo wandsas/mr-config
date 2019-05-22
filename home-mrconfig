@@ -196,7 +196,7 @@ skip = lazy
 # -----------------------------------------------------------------------------
 
 [$HOME/toolchains/native/gcc-9.1.0]
-lib = mr_set_download ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-9.1.0/gcc-9.1.0.tar.xz
+lib = mr_set_download_url ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-9.1.0/gcc-9.1.0.tar.xz
 checkout = mr_download_checkout
 fixups =
   ln -s $HOME/toolchains/native/gcc-9.1.0 $HOME/toolchains/native/gcc
@@ -206,7 +206,8 @@ skip = lazy
 lib = mr_set_download_url https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
 checkout = mr_download_checkout
 fixups =
-  ln -s $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf $HOME/toolchains/cross/linaro-arm-linux-gnueabihf
+  ln -s $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf
+skip = lazy
 
 [$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
 name = x86_64-linux-musl-8.3.0-cross
