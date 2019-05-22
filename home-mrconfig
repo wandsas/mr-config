@@ -153,7 +153,6 @@ skip = lazy
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
 [$HOME/src/toolchains/cmake]
-stowable = true
 checkout = git clone https://gitlab.kitware.com/cmake/cmake
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/cmake
 post_checkout = git checkout v3.14.4
@@ -167,25 +166,21 @@ fixups =
 skip = lazy
 
 [$HOME/src/toolchains/binutils]
-stowable = true
 checkout = git clone git://sourceware.org/git/binutils-gdb.git
 remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/binutils
 skip = lazy
 
 [$HOME/src/toolchains/gmp]
-stowable = true
 checkout = hg clone https://gmplib.org/repo/gmp/ $MR_REPO
 remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/gmp
 skip = lazy
 
 [$HOME/src/toolchains/mpc]
-stowable = true
 checkout = git clone https://scm.gforge.inria.fr/anonscm/git/mpc/mpc.git $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpc
 skip = lazy
 
 [$HOME/src/toolchains/mpfr]
-stowable = true
 checkout = svn checkout https://scm.gforge.inria.fr/anonscm/svn/mpfr/trunk $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpfr
 skip = lazy
