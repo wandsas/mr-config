@@ -121,6 +121,29 @@ post_checkout = git checkout v5.1.3
 update = git pull origin v5.1.3
 skip = lazy
 
+# -----------------------------------------------------------------------------
+# Libc
+# -----------------------------------------------------------------------------
+
+[$HOME/src/libs/musl]
+checkout = git clone git://git.musl-libc.org/musl $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
+skip = lazy
+
+[$HOME/src/libs/musl-utils]
+checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
+skip = lazy
+
+[$HOME/src/libs/musl-locales]
+checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
+skip = lazy
+
+[$HOME/src/libs/newlib]
+checkout =  git clone git://sourceware.org/git/newlib-cygwin $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
 # Build-Tools
@@ -142,7 +165,6 @@ fixups =
   make -j${PM}
   make install
 skip = lazy
-
 
 [$HOME/src/compiler/binutils]
 stowable = true
@@ -296,30 +318,6 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Libc
-# -----------------------------------------------------------------------------
-
-[$HOME/src/libs/musl]
-checkout = git clone git://git.musl-libc.org/musl $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
-skip = lazy
-
-[$HOME/src/libs/musl-utils]
-checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
-skip = lazy
-
-[$HOME/src/libs/musl-locales]
-checkout = git clone git://github.com/rilian-la-te/musl-locales $MR_REPO
-skip = lazy
-
-[$HOME/src/libs/newlib]
-checkout =  git clone git://sourceware.org/git/newlib-cygwin $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/newlib
-skip = lazy
-
-
-# -----------------------------------------------------------------------------
 # Busybox
 # -----------------------------------------------------------------------------
 
@@ -350,7 +348,7 @@ skip = lazy
 [$HOME/src/roots/sabotage]
 checkout = git clone git://github.com/sabotage-linux/sabotage $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
-#skip = lazy
+skip = lazy
 
 # Successor of Aboriginal Linux
 [$HOME/src/rootfs/mkroot]
