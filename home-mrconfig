@@ -125,7 +125,11 @@ checkout =
   fi
 update = :
 fixups =
+  cp /boot/config-5.1.3 $MR_REPO/.config
+  make oldconfig
+  make INSTALL_HDR_PATH=$HOME/kernel/linux-headers-$KVERSION headers_install
   ensure_symlink_exists $HOME/kernel/linux $HOME/kernel/linux-$KVERSION
+  ensure_symlink_exists $HOME/kernel/linux-headers $HOME/kernel/linux-headers-$KVERSION
 
 [$HOME/kernel/hellolinuxworld]
 checkout = git clone git://github.com/csmart/hellolinuxworld $MR_REPO
