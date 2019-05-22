@@ -209,6 +209,7 @@ fixups =
   ln -s $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf $HOME/toolchains/cross/linaro-arm-linux-gnueabihf
 
 [$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
+name = x86_64-linux-musl-8.3.0-cross
 lib = mr_set_download_url http://skarnet.org/toolchains/cross/x86_64-linux-musl-8.3.0.tar.xz
 checkout = mr_download_checkout
 fixups =
@@ -216,6 +217,7 @@ fixups =
 skip = lazy
 
 [$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
+name = arm-linux-musleabihf-8.3.0_odroid-cross
 lib = mr_set_download_url http://skarnet.org/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid.tar.xz
 checkout = mr_download_checkout
 fixups =
@@ -223,6 +225,7 @@ fixups =
 skip = lazy
 
 [$HOME/toolchains/native/x86_64-linux-musl-8.3.0]
+name = x86_64-linux-musl-8.3.0-native
 lib = mr_set_download_url http://skarnet.org/toolchains/native/x86_64-linux-musl-8.3.0.tar.xz
 checkout = mr_download_checkout
 fixups =
@@ -230,6 +233,7 @@ fixups =
 skip = lazy
 
 [$HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid]
+name = arm-linux-musleabihf-8.3.0_odroid-native
 lib = mr_set_download_url http://skarnet.org/toolchains/native/arm-linux-musleabihf-8.3.0_odroid.tar.xz
 checkout = mr_download_checkout
 fixups =
