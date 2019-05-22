@@ -156,77 +156,12 @@ skip = lazy
 # Compiler
 # -----------------------------------------------------------------------------
 
-[$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
-name = x86_64-linux-musl-8.3.0-cross
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-      curl http://skarnet.org/toolchains/cross/x86_64-linux-musl-8.3.0.tar.xz \
-        -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
-      tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/cross
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/x86_64-linux-musl \
-    $HOME/toolchains/cross/x86_64-linux-musl-8.3.0
-skip = lazy
-
-[$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
-name = arm-linux-musleabihf-8.3.0_odroid-cross
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl http://skarnet.org/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
-      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
-    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/cross
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/arm-linux-musleabihf \
-    $HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid
-skip = lazy
-
-[$HOME/toolchains/native/x86_64-linux-musl-8.3.0]
-name = x86_64-linux-musl-8.3.0-native
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl http://skarnet.org/toolchains/native/x86_64-linux-musl-8.3.0.tar.xz \
-      -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
-    tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/native
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/native/x86_64-linux-musl \
-    $HOME/toolchains/native/x86_64-linux-musl-8.3.0
-skip = lazy
-
-[$HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid]
-name = arm-linux-musleabihf-8.3.0_odroid-native
-checkout =
-  if ! [[ -d $MR_RERO ]]; then
-    curl http://skarnet.org/toolchains/native/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
-      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
-    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/native
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/native/arm-linux-musleabihf \
-    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid
-skip = lazy
-
-[$HOME/src/toolchains/wandsas-musl-gcc]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
-skip = lazy
-
 [$HOME/src/toolchains/wandsas-musl-llvm]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
 skip = lazy
 
 [$HOME/src/toolchains/wandsas-build-tools]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
-
-
-# -----------------------------------------------------------------------------
-# Cross-Compiler
-# -----------------------------------------------------------------------------
 
 [$HOME/src/toolchains/musl-cross]
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
@@ -281,9 +216,7 @@ skip = lazy
 
 [$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/lh-bootstrap $MR_REPO
-remotes = git_add_remote upstream git://github.com/skarnet/lh-bootstrap
-fixups =
-  ensure_symlink_exists ~/src/skaware/lh-bootstrap $MR_REPO
+remotes = git_add_remote upstream git clone git://git.skarnet.org/lh-bootstrap
 skip = lazy
 
 [$HOME/src/rootfs/tor-ramdisk]
