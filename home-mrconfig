@@ -19,6 +19,7 @@ remotes = github ssh://git@github.com/wandsas/mr-config
 fixups =
 	ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
 	ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
+
 [$HOME/.GIT/wandsas/dotfiles]
 order = 2
 stowable = true
@@ -116,12 +117,87 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
 [$HOME/src/kernel/linux-stable]
 checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git $MR_REPO
+post_checkout = git checkout v5.1.3
 update = git pull origin v5.1.3
 skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Native/Cross Toolchains
+# Compiler
+# -----------------------------------------------------------------------------
+
+[$HOME/src/compiler/gcc]
+stowable = true
+checkout = git clone git://gcc.gnu.org/git/gcc.git
+post_checkout = git checkout
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gcc
+skip = lazy
+
+[$HOME/src/compiler/llvm]
+checkout = git clone --depth 1 http://llvm.org/git/llvm $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/llvm
+fixups =
+  curl -LO https://gist.github.com/jhuntwork/5800888/raw/80538b7f5aaad6427e5f22d2428b9d644d2c93c8/llvm-musl_compat.patch
+  curl -LO https://raw.github.com/path64/compiler/master/src/csu/elf-x86_64/crtbegin.S
+  curl -LO https://raw.github.com/path64/compiler/master/src/csu/elf-x86_64/crtend.S
+  patch -Np1 -i ../llvm-musl_compat.patch
+skip = lazy
+
+
+[$HOME/src/compiler/clang]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/clang
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang
+fixups =
+  ensure_symlink_exists ~/src/compiler/llvm/tools/clang $MR_REPO
+  sed -i 's@/lib64/ld-linux-x86-64.so.2@/lib/ld-musl-x86_64.so.1@' $MR_REPO/lib/Driver/Tools.cpp
+  # avoid hardcoded dependency on libgcc
+  sed -i -e 's@"-lgcc[^"]*"@"-lunwind"@g' $MR_REPO/lib/Driver/Tools.cpp
+skip = lazy
+
+[$HOME/src/compiler/compiler-rt]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/compiler-rt
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/compiler-rt
+fixups =
+  curl -LO https://gist.github.com/jhuntwork/5800919/raw/89b3fe54925888007ef4f9ec0906bffae1176979/compiler-rt-musl_compat.patch
+  patch -Np1 -i ../../../compiler-rt-musl_compat.patch
+skip = lazy
+
+[$HOME/src/compiler/test-suite]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/test-suite
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/test-suite
+skip = lazy
+
+[$HOME/src/compiler/libunwind]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/libunwind
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libunwind
+skip = lazy
+
+# Pathscale
+[$HOME/src/compiler/libcxxrt]
+stowable = true
+checkout = git clone --depth 1 git://github.com/pathscale/libcxxrt.git
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxrt
+skip = lazy
+
+[$HOME/src/compiler/libcxxabi]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/libcxxabi
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxabi
+skip = lazy
+
+[$HOME/src/compiler/libcxx]
+stowable = true
+checkout = git clone --depth 1 http://llvm.org/git/libcxx
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxx
+skip = lazy
+
+
+# -----------------------------------------------------------------------------
+# Cross Toolchains
 # -----------------------------------------------------------------------------
 
 [$HOME/src/toolchains/clang_toolchain]
@@ -141,7 +217,7 @@ skip = lazy
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
 skip = lazy
 
-# musl gcc-patches collection by musl-cross
+# musl gcc-patches by musl-cross
 [$HOME/src/toolchains/musl-gcc-patches]
 checkout = git clone git://github.com/GregorR/musl-gcc-patches $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-gcc-patches
@@ -179,6 +255,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REP
 
 [$HOME/src/embedded/busybox]
 checkout = git clone git://git.busybox.net/busybox $MR_REPO
+post_checkout = git checkout 1_30_1
 update = git pull origin 1_30_1
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 
@@ -221,22 +298,24 @@ skip = lazy
 [$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
+fixups =
+  ensure_symlink_exists ~/src/skaware/lh-bootstrap $MR_REPO
 skip = lazy
 
 [$HOME/src/rootfs/tor-ramdisk]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk' $MR_REPO
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk $MR_REPO
 remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
 skip = lazy
 
-# mkroot is the successor of Aboriginal Linux
+[$HOME/src/roots/sabotage]
+checkout = git clone git://github.com/sabotage-linux/sabotage $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
+#skip = lazy
+
+# Successor of Aboriginal Linux
 [$HOME/src/rootfs/mkroot]
 checkout = git clone git://github.com/landley/mkroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkroot
-skip = lazy
-
-[$HOME/src/roots/sabotage]
-checkout = git clone https://github.com/sabotage-linux/sabotage $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
 skip = lazy
 
 
@@ -245,12 +324,12 @@ skip = lazy
 # -----------------------------------------------------------------------------
 
 [$HOME/src/emulation/proot]
-checkout = git clone 'https://github.com/proot-me/proot.git' 'proot'
+checkout = git clone git://github.com/proot-me/proot.git $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
 [$HOM/src/emulation/just-containers/busybox-chroots]
-checkout = git clone 'git://github.com/just-containers/busybox-chroots' 'busybox-chroots'
+checkout = git clone git://github.com/just-containers/busybox-chroots $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
@@ -273,6 +352,7 @@ skip = lazy
 checkout = git clone git://github.com/nastevens/docker-rust-arm-musl $MR_REPO
 remotes = my_upstream_remote
 
+
 # -----------------------------------------------------------------------------
 # Zsh Shell Libraries
 # -----------------------------------------------------------------------------
@@ -294,9 +374,9 @@ fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/z
 checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-syntax-highlighting
 fixups =
-	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 	ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
+	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 
 [$HOME/.GIT/3rd-party/zsh-completions]
 checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
@@ -527,7 +607,7 @@ fixups =
 # -----------------------------------------------------------------------------
 
 [$HOME/.config/tor-bundle]
-checkout = git clone git://github.com/andy-portmen/tor-bundle
+checkout = git clone git://github.com/andy-portmen/tor-bundle $MR_REPO
 remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
 skip = lazy
 
