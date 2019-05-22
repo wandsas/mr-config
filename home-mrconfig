@@ -202,6 +202,9 @@ checkout =
       -o /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
     tar xvf /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz --xattrs -C $HOME/toolchains/cross
 update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf \
+    $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf
 skip = lazy
 
 [$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
@@ -215,7 +218,7 @@ checkout =
 update = :
 fixups =
   ensure_symlink_exists $HOME/toolchains/cross/x86_64-linux-musl \
-    $HOME/toolchains/cross/x86_64-linux-musl
+    $HOME/toolchains/cross/x86_64-linux-musl-8.3.0
 skip = lazy
 
 [$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
@@ -257,7 +260,7 @@ checkout =
 update = :
 fixups =
   ensure_symlink_exists $HOME/toolchains/native/arm-linux-musleabihf \
-    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0
+    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid
 skip = lazy
 
 
