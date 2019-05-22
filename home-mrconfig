@@ -216,7 +216,7 @@ skip = lazy
 
 [$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/lh-bootstrap $MR_REPO
-remotes = git_add_remote upstream git clone git://git.skarnet.org/lh-bootstrap
+remotes = git_add_remote upstream git clone git://github.com/skarnet/lh-bootstrap
 skip = lazy
 
 [$HOME/src/rootfs/tor-ramdisk]
