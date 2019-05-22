@@ -149,10 +149,10 @@ skip = lazy
 # Build-Tools
 # -----------------------------------------------------------------------------
 
-[$HOME/src/wandsas-build-tools]
+[$HOME/src/toolchains/wandsas-build-tools]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
 
-[$HOME/src/compiler/cmake]
+[$HOME/src/toolchains/cmake]
 stowable = true
 checkout = git clone https://gitlab.kitware.com/cmake/cmake
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/cmake
@@ -166,25 +166,25 @@ fixups =
   make install
 skip = lazy
 
-[$HOME/src/compiler/binutils]
+[$HOME/src/toolchains/binutils]
 stowable = true
 checkout = git clone git://sourceware.org/git/binutils-gdb.git
 remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/binutils
 skip = lazy
 
-[$HOME/src/compiler/gmp]
+[$HOME/src/toolchains/gmp]
 stowable = true
 checkout = hg clone https://gmplib.org/repo/gmp/ $MR_REPO
 remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/gmp
 skip = lazy
 
-[$HOME/src/compiler/mpc]
+[$HOME/src/toolchains/mpc]
 stowable = true
 checkout = git clone https://scm.gforge.inria.fr/anonscm/git/mpc/mpc.git $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpc
 skip = lazy
 
-[$HOME/src/compiler/mpfr]
+[$HOME/src/toolchains/mpfr]
 stowable = true
 checkout = svn checkout https://scm.gforge.inria.fr/anonscm/svn/mpfr/trunk $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mpfr
@@ -195,14 +195,14 @@ skip = lazy
 # Compiler
 # -----------------------------------------------------------------------------
 
-[$HOME/src/compiler/gcc]
+[$HOME/src/toolchains/gcc]
 stowable = true
 checkout = git clone git://gcc.gnu.org/git/gcc.git
 post_checkout = git checkout
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gcc
 skip = lazy
 
-[$HOME/src/compiler/llvm]
+[$HOME/src/toolchains/llvm]
 checkout = git clone --depth 1 http://llvm.org/git/llvm $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/llvm
 fixups =
@@ -212,8 +212,7 @@ fixups =
   patch -Np1 -i ../llvm-musl_compat.patch
 skip = lazy
 
-
-[$HOME/src/compiler/clang]
+[$HOME/src/toolchains/clang]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/clang
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang
@@ -224,7 +223,7 @@ fixups =
   sed -i -e 's@"-lgcc[^"]*"@"-lunwind"@g' $MR_REPO/lib/Driver/Tools.cpp
 skip = lazy
 
-[$HOME/src/compiler/compiler-rt]
+[$HOME/src/toolchains/compiler-rt]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/compiler-rt
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/compiler-rt
@@ -233,62 +232,54 @@ fixups =
   patch -Np1 -i ../../../compiler-rt-musl_compat.patch
 skip = lazy
 
-[$HOME/src/compiler/test-suite]
+[$HOME/src/toolchains/test-suite]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/test-suite
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/test-suite
 skip = lazy
 
-[$HOME/src/compiler/libunwind]
+[$HOME/src/toolchains/libunwind]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/libunwind
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libunwind
 skip = lazy
 
 # Pathscale
-[$HOME/src/compiler/libcxxrt]
+[$HOME/src/toolchains/libcxxrt]
 stowable = true
 checkout = git clone --depth 1 git://github.com/pathscale/libcxxrt.git
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxrt
 skip = lazy
 
-[$HOME/src/compiler/libcxxabi]
+[$HOME/src/toolchains/libcxxabi]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/libcxxabi
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxxabi
 skip = lazy
 
-[$HOME/src/compiler/libcxx]
+[$HOME/src/toolchains/libcxx]
 stowable = true
 checkout = git clone --depth 1 http://llvm.org/git/libcxx
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/libcxx
 skip = lazy
 
+[$HOME/src/toolchains/wandsas-musl-gcc]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
+skip = lazy
+
+[$HOME/src/toolchains/wandsas-musl-llvm]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
-# Cross Toolchains
+# Cross-Compiler
 # -----------------------------------------------------------------------------
-
-[$HOME/src/toolchains/clang_toolchain]
-checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
-skip = lazy
-
-[$HOME/src/toolchains/buildroot]
-checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
-skip = lazy
-
-[$HOME/src/toolchains/crosstool-ng]
-checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
-skip = lazy
 
 [$HOME/src/toolchains/musl-cross]
 checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
 skip = lazy
 
-# musl gcc-patches by musl-cross
 [$HOME/src/toolchains/musl-gcc-patches]
 checkout = git clone git://github.com/GregorR/musl-gcc-patches $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-gcc-patches
@@ -308,12 +299,19 @@ checkout = git clone git://github.com/bradfa/meroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/meroot
 skip = lazy
 
-[$HOME/src/toolchains/wandsas-musl-gcc]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
+[$HOME/src/toolchains/clang_toolchain]
+checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
 skip = lazy
 
-[$HOME/src/toolchains/wandsas-musl-llvm]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
+[$HOME/src/toolchains/buildroot]
+checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
+skip = lazy
+
+[$HOME/src/toolchains/crosstool-ng]
+checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
 skip = lazy
 
 
