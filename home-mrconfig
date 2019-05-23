@@ -115,7 +115,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 # Linux Kernel
 # -----------------------------------------------------------------------------
 
-[$HOME/kernel/linux-5.1.4]
+[$HOME/src/kernel/linux-5.1.4]
 lib = KVERSION=5.1.4
 checkout =
   if ! [[ -d $MR_REPO ]]; then
@@ -149,6 +149,79 @@ skip = lazy
 [$HOME/src/libs/musl-utils]
 checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
+skip = lazy
+
+
+# -----------------------------------------------------------------------------
+# Binary Compiler
+# -----------------------------------------------------------------------------
+
+[$HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf]
+checkout =
+  if ! [[ -d $MR_REPO ]]; then
+    curl https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz \
+      -o /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
+    tar xvf /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz --xattrs -C $HOME/toolchains/cross
+update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf \
+    $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf
+skip = true
+
+[$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
+name = x86_64-linux-musl-8.3.0-cross
+checkout =
+  if ! [[ -d $MR_REPO ]]; then
+      curl http://skarnet.org/toolchains/cross/x86_64-linux-musl-8.3.0.tar.xz \
+        -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
+      tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/cross
+  fi
+update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/cross/x86_64-linux-musl \
+    $HOME/toolchains/cross/x86_64-linux-musl-8.3.0
+skip = lazy
+
+[$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
+name = arm-linux-musleabihf-8.3.0_odroid-cross
+checkout =
+  if ! [[ -d $MR_REPO ]]; then
+    curl http://skarnet.org/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
+      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
+    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/cross
+  fi
+update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/cross/arm-linux-musleabihf \
+    $HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid
+skip = lazy
+
+[$HOME/toolchains/native/x86_64-linux-musl-8.3.0]
+name = x86_64-linux-musl-8.3.0-native
+checkout =
+  if ! [[ -d $MR_REPO ]]; then
+    curl http://skarnet.org/toolchains/native/x86_64-linux-musl-8.3.0.tar.xz \
+      -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
+    tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/native
+  fi
+update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/native/x86_64-linux-musl \
+    $HOME/toolchains/native/x86_64-linux-musl-8.3.0
+skip = lazy
+
+[$HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid]
+name = arm-linux-musleabihf-8.3.0_odroid-native
+checkout =
+  if ! [[ -d $MR_RERO ]]; then
+    curl http://skarnet.org/toolchains/native/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
+      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
+    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/native
+  fi
+update = :
+fixups =
+  ensure_symlink_exists $HOME/toolchains/native/arm-linux-musleabihf \
+    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid
 skip = lazy
 
 
