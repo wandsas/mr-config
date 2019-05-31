@@ -153,106 +153,23 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Binary Compiler
-# -----------------------------------------------------------------------------
-
-[$HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf]
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz \
-      -o /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
-    tar xvf /tmp/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz --xattrs -C $HOME/toolchains/cross
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/gcc-linaro-arm-linux-gnueabihf \
-    $HOME/toolchains/cross/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf
-skip = true
-
-[$HOME/toolchains/cross/x86_64-linux-musl-8.3.0]
-name = x86_64-linux-musl-8.3.0-cross
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-      curl http://skarnet.org/toolchains/cross/x86_64-linux-musl-8.3.0.tar.xz \
-        -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
-      tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/cross
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/x86_64-linux-musl \
-    $HOME/toolchains/cross/x86_64-linux-musl-8.3.0
-skip = lazy
-
-[$HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid]
-name = arm-linux-musleabihf-8.3.0_odroid-cross
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl http://skarnet.org/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
-      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
-    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/cross
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/cross/arm-linux-musleabihf \
-    $HOME/toolchains/cross/arm-linux-musleabihf-8.3.0_odroid
-skip = lazy
-
-[$HOME/toolchains/native/x86_64-linux-musl-8.3.0]
-name = x86_64-linux-musl-8.3.0-native
-checkout =
-  if ! [[ -d $MR_REPO ]]; then
-    curl http://skarnet.org/toolchains/native/x86_64-linux-musl-8.3.0.tar.xz \
-      -o /tmp/x86_64-linux-musl-8.3.0.tar.xz
-    tar xvf /tmp/x86_64-linux-musl-8.3.0.tar.xz --xattrs -C $HOME/toolchains/native
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/native/x86_64-linux-musl \
-    $HOME/toolchains/native/x86_64-linux-musl-8.3.0
-skip = lazy
-
-[$HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid]
-name = arm-linux-musleabihf-8.3.0_odroid-native
-checkout =
-  if ! [[ -d $MR_RERO ]]; then
-    curl http://skarnet.org/toolchains/native/arm-linux-musleabihf-8.3.0_odroid.tar.xz \
-      -o /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz
-    tar xvf /tmp/arm-linux-musleabihf-8.3.0_odroid.tar.xz --xattrs -C $HOME/toolchains/native
-  fi
-update = :
-fixups =
-  ensure_symlink_exists $HOME/toolchains/native/arm-linux-musleabihf \
-    $HOME/toolchains/native/arm-linux-musleabihf-8.3.0_odroid
-skip = lazy
-
-
-# -----------------------------------------------------------------------------
 # Compiler
 # -----------------------------------------------------------------------------
+
+[$HOME/src/toolchains/wandsas-build-tools]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
+
+[$HOME/src/toolchains/wandsas-musl-gcc]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
+skip = lazy
 
 [$HOME/src/toolchains/wandsas-musl-llvm]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
 skip = lazy
 
-[$HOME/src/toolchains/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
-
-[$HOME/src/toolchains/musl-cross]
-checkout = git clone git://github.com/GregorR/musl-cross $MR_REPO
-skip = lazy
-
-[$HOME/src/toolchains/musl-gcc-patches]
-checkout = git clone git://github.com/GregorR/musl-gcc-patches $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-gcc-patches
-skip = lazy
-
 [$HOME/src/toolchains/musl-cross-make]
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-cross-make
-
-[$HOME/src/toolchains/musl-cross-compiler]
-checkout = git clone git://github.com/pikhq/musl-cross-compiler $MR_REPO
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/musl-cross-compiler
-skip = lazy
 
 [$HOME/src/toolchains/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
@@ -284,7 +201,7 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Build custom system images for qemu/bare metal
+# Build system images for Qemu or Bare Metal
 # -----------------------------------------------------------------------------
 
 [$HOME/src/rootfs/lh-bootstrap]
@@ -297,7 +214,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk $MR_REPO
 remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
 skip = lazy
 
-[$HOME/src/roots/sabotage]
+[$HOME/src/rootfs/sabotage]
 checkout = git clone git://github.com/sabotage-linux/sabotage $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
 skip = lazy
