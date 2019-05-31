@@ -192,10 +192,7 @@ skip = lazy
 # -----------------------------------------------------------------------------
 
 [$HOME/src/embedded/busybox]
-lib = BUSYBOX_VERSION=1_30_1
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/busybox $MR_REPO
-post_checkout = git checkout $BUSYBOX_VERSION
-update = git pull origin $BUSYBOX_VERSION
 remotes = git_add_remote upstream git://git.busybox.net/busybox
 skip = lazy
 
