@@ -462,7 +462,8 @@ fixups =
 
 [$HOME/.GIT/3rd-party/neovim]
 stowable = true
-checkout = git clone git://github.com/neovim/neovim
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/neovim
+remotes = git_add_remote upstream git://github.com/neovim/neovim
 lib = mr_init_stow_package ~/.local
 fixups =
 	rm -rf build/
@@ -475,14 +476,15 @@ skip = lazy
 
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
-checkout = git clone git://github.com/daa84/neovim-gtk
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/neovim-gtk
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/neovim-gtk
+remotes = git_add_remote upstream git://github.com/daa84/neovim-gtk
 lib = mr_init_stow_package ~/.local
 fixups =
 	install -d ${STOW_PKG_PATH}
 	cargo build --release
 	make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
+
 [$HOME/.emacs.d]
 order = 15
 checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
