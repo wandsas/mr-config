@@ -222,6 +222,11 @@ checkout = git clone git://github.com/landley/mkroot $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkroot
 skip = lazy
 
+[$HOME/src/rootfs/mkrootfs]
+checkout = git clone git://github.com/MParolari/mkrootfs $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkrootfs
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
 # Emulation Container/Virtualization/Chroot
