@@ -196,6 +196,10 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/busybox $MR_REPO
 remotes = git_add_remote upstream git://git.busybox.net/busybox
 skip = lazy
 
+[$HOME/src/emulation/just-containers/busybox-chroots]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/busybox-chroots $MR_REPO
+remotes = git_add_remote upstream git://github.com/just-containers/busybox-chroots
+
 
 # -----------------------------------------------------------------------------
 # Build system images for Qemu or Bare Metal
@@ -252,7 +256,7 @@ checkout = git clone git://git.qemu.org/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/emulation/resin-qemu]
+[$HOME/src/emulation/qemu-execve]
 checkout = git clone git://github.com/balena-io/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
