@@ -176,11 +176,6 @@ checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
 skip = lazy
 
-[$HOME/src/toolchains/buildroot]
-checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
-skip = lazy
-
 [$HOME/src/toolchains/crosstool-ng]
 checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
@@ -204,6 +199,16 @@ remotes = git_add_remote upstream git://github.com/just-containers/busybox-chroo
 # -----------------------------------------------------------------------------
 # Build system images for Qemu or Bare Metal
 # -----------------------------------------------------------------------------
+
+[$HOME/src/rootfs/buildroot]
+checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
+skip = lazy
+
+[$HOME/src/rootfs/armbian]
+checkout = git clone git://github.com/armbian/build $MR_REPO
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/armbian
+skip = lazy
 
 [$HOME/src/rootfs/lh-bootstrap]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/lh-bootstrap $MR_REPO
