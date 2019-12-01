@@ -23,16 +23,16 @@ fixups =
 [$HOME/.GIT/wandsas/dotfiles]
 order = 2
 stowable = true
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/dotfiles
-remotes = git_add_remote github ssh://git@github.com/wandsas/myrepos
+checkout = git clone ssh://git@github.com/wandsas/myrepos $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/dotfiles
 
 
 [$HOME/.GIT/wandsas/myrepos]
 order = 3
 stowable = true
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/myrepos
+checkout = git clone ssh://git@github.com/wandsas/myrepos $MR_REPO
 remotes = git_add_remotes "
-	github ssh://git@github.com/wandsas/myrepos
+	github ssh://git@rpi.gnu.local/wandsas/myrepos
 	upstream git://github.com/aspiers/kitenet-mr
 	joeyh git://git.joeyh.name/myrepos"
 lib = mr_init_stow_package ~/.local
@@ -46,30 +46,6 @@ fixups =
 	    [ -e "${fp}" ] && ln -sf ${fp} ~/.local/share/zsh/site-functions
 	done
 	zsh -c zrec
-skip = lazy
-
-[$HOME/downloads/scm/stow]
-order = 4
-name = stow-release
-lib = mr_set_download_url http://ftp.gnu.org/gnu/stow/stow-latest.tar.bz2
-# lib = mr_set_download_url http://ftp.halifax.rwth-aachen.de/gnu/stow/stow-latest.tar.bz2
-checkout = mr_download_checkout
-fixups =
-	cd $MR_REPO
-	./configure --prefix=${HOME}/.local
-	make install
-skip = true
-
-[$HOME/.GIT/3rd-party/stow]
-order = 5
-checkout = git clone git://git.savannah.gnu.org/git/stow $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/stow $MR_REPO
-fixups =
-	cd $MR_REPO
-	autoconf
-	automake --add-missing
-	./configure --prefix=${HOME}/.local
-	make install
 skip = lazy
 
 
@@ -90,7 +66,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/pass $MR_REPO
 fixups = set_confidential_repo
 
 [$HOME/.GIT/wandsas/gitolite-admin]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/gitolite-admin $MR_REPO
+checkout = git clone ssh://git@rpi.gnu.local/gitolite-admin $MR_REPO
 fixups = set_confidential_repo
 
 
@@ -125,7 +101,7 @@ checkout =
   fi
 update = :
 fixups =
-  cp /boot/config-5.1.3 $MR_REPO/.config
+  cp /boot/config-5.1.4 $MR_REPO/.config
   make oldconfig
   make INSTALL_HDR_PATH=$HOME/kernel/linux-headers-$KVERSION headers_install
   ensure_symlink_exists $HOME/kernel/linux $HOME/kernel/linux-$KVERSION
@@ -133,6 +109,7 @@ fixups =
 
 [$HOME/kernel/hellolinuxworld]
 checkout = git clone git://github.com/csmart/hellolinuxworld $MR_REPO
+remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/hellolinuxworld
 skip = lazy
 
 
@@ -156,13 +133,6 @@ skip = lazy
 # Compiler
 # -----------------------------------------------------------------------------
 
-[$HOME/src/toolchains/wandsas-build-tools]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-build-tools $MR_REPO
-
-[$HOME/src/toolchains/wandsas-musl-gcc]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-gcc $MR_REPO
-skip = lazy
-
 [$HOME/src/toolchains/wandsas-musl-llvm]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
 skip = lazy
@@ -176,43 +146,24 @@ checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
 skip = lazy
 
-[$HOME/src/toolchains/crosstool-ng]
-checkout = git clone https://github.com/crosstool-ng/crosstool-ng $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/crosstool-ng
-skip = lazy
-
 
 # -----------------------------------------------------------------------------
-# Busybox
+# Bootstrap system images
 # -----------------------------------------------------------------------------
 
 [$HOME/src/embedded/busybox]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/busybox $MR_REPO
-remotes = git_add_remote upstream git://git.busybox.net/busybox
-skip = lazy
-
-# -----------------------------------------------------------------------------
-# Build system images for Qemu or Bare Metal
-# -----------------------------------------------------------------------------
-
-[$HOME/src/rootfs/buildroot]
-checkout = git clone git://git.buildroot.net/buildroot $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/buildroot
-skip = lazy
-
-[$HOME/src/rootfs/armbian]
-checkout = git clone git://github.com/armbian/build $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/armbian
+checkout = git clone git://git.busybox.net/busybox $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
 skip = lazy
 
 [$HOME/src/rootfs/lh-bootstrap]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/lh-bootstrap $MR_REPO
-remotes = git_add_remote upstream git clone git://github.com/skarnet/lh-bootstrap
+checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
+remotes = git_add_remote upstream ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
 skip = lazy
 
 [$HOME/src/rootfs/tor-ramdisk]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/tor-ramdisk $MR_REPO
-remotes = git_add_remote upstream https://git.torproject.org/tor-ramdisk.git
+checkout = git clone https://git.torproject.org/tor-ramdisk.git $MR_REPO
+remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/tor-ramdisk
 skip = lazy
 
 [$HOME/src/rootfs/sabotage]
@@ -231,27 +182,32 @@ checkout = git clone git://github.com/MParolari/mkrootfs $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkrootfs
 skip = lazy
 
+[$HOME/src/bootstrap/just-containers/skaware]
+checkout = git clone git://github.com/just-containers/skaware $MR_REPO
+remotes = my_upstream_remote
+skip = lazy
+
 
 # -----------------------------------------------------------------------------
-# Emulation Container/Virtualization/Chroot
+# Chroot
 # -----------------------------------------------------------------------------
 
-[$HOME/src/emulation/proot]
+[$HOME/src/chroot/proot]
 checkout = git clone git://github.com/proot-me/proot.git $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
-[$HOM/src/emulation/just-containers/busybox-chroots]
+[$HOM/src/chroot/just-containers/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/emulation/just-containers/skaware]
-checkout = git clone 'git://github.com/just-containers/skaware' 'skaware'
-remotes = my_upstream_remote
-skip = lazy
 
-[$HOME/src/emulation/qemu]
+# -----------------------------------------------------------------------------
+# Virtualization
+# -----------------------------------------------------------------------------
+
+[$HOME/src/vm/qemu]
 checkout = git clone git://git.qemu.org/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
@@ -261,17 +217,23 @@ checkout = git clone git://github.com/balena-io/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
+
+# -----------------------------------------------------------------------------
+# Container
+# -----------------------------------------------------------------------------
+
 [$HOME/src/emulation/docker-rust-arm-musl]
 checkout = git clone git://github.com/nastevens/docker-rust-arm-musl $MR_REPO
 remotes = my_upstream_remote
 
 
 # -----------------------------------------------------------------------------
-# Zsh Shell Libraries
+# Shell
 # -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/zsh-morpho]
 checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
+remotes = my_upstream_remote
 fixups =
 	for cfg in morlib pmorpho zblank zmandelbrot zmorpho; do
 	    [[ -r "${cfg}" ]] && chmod +x ${cfg}
@@ -280,12 +242,12 @@ fixups =
 
 [$HOME/.GIT/3rd-party/zsh-autosuggestions]
 checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-autosuggestions
+remotes = my_upstream_remote
 fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
 
 [$HOME/.GIT/3rd-party/fast-syntax-highlighting]
 checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-syntax-highlighting
+remotes = my_upstream_remote
 fixups =
 	ensure_symlink_exists ~/.local/lib/fast-highlight ${MR_REPO}/fast-highlight
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
@@ -293,7 +255,7 @@ fixups =
 
 [$HOME/.GIT/3rd-party/zsh-completions]
 checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/zsh-completions
+remotes = my_upstream_remote
 fixups =
 	zcpath=~/.local/share/zsh/site-functions
 	[[ -d "$zcpath" ]]      || install -d ${zcpath}
@@ -306,7 +268,7 @@ fixups =
 
 [$HOME/.GIT/3rd-party/gentoo-zsh-completions]
 checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/gentoo-zsh-completions
+remotes = my_upstream_remote
 fixups =
 	zcpath=~/.local/share/zsh/site-functions
 	[ -d "$zcpath" ]        || install -d ${zcpath}
@@ -317,22 +279,15 @@ fixups =
 	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/gentoo-zsh-completions
 	# zsh -c zrec
 
-[$HOME/.GIT/3rd-party/lxd-completion]
-checkout = git clone git://github.com/endaaman/lxd-completion-zsh $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/lxd-completion-zsh
-fixups =
-	ensure_symlink_exists ~/.local/share/zsh/site-functions/_lxc ${MR_REPO}/_lxc
-	zsh -c zrec
-
 
 # -----------------------------------------------------------------------------
-# Cmdline
+# Cmdline tools
 # -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/translate-shell]
 stowable = true
 checkout = git clone git://github.com/soimort/translate-shell
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/translate-shell
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make PREFIX=$STOW_PKG_PATH install
@@ -341,7 +296,7 @@ fixups =
 [$HOME/.GIT/3rd-party/pngquant]
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/pngquant
+remotes = my_upstream_remote
 lib =
 	mr_init_stow_package ~/.local
 fixups =
@@ -352,13 +307,13 @@ fixups =
 
 
 # -----------------------------------------------------------------------------
-# X11 Tools
+# X11 tools
 # -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/alacritty]
 stowable = true
 checkout = git clone git://github.com/jwilm/alacritty
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/alacritty
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean
@@ -382,7 +337,7 @@ skip = lazy
 [$HOME/.GIT/3rd-party/wmutils]
 stowable = true
 checkout = git clone git://github.com/wmutils/core $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/wmutils
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
@@ -391,7 +346,7 @@ fixups =
 [$HOME/.GIT/3rd-party/xdo]
 stowable = true
 checkout = git clone git://github.com/baskerville/xdo $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/xdo
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
@@ -400,7 +355,7 @@ fixups =
 [$HOME/.GIT/3rd-party/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/sutils
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
@@ -409,30 +364,31 @@ fixups =
 [$HOME/.GIT/3rd-party/xtitle]
 stowable = true
 checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/xtitle
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/bar]
+[$HOME/.GIT/3rd-party/ympd]
 stowable = true
-checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
-remotes = git_add_remote rpo ssh://git@rpi.gnu.local/wandsas/bar
+checkout = git clone git://github.com/notandy/ympd
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
-	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
+	make install
 	mr_restow_regardless
 
 
 # -----------------------------------------------------------------------------
-# Window-Manager Helper-Scripts
+# Window-Manager helper scripts
 # -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/betterlockscreen]
 stowable = true
 checkout = git clone git://github.com/pavanjadhaw/betterlockscreen
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/betterlockscreen
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	install -d $STOW_PKG_PATH/bin
@@ -442,7 +398,7 @@ fixups =
 [$HOME/.GIT/3rd-party/rofi-pass]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-pass
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	install -d $STOW_PKG_PATH/bin
@@ -453,7 +409,7 @@ fixups =
 [$HOME/.GIT/3rd-party/rofi-scripts]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-scripts
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/rofi-scripts
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	install -d $STOW_PKG_PATH/bin
@@ -461,15 +417,24 @@ fixups =
 	install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
 	mr_restow_regardless
 
+[$HOME/.GIT/3rd-party/bar]
+stowable = true
+checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
+remotes = my_upstream_remote
+lib = mr_init_stow_package ~/.local
+fixups =
+	make clean && make && make PREFIX=${STOW_PKG_PATH} install
+	mr_restow_regardless
+
 
 # -----------------------------------------------------------------------------
-# Neovim & Spacemacs Editors
+# Editor configs
 # -----------------------------------------------------------------------------
 
 [$HOME/.GIT/3rd-party/neovim]
 stowable = true
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/neovim
-remotes = git_add_remote upstream git://github.com/neovim/neovim
+checkout = git clone git://github.com/neovim/neovim
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	rm -rf build/
@@ -482,8 +447,8 @@ skip = lazy
 
 [$HOME/.GIT/3rd-party/neovim-gtk]
 stowable = true
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/neovim-gtk
-remotes = git_add_remote upstream git://github.com/daa84/neovim-gtk
+checkout = git clone git://github.com/daa84/neovim-gtk
+remotes = my_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
 	install -d ${STOW_PKG_PATH}
@@ -494,27 +459,12 @@ fixups =
 [$HOME/.emacs.d]
 order = 15
 checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/spacemacs
+remotes = my_upstream_remote
 
 [$HOME/.cask]
 order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/cask
-
-
-# -----------------------------------------------------------------------------
-# Multimedia Applications
-# -----------------------------------------------------------------------------
-
-[$HOME/.GIT/3rd-party/ympd]
-stowable = true
-checkout = git clone git://github.com/notandy/ympd
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/3rd-party/ympd
-lib = mr_init_stow_package ~/.local
-fixups =
-	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
-	make install
-	mr_restow_regardless
+remotes = my_upstream_remote
 
 
 # -----------------------------------------------------------------------------
@@ -523,7 +473,7 @@ fixups =
 
 [$HOME/.config/tor-bundle]
 checkout = git clone git://github.com/andy-portmen/tor-bundle $MR_REPO
-remotes = git_add_remote rpi ssh://git@github.com/wandsas/tor-bundle
+remotes = my_upstream_remote
 skip = lazy
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:
