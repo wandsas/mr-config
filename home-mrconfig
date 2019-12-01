@@ -14,8 +14,8 @@ lib = . ~/.config/mr/mr-functions.sh
 order = 1
 name = mr-config
 chain = true
-checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/mr-config $MR_REPO
-remotes = github ssh://git@github.com/wandsas/mr-config
+checkout = git clone -b z800 ssh://git@github.com/wandsas/mr-config $MR_REPO
+remotes = my_upstream_remote
 fixups =
 	ensure_symlink_exists ~/.mrconfig ${MR_REPO}/home-mrconfig
 	ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
@@ -25,6 +25,7 @@ order = 2
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/myrepos $MR_REPO
 remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/dotfiles
+remotes = my_upstream_remote
 
 
 [$HOME/.GIT/wandsas/myrepos]
@@ -79,7 +80,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki $MR_REPO
 
 [$HOME/.GIT/wandsas/wandsas.github.io]
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
-remotes = git_add_remotes rpi ssh://git@rpi.gnu.local/wandsas
+remotes = my_upstream_remote
 fixups = set_confidential_repo
 skip = lazy
 
@@ -91,7 +92,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 # Linux Kernel
 # -----------------------------------------------------------------------------
 
-[$HOME/src/kernel/linux-5.1.4]
+[$HOME/.GIT/3rd-party/kernel/linux-5.1.4]
 lib = KVERSION=5.1.4
 checkout =
   if ! [[ -d $MR_REPO ]]; then
@@ -99,6 +100,7 @@ checkout =
       -o /tmp/linux-$KVERSION.tar.xz
     tar xvf /tmp/linux-$KVERSION.tar.xz --xattrs -C $HOME/kernel
   fi
+remotes = my_upstream_remote
 update = :
 fixups =
   cp /boot/config-5.1.4 $MR_REPO/.config
@@ -107,9 +109,9 @@ fixups =
   ensure_symlink_exists $HOME/kernel/linux $HOME/kernel/linux-$KVERSION
   ensure_symlink_exists $HOME/kernel/linux-headers $HOME/kernel/linux-headers-$KVERSION
 
-[$HOME/kernel/hellolinuxworld]
+[$HOME/.GIT/3rd-party/kernel/hellolinuxworld]
 checkout = git clone git://github.com/csmart/hellolinuxworld $MR_REPO
-remotes = git_add_remote ssh://git@rpi.gnu.local/wandsas/hellolinuxworld
+remotes = my_upstream_remote
 skip = lazy
 
 
@@ -117,15 +119,15 @@ skip = lazy
 # Libc
 # -----------------------------------------------------------------------------
 
-[$HOME/src/libs/musl]
+[$HOME/.GIT/3rd-party/lib/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
 post_checkout = git checkout v1.1.22
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl
+remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/libs/musl-utils]
+[$HOME/.GIT/3rd-party/lib/musl-utils]
 checkout = git clone git://github.com/smaeul/musl-utils $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-utils
+remotes = my_upstream_remote
 skip = lazy
 
 
@@ -133,57 +135,52 @@ skip = lazy
 # Compiler
 # -----------------------------------------------------------------------------
 
-[$HOME/src/toolchains/wandsas-musl-llvm]
-checkout = git clone ssh://git@rpi.gnu.local/wandsas/wandsas-musl-llvm $MR_REPO
-skip = lazy
-
-[$HOME/src/toolchains/musl-cross-make]
+[$HOME/.GIT/3rd-party/compiler/musl-cross-make]
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/musl-cross-make
+remotes = my_upstream_remote
 
-[$HOME/src/toolchains/clang_toolchain]
+[$HOME/.GIT/3rd-party/compiler/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/clang_toolchain
-skip = lazy
+remotes = my_upstream_remote
 
 
 # -----------------------------------------------------------------------------
 # Bootstrap system images
 # -----------------------------------------------------------------------------
 
-[$HOME/src/embedded/busybox]
+[$HOME/.GIT/3rd-party/bootstrap/busybox]
 checkout = git clone git://git.busybox.net/busybox $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/busybox
+remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/rootfs/lh-bootstrap]
+[$HOME/.GIT/3rd-party/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
-remotes = git_add_remote upstream ssh://git@rpi.gnu.local/wandsas/lh-bootstrap
+remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/rootfs/tor-ramdisk]
+[$HOME/.GIT/3rd-party/bootstrap/just-containers/skaware]
+checkout = git clone git://github.com/just-containers/skaware $MR_REPO
+remotes = my_upstream_remote
+skip = lazy
+
+[$HOME/.GIT/3rd-party/bootstrap/tor-ramdisk]
 checkout = git clone https://git.torproject.org/tor-ramdisk.git $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/tor-ramdisk
+remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/rootfs/sabotage]
+[$HOME/.GIT/3rd-party/bootstrap/sabotage]
 checkout = git clone git://github.com/sabotage-linux/sabotage $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/sabotage
+remotes = my_upstream_remote
 skip = lazy
 
 # Successor of Aboriginal Linux
-[$HOME/src/rootfs/mkroot]
+[$HOME/.GIT/3rd-party/bootstrap/mkroot]
 checkout = git clone git://github.com/landley/mkroot $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkroot
+remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/rootfs/mkrootfs]
+[$HOME/.GIT/3rd-Party/bootstrap/mkrootfs]
 checkout = git clone git://github.com/MParolari/mkrootfs $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/mkrootfs
-skip = lazy
-
-[$HOME/src/bootstrap/just-containers/skaware]
-checkout = git clone git://github.com/just-containers/skaware $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
@@ -192,12 +189,12 @@ skip = lazy
 # Chroot
 # -----------------------------------------------------------------------------
 
-[$HOME/src/chroot/proot]
+[$HOME/.GIT/3rd-party/chroot/proot]
 checkout = git clone git://github.com/proot-me/proot.git $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
-[$HOM/src/chroot/just-containers/busybox-chroots]
+[$HOM/.GIT/3rd-party/chroot/just-containers/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
@@ -207,12 +204,12 @@ skip = lazy
 # Virtualization
 # -----------------------------------------------------------------------------
 
-[$HOME/src/vm/qemu]
+[$HOME/.GIT/3rd-party/emulation/qemu]
 checkout = git clone git://git.qemu.org/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
 
-[$HOME/src/emulation/qemu-execve]
+[$HOME/.GIT/3rd-Party/emulation/qemu-execve]
 checkout = git clone git://github.com/balena-io/qemu $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
@@ -222,7 +219,7 @@ skip = lazy
 # Container
 # -----------------------------------------------------------------------------
 
-[$HOME/src/emulation/docker-rust-arm-musl]
+[$HOME/.GIT/3rd-Party/emulation/docker-rust-arm-musl]
 checkout = git clone git://github.com/nastevens/docker-rust-arm-musl $MR_REPO
 remotes = my_upstream_remote
 
@@ -231,7 +228,7 @@ remotes = my_upstream_remote
 # Shell
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/zsh-morpho]
+[$HOME/.GIT/3rd-party/shell/zsh-morpho]
 checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
 remotes = my_upstream_remote
 fixups =
@@ -240,12 +237,12 @@ fixups =
 	done
 	symlink_repo_from ~/.local/lib/zsh-morpho
 
-[$HOME/.GIT/3rd-party/zsh-autosuggestions]
+[$HOME/.GIT/3rd-party/shell/zsh-autosuggestions]
 checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
 remotes = my_upstream_remote
 fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
 
-[$HOME/.GIT/3rd-party/fast-syntax-highlighting]
+[$HOME/.GIT/3rd-party/shell/fast-syntax-highlighting]
 checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
 remotes = my_upstream_remote
 fixups =
@@ -253,7 +250,7 @@ fixups =
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
 	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 
-[$HOME/.GIT/3rd-party/zsh-completions]
+[$HOME/.GIT/3rd-party/shell/zsh-completions]
 checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
 remotes = my_upstream_remote
 fixups =
@@ -266,7 +263,7 @@ fixups =
 	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
 	# zsh -c zrec
 
-[$HOME/.GIT/3rd-party/gentoo-zsh-completions]
+[$HOME/.GIT/3rd-party/shell/gentoo-zsh-completions]
 checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
 remotes = my_upstream_remote
 fixups =
@@ -284,7 +281,7 @@ fixups =
 # Cmdline tools
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/translate-shell]
+[$HOME/.GIT/3rd-party/cmdline/translate-shell]
 stowable = true
 checkout = git clone git://github.com/soimort/translate-shell
 remotes = my_upstream_remote
@@ -293,7 +290,7 @@ fixups =
 	make PREFIX=$STOW_PKG_PATH install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/pngquant]
+[$HOME/.GIT/3rd-party/cmdline/pngquant]
 stowable = true
 checkout = git clone git://github.com/kornelski/pngquant.git
 remotes = my_upstream_remote
@@ -310,7 +307,7 @@ fixups =
 # X11 tools
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/alacritty]
+[$HOME/.GIT/3rd-party/x11/alacritty]
 stowable = true
 checkout = git clone git://github.com/jwilm/alacritty
 remotes = my_upstream_remote
@@ -334,7 +331,7 @@ fixups =
 	mr_restow_regardless
 skip = lazy
 
-[$HOME/.GIT/3rd-party/wmutils]
+[$HOME/.GIT/3rd-party/x11/wmutils]
 stowable = true
 checkout = git clone git://github.com/wmutils/core $MR_REPO
 remotes = my_upstream_remote
@@ -343,7 +340,7 @@ fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/xdo]
+[$HOME/.GIT/3rd-party/x11/xdo]
 stowable = true
 checkout = git clone git://github.com/baskerville/xdo $MR_REPO
 remotes = my_upstream_remote
@@ -352,7 +349,7 @@ fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/sutils]
+[$HOME/.GIT/3rd-party/x11/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
 remotes = my_upstream_remote
@@ -361,7 +358,7 @@ fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/xtitle]
+[$HOME/.GIT/3rd-party/x11/xtitle]
 stowable = true
 checkout = git clone git://github.com/baskerville/xtitle $MR_REPO
 remotes = my_upstream_remote
@@ -370,22 +367,8 @@ fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/ympd]
-stowable = true
-checkout = git clone git://github.com/notandy/ympd
-remotes = my_upstream_remote
-lib = mr_init_stow_package ~/.local
-fixups =
-	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
-	make install
-	mr_restow_regardless
 
-
-# -----------------------------------------------------------------------------
-# Window-Manager helper scripts
-# -----------------------------------------------------------------------------
-
-[$HOME/.GIT/3rd-party/betterlockscreen]
+[$HOME/.GIT/3rd-party/x11/betterlockscreen]
 stowable = true
 checkout = git clone git://github.com/pavanjadhaw/betterlockscreen
 remotes = my_upstream_remote
@@ -395,7 +378,7 @@ fixups =
 	install -m 755 betterlockscreen $STOW_PKG_PATH/bin
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/rofi-pass]
+[$HOME/.GIT/3rd-party/x11/rofi-pass]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-pass
 remotes = my_upstream_remote
@@ -406,7 +389,7 @@ fixups =
 	install -m 755 addpass $STOW_PKG_PATH/bin
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/rofi-scripts]
+[$HOME/.GIT/3rd-party/x11/rofi-scripts]
 stowable = true
 checkout = git clone git://github.com/carnager/rofi-scripts
 remotes = my_upstream_remote
@@ -417,7 +400,7 @@ fixups =
 	install -m 755 mode-scripts/rofi-file-browser.sh $STOW_PKG_PATH/bin
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-party/bar]
+[$HOME/.GIT/3rd-party/x11/bar]
 stowable = true
 checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
 remotes = my_upstream_remote
@@ -431,7 +414,7 @@ fixups =
 # Editor configs
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-party/neovim]
+[$HOME/.GIT/3rd-party/editor/neovim]
 stowable = true
 checkout = git clone git://github.com/neovim/neovim
 remotes = my_upstream_remote
@@ -445,7 +428,7 @@ fixups =
 	mr_restow_regardless
 skip = lazy
 
-[$HOME/.GIT/3rd-party/neovim-gtk]
+[$HOME/.GIT/3rd-Party/editor/neovim-gtk]
 stowable = true
 checkout = git clone git://github.com/daa84/neovim-gtk
 remotes = my_upstream_remote
@@ -475,5 +458,15 @@ remotes = my_upstream_remote
 checkout = git clone git://github.com/andy-portmen/tor-bundle $MR_REPO
 remotes = my_upstream_remote
 skip = lazy
+
+[$HOME/.GIT/3rd-party/www-client/ympd]
+stowable = true
+checkout = git clone git://github.com/notandy/ympd
+remotes = my_upstream_remote
+lib = mr_init_stow_package ~/.local
+fixups =
+	cmake -DCMAKE_INSTALL_PREFIX=${STOW_PKG_PATH}
+	make install
+	mr_restow_regardless
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:
