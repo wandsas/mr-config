@@ -28,12 +28,12 @@ remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/dotfiles
 remotes = my_upstream_remote
 
 
-[$HOME/.GIT/wandsas/myrepos]
+[$HOME/.GIT/wandsas/kitenet-mr]
 order = 3
 stowable = true
-checkout = git clone ssh://git@github.com/wandsas/myrepos $MR_REPO
+checkout = git clone ssh://git@github.com/wandsas/kitenet-mr $MR_REPO
 remotes = git_add_remotes "
-	github ssh://git@rpi.gnu.local/wandsas/myrepos
+	rpi ssh://git@rpi.gnu.local/wandsas/myrepos
 	upstream git://github.com/aspiers/kitenet-mr
 	joeyh git://git.joeyh.name/myrepos"
 lib = mr_init_stow_package ~/.local
@@ -51,7 +51,7 @@ skip = lazy
 
 
 # -----------------------------------------------------------------------------
-# Confidential Repositories
+# Confidential repos
 # -----------------------------------------------------------------------------
 
 [$HOME/.ssh]
@@ -72,7 +72,7 @@ fixups = set_confidential_repo
 
 
 # -----------------------------------------------------------------------------
-# Static Helper Repos
+# Static data
 # -----------------------------------------------------------------------------
 
 [$HOME/.local/share/vimwiki]
