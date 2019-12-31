@@ -68,7 +68,7 @@ checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 # Shell
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-Party/shell/zsh-morpho]
+[$HOME/.GIT/3rd-Party/zsh-morpho]
 checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
 remotes = my_local_upstream_remote
 fixups =
@@ -77,12 +77,12 @@ fixups =
 	done
 	symlink_repo_from ~/.local/lib/zsh-morpho
 
-[$HOME/.GIT/3rd-Party/shell/zsh-autosuggestions]
+[$HOME/.GIT/3rd-Party/zsh-autosuggestions]
 checkout = git clone git://github.com/zsh-users/zsh-autosuggestions $MR_REPO
 remotes = my_local_upstream_remote
 fixups = ensure_symlink_exists ~/.local/lib/zsh-autosuggestions.zsh ${MR_REPO}/zsh-autosuggestions.zsh
 
-[$HOME/.GIT/3rd-Party/shell/fast-syntax-highlighting]
+[$HOME/.GIT/3rd-Party/fast-syntax-highlighting]
 checkout = git clone git://github.com/zdharma/fast-syntax-highlighting $MR_REPO
 remotes = my_local_upstream_remote
 fixups =
@@ -96,7 +96,7 @@ fixups =
 # -----------------------------------------------------------------------------
 
 # Set of window manipulation tools
-[$HOME/.GIT/3rd-Party/x11/wmutils]
+[$HOME/.GIT/3rd-Party/wmutils]
 stowable = true
 t = git clone git://github.com/wmutils/core $MR_REPO
 remotes = my_local_upstream_remote
@@ -106,7 +106,7 @@ fixups =
 	mr_restow_regardless
 
 # Small cmdline utils for Lemon Bar
-[$HOME/.GIT/3rd-Party/x11/sutils]
+[$HOME/.GIT/3rd-Party/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
 remotes = my_local_upstream_remote
@@ -115,7 +115,7 @@ fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-[$HOME/.GIT/3rd-Party/x11/bar]
+[$HOME/.GIT/3rd-Party/bar]
 stowable = true
 checkout = git clone git://github.com/LemonBoy/bar $MR_REPO
 remotes = my_local_upstream_remote
@@ -129,7 +129,7 @@ fixups =
 # Editor
 # -----------------------------------------------------------------------------
 
-[$HOME/.GIT/3rd-Party/editor/neovim-gtk]
+[$HOME/.GIT/3rd-Party/neovim-gtk]
 stowable = true
 checkout = git clone git://github.com/daa84/neovim-gtk
 remotes = my_local_upstream_remote
