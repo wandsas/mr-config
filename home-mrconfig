@@ -1,3 +1,5 @@
+# ~/.config/home-mrconfig wandsas 20191231
+
 [DEFAULT]
 include =
 	cat /usr/share/kitenet-mr/stow 2>/dev/null || true
@@ -21,10 +23,9 @@ fixups =
 	ensure_symlink_exists ~/.stow-global-ignore ${MR_REPO}/.stow-global-ignore
 
 [$HOME/.GIT/wandsas/dotfiles]
-order = 2
+order = 3
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles $MR_REPO
-remotes = git_add_remote rpi ssh://git@rpi.gnu.local/wandsas/dotfiles
 remotes = my_local_upstream_remote
 
 
@@ -89,63 +90,12 @@ fixups =
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
 	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 
-[$HOME/.GIT/3rd-Party/shell/zsh-completions]
-checkout = git clone git://github.com/zsh-users/zsh-completions $MR_REPO
-remotes = my_local_upstream_remote
-fixups =
-	zcpath=~/.local/share/zsh/site-functions
-	[[ -d "$zcpath" ]]      || install -d ${zcpath}
-	# [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
-	for sh in ${MR_REPO}/src/*; do
-	    [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
-	done
-	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/zsh-completions
-	# zsh -c zrec
-
-[$HOME/.GIT/3rd-Party/shell/gentoo-zsh-completions]
-checkout = git clone git://github.com/gentoo/gentoo-zsh-completions $MR_REPO
-remotes = my_local_upstream_remote
-fixups =
-	zcpath=~/.local/share/zsh/site-functions
-	[ -d "$zcpath" ]        || install -d ${zcpath}
-	# [[ -d "~/.zsh/env.d" ]] || install -d ~/.zsh/env.d
-	for sh in ${MR_REPO}/src/*; do
-	    [[ -r "$sh" ]] && ln -sf ${sh} ${zcpath}
-	done
-	# echo 'fpath=( "$fpath[@]" "'"$zcpath"'" )' > ~/.zsh/env.d/gentoo-zsh-completions
-	# zsh -c zrec
-
-
-# -----------------------------------------------------------------------------
-# Cmdline tools
-# -----------------------------------------------------------------------------
-
-[$HOME/.GIT/3rd-Party/cmdline/translate-shell]
-stowable = true
-checkout = git clone git://github.com/soimort/translate-shell
-remotes = my_local_upstream_remote
-lib = mr_init_stow_package ~/.local
-fixups =
-	make PREFIX=$STOW_PKG_PATH install
-	mr_restow_regardless
-
-[$HOME/.GIT/3rd-Party/cmdline/pngquant]
-stowable = true
-checkout = git clone git://github.com/kornelski/pngquant.git
-remotes = my_local_upstream_remote
-lib =
-	mr_init_stow_package ~/.local
-fixups =
-	make clean
-	./configure --prefix=/usr/local
-	make PREFIX=${STOW_PKG_PATH} install
-	mr_restow_regardless
-
 
 # -----------------------------------------------------------------------------
 # X11 tools
 # -----------------------------------------------------------------------------
 
+# Set of window manipulation tools
 [$HOME/.GIT/3rd-Party/x11/wmutils]
 stowable = true
 t = git clone git://github.com/wmutils/core $MR_REPO
@@ -155,6 +105,7 @@ fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
+# Small cmdline utils for Lemon Bar
 [$HOME/.GIT/3rd-Party/x11/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
