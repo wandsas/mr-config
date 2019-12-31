@@ -1,7 +1,13 @@
 
-MR_GIT=$HOME/.GIT
-GIT_MY_ROOT=$MR_GIT/wandsas
-GIT_MY_UPSTREAM=wandsas:
+MY_USER=wandsas
+MY_HOST=z800
+MY_DOMAIN=gnu.local
+
+MR_GIT=${HOME}/.GIT
+GIT_MY_ROOT=${MR_GIT}/wandsas
+GIT_MY_UPSTREAM=wandsas
+GIT_MY_LOCAL_UPSTREAM=rpi
+
 
 info () {
 	echo -e "\e[1;34mINFO\e[0m: ${@}"
@@ -283,12 +289,21 @@ git_add_remotes () {
 }
 
 my_upstream_url () {
-    echo "${GIT_MY_UPSTREAM}${MR_NAME}.git"
+    echo "ssh://git@github.com/${GIT_MY_UPSTREAM}/${MR_NAME}.git"
+}
+
+my_local_upstream_url () {
+    echo "ssh://git@rpi.gnu.local/${GIT_MY_LOCAL_UPSTREAM}/${MR_NAME}.git"
 }
 
 my_upstream_remote () {
-    git_add_remote rpi `my_upstream_url`
+    git_add_remote ${GIT_MY_UPSTREAM} `my_upstream_url`
 }
+
+my_local_upstream_remote () {
+    git_add_remote ${GIT_MY_LOCAL_UPSTREAM} `my_local_upstream_url`
+}
+
 
 # -----------------------------------------------------------------------------
 # Skippers
@@ -390,34 +405,18 @@ on () {
     return 1
 }
 
-myworkstation () {
-    on wandsas@z800
+my_user_host () {
+    on ${MY_USER}@${MY_HOST}
 }
 
-z800 () {
-    [[ "$(hostname)" = "z800" ]]
+my_host () {
+    [[ "$(hostname)" = ${MY_HOST} ]]
 }
 
-wandsas () {
-    [[ "$USER" = "wandsas" ]]
+my_user () {
+    [[ "${USER}" = ${MY_USER} ]]
 }
 
 root () {
     [[ "$USER" = "root" ]]
-}
-
-# -----------------------------------------------------------------------------
-# Helper Functions
-# -----------------------------------------------------------------------------
-
-read_localhost_nickname () {
-    if [ -n "$localhost_nickname" ]; then
-        return 0 # already got it
-    fi
-    HOST_NAME_FILE=$HOME/.localhost-nickname
-    [ -f "$HOST_NAME_FILE" ] && localhost_nickname="$(cat $HOST_NAME_FILE)"
-    if [ -z "$localhost_nickname" ]; then
-        echo "Put host nickname in $HOST_NAME_FILE" >&2
-        exit 1
-    fi
 }
