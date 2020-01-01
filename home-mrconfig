@@ -98,7 +98,7 @@ fixups =
 # Set of window manipulation tools
 [$HOME/.GIT/3rd-Party/wmutils]
 stowable = true
-t = git clone git://github.com/wmutils/core $MR_REPO
+checkout = git clone git://github.com/wmutils/core $MR_REPO
 remotes = my_local_upstream_remote
 lib = mr_init_stow_package ~/.local
 fixups =
@@ -145,11 +145,11 @@ fixups =
 # Compiler
 # -----------------------------------------------------------------------------
 
-[$HOME/toolchains/musl-cross-make]
+[$HOME/src/compiler/musl-cross-make]
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make $MR_REPO
 remotes = my_local_upstream_remote
 
-[$HOME/toolchains/clang_toolchain]
+[$HOME/src/compiler/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = my_local_upstream_remote
 
@@ -159,7 +159,7 @@ remotes = my_local_upstream_remote
 # -----------------------------------------------------------------------------
 
 # QEMU with additional QEMU_EXECVE flag that persists emulator after an execve
-[$HOME/src/qemu]
+[$HOME/src/vm/qemu]
 checkout = git clone https://github.com/balena-io/qemu.git $MR_REPO
 remotes = my_local_upstream_remote
 
@@ -168,7 +168,7 @@ remotes = my_local_upstream_remote
 # Container
 # -----------------------------------------------------------------------------
 
-[$HOM/src/s6-overlay]
+[$HOM/src/container/s6-overlay]
 checkout = git clone git://github.com/just-containers/s6-overlay $MR_REPO
 remotes = my_local_upstream_remote
 
@@ -177,11 +177,11 @@ remotes = my_local_upstream_remote
 # Bootstrap
 # -----------------------------------------------------------------------------
 
-[$HOME/src/lh-bootstrap]
+[$HOME/src/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
 remotes = my_local_upstream_remote
 
-[$HOM/src/busybox-chroots]
+[$HOM/src/bootstrap/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots $MR_REPO
 remotes = my_local_upstream_remote
 
