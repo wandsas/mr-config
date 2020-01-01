@@ -140,6 +140,15 @@ fixups =
 	make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
+[$HOME/.emacs.d]
+order = 15
+checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
+remotes = my_local_upstream_remote
+
+[$HOME/.cask]
+order = 20
+checkout = git clone git://github.com/cask/cask $MR_REPO
+remotes = my_local_upstream_remote
 
 # -----------------------------------------------------------------------------
 # Compiler
