@@ -1,16 +1,13 @@
-# ~/.config/home-mrconfig wandsas 20191231
+# ~/.config/mr/home-mrconfig wandsas 20191231
 
 [DEFAULT]
 include =
 	cat /usr/share/kitenet-mr/stow 2>/dev/null || true
 	cat /usr/share/kitenet-mr/download 2>/dev/null || true
-	cat ~/.config/mr/mr-hooks.sh
+	cat ~/.config/mr/mr-hooks.sh 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions.sh
 
-
-# -----------------------------------------------------------------------------
-# Dotfiles
-# -----------------------------------------------------------------------------
+# {{{ Dotfiles
 
 [.config/mr]
 order = 1
@@ -28,10 +25,9 @@ stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles $MR_REPO
 remotes = my_local_upstream_remote
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Confidential repos
-# -----------------------------------------------------------------------------
+# {{{ Confidential
 
 [$HOME/.ssh]
 checkout = git clone -b z800 ssh://git@rpi.gnu.local/wandsas/ssh $MR_REPO
@@ -49,24 +45,25 @@ fixups = set_confidential_repo
 checkout = git clone ssh://git@rpi.gnu.local/gitolite-admin $MR_REPO
 fixups = set_confidential_repo
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Static data
-# -----------------------------------------------------------------------------
+# {{{ Static Data
 
 [$HOME/.GIT/wandsas/wandsas.github.io]
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io $MR_REPO
 remotes = my_local_upstream_remote
-fixups = set_confidential_repo
+skip = lazy
+
+[$HOME/.local/share/vimwiki]
+checkout = git clone ssh://git@rpi.gnu.local/wandsas/vimwiki.git $MR_REPO
 skip = lazy
 
 [$HOME/.local/share/fonts]
 checkout = git clone ssh://git@rpi.gnu.local/wandsas/fonts $MR_REPO
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Shell
-# -----------------------------------------------------------------------------
+# {{{ Shell
 
 [$HOME/.GIT/3rd-Party/zsh-morpho]
 checkout = git clone git://github.com/psprint/zsh-morpho $MR_REPO
@@ -90,10 +87,9 @@ fixups =
 	ensure_symlink_exists ~/.local/lib/fast-string-highlight ${MR_REPO}/fast-string-highlight
 	ensure_symlink_exists ~/.local/lib/fast-syntax-highlighting.zsh ${MR_REPO}/fast-syntax-highlighting.plugin.zsh
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# X11
-# -----------------------------------------------------------------------------
+# {{{ X11
 
 # Set of window manipulation tools
 [$HOME/.GIT/3rd-Party/wmutils]
@@ -105,7 +101,7 @@ fixups =
 	make clean && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
-# Small cmdline utils for Lemon Bar
+# Utils for Lemon Bar (e.g. battery, clock, essid, temperature, volume)
 [$HOME/.GIT/3rd-Party/sutils]
 stowable = true
 checkout = git clone git://github.com/baskerville/sutils $MR_REPO
@@ -124,10 +120,9 @@ fixups =
 	make clean && make && make PREFIX=${STOW_PKG_PATH} install
 	mr_restow_regardless
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Editor
-# -----------------------------------------------------------------------------
+# {{{ Editor
 
 [$HOME/.GIT/3rd-Party/neovim-gtk]
 stowable = true
@@ -145,53 +140,59 @@ order = 15
 checkout = git clone git://github.com/syl20bnr/spacemacs $MR_REPO
 remotes = my_local_upstream_remote
 
+# Project management tool for Emacs
 [$HOME/.cask]
 order = 20
 checkout = git clone git://github.com/cask/cask $MR_REPO
 remotes = my_local_upstream_remote
 
-# -----------------------------------------------------------------------------
-# Compiler
-# -----------------------------------------------------------------------------
+# }}}
+
+# {{{ Compiler
 
 [$HOME/src/compiler/musl-cross-make]
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
 [$HOME/src/compiler/clang_toolchain]
 checkout = git clone git://github.com/jwinarske/clang_toolchain $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# VM
-# -----------------------------------------------------------------------------
+# {{{ VM
 
 # QEMU with additional QEMU_EXECVE flag that persists emulator after an execve
 [$HOME/src/vm/qemu]
 checkout = git clone https://github.com/balena-io/qemu.git $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Container
-# -----------------------------------------------------------------------------
+# {{{ Container
 
 [$HOM/src/container/s6-overlay]
 checkout = git clone git://github.com/just-containers/s6-overlay $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
+# }}}
 
-# -----------------------------------------------------------------------------
-# Bootstrap
-# -----------------------------------------------------------------------------
+# {{{ Bootstrap
 
 [$HOME/src/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
 [$HOM/src/bootstrap/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots $MR_REPO
 remotes = my_local_upstream_remote
+skip = lazy
 
-# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:
+# }}}
+
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:et:fdm=marker:foldlevel=0:
