@@ -14,6 +14,10 @@ fixups =
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-dotfiles
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
+[$HOME/repo/dev-vcs/kitenet-mr]
+stowable = true
+checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git
+
 [$HOME/repo/wandsas/dotfiles]
 stowable = true
 checkout = git clone rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
