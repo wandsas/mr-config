@@ -1,0 +1,21 @@
+[DEFAULT]
+include =
+	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
+	cat ~/.config/mr/mr-hooks 2>/dev/null || true
+lib = . ~/.config/mr/mr-functions
+
+[.config/mr]
+order = 1
+name = mr-config
+chain = true
+checkout = git clone rpi:/srv/git/mr-config.git $MR_REPO
+remote = git_add_remote github git@github.com:wandsas/mr-config.git
+fixups =
+	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-dotfiles
+	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
+
+[$HOME/repo/wandsas/dotfiles]
+stowable = true
+checkout = git clone rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
+
+# vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:

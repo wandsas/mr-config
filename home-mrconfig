@@ -1,0 +1,117 @@
+[DEFAULT]
+include =
+	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
+	cat ~/.config/mr/mr-hooks 2>/dev/null || true
+lib = . ~/.config/mr/mr-functions
+
+[.config/mr]
+order = 1
+name = mr-config
+chain = true
+checkout = git clone rpi:repo/mr-config.git $MR_REPO
+remote = git_add_remote github git@github.com:wandsas/mr-config.git
+fixups =
+	ensure_symlink_exists ~/.mrconfig $MR_REPO/home-mrconfig
+	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
+
+[$HOME/mr-repo/wandsas/wandsas-dotfiles]
+stowable = true
+checkout = git clone rpi:repo/wandsas-dotfiles.git $MR_REPO
+
+
+### Bootstrap ###
+
+[$HOME/mr-repo/bootstrap/busybox]
+checkout = git clone git://git.busybox.net/busybox/ $MR_REPO
+
+[$HOME/mr-repo/bootstrap/busybox-chroots]
+checkout = git clone git://github.com/just-containers/busybox-chroots
+
+[$HOME/mr-repo/bootstrap/lh-bootstrap]
+checkout = git clone git://github.com/skarnet/lh-bootstrap
+
+
+### Net ###
+
+[$HOME/mr-repo/net/torproxy]
+checkout = git clone git://github.com/dperson/torproxy.git
+
+[$HOME/mr-repo/net/docker-tor]
+checkout = git clone git://github.com/wandsas/docker-tor.git
+
+[$HOME/mr-repo/net/docker-privoxy]
+checkout = git clone git://github.com/wandsas/docker-privoxy
+
+[$HOME/mr-repo/net/doh-server]
+checkout = git clone git://github.com/jedisct1/doh-server.git
+
+[$HOME/mr-repo/net/encrypted-dns-server]
+checkout = git clone git://github.com/jedisct1/encrypted-dns-server.git
+
+[$HOME/mr-repo/net/cloudflared]
+checkout = git clone git://github.com/cloudflare/cloudflared.git
+
+[$HOME/mr-repo/net/dnscrypt-proxy]
+checkout = git clone git://github.com/DNSCrypt/dnscrypt-proxy.git
+
+[$HOME/mr-repo/net/tor]
+checkout = git clone https://git.torproject.org/tor.git
+
+
+### Linux ###
+
+[$HOME/mr-repo/linux/korg-helpers]
+checkout = git clone https://git.kernel.org/pub/scm/linux/kernel/git/mricon/korg-helpers.git
+remote = git_add_remote rpi:repo/korg-herlpers.git
+
+[$HOME/mr-repo/linux/firmware-nonfree]
+checkout = git clone git://github.com/RPi-Distro/firmware-nonfree.git $MR_REPO
+
+
+### x11 ###
+
+[$HOME/mr-repo/x11/alacritty]
+checkout = git clone git://github.com/alacritty/alacritty.git
+
+[$HOME/mr-repo/x11/alacritty-themes]
+checkout = git clone git://github.com/rajasegar/alacritty-themes.git
+
+
+### BSD cmdline tools ###
+
+[$HOME/mr-repo/shell/lobase]
+checkout = git clone git://github.com/Duncaen/lobase.git
+remotes = git_add_remote wandsas rpi:repo/lobase.git
+fixups = ./configure make install
+skip = true
+
+[$HOME/mr-repo/shell/OpenDoas]
+checkout = git clone git://github.com/Duncaen/OpenDoas.git
+remotes = git_add_remote wandsas rpi:repo/OpenDoas.git
+fixups = ./configure && make install
+skip = true
+
+
+### Toolchain ###
+
+[$HOME/mr-repo/toolchain/musl-cross-make]
+checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git
+remotes = git_add_remote origin rpi:repo/musl-cross-make.git
+fixups =
+  cd $MR_REPO && make clean
+  make TARGET=x86_64-linux-musl OUTPUT=/home/wandsas/.DIST/gcc-9.3-${TARGET} install
+skip = true
+
+[$HOME/mr-repo/toolchain/musl-utils]
+checkout = git clone git@github.com:wandsas/musl-utils.git
+skip = true
+
+[$HOME/mr-repo/toolchain/android-tools]
+checkout = git clone git@github.com:wandsas/android-tools.git
+skip = true
+
+[$HOME/mr-repo/toolchain/llvm-toolchain]
+checkout = git clone git://github.com/llvm/llvm-project.git 
+
+
+# vim:fenc=utf-8:ft=dosini:ts=2:

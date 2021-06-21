@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# mr remotes
+forceremotes = MR_OVERWRITE_REMOTES=y mr remotes "$@"
+post_checkout =
+    cd "$MR_REPO"
+    if [ -d .git ]; then
+        mr remotes
+    fi
+
+
+# mr confidential
+fixups_append =
+    if confidential_repo; then
+        chmod go-rwx -R "$MR_REPO"
+    fi
+
+isconfidential =
+    if confidential_repo; then
+        echo "confidential"
+    else
+        echo "public"
+    fi
+
+
+# cfg-post.d hooks
+fixups_append =
+    dir=.cfg-post.d
+    for f in "$MR_REPO/$dir"/*; do
+        if [ -x "$f" ]; then
+            stowed="${f##*/}"
+            s="$ZDOTDIR/$dir/$stowed"
+            if [ -x "$s" ]; then
+                info "Running $s ..."
+                if "$s"; then
+                    info "$s succeeded"
+                else
+                    error "$s failed"
+                fi
+            else
+                error "$f not stowed as $s; can't run"
+            fi
+        fi
+    done
+
+
+# Support for "relocation" in a manner similar to the now obsolete
+# https://github.com/aspiers/cfgctl/blob/master/lib/perl5/Cfg/Pkg/Relocatable.pm
+
+lib =
+    symlink_repo_from () {
+        if [ $# != 1 ]; then
+            error "Usage: symlink_repo_from SYMLINK"
+        fi
+        ensure_symlink_exists "$1" "$MR_REPO"
+    }
+
+# vim:fenc=utf-8:ft=sh:ts=2:
