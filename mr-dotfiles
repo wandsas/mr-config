@@ -17,9 +17,11 @@ fixups =
 [$HOME/repo/dev-vcs/kitenet-mr]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git
+lib = mr_init_stow_package /usr/local
+fixups = make clean && make build &/& make PREFIX=${STOW_PKG_PATH} install
 
 [$HOME/repo/wandsas/dotfiles]
 stowable = true
-checkout = git clone rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
+checkout = git clone -b z800 rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
