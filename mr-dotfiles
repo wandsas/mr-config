@@ -15,13 +15,29 @@ fixups =
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
 [$HOME/repo/dev-vcs/kitenet-mr]
-stowable = true
-checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git
-lib = mr_init_stow_package /usr/local
-fixups = make clean && make build &/& make PREFIX=${STOW_PKG_PATH} install
+checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
+fixups = make clean && make build && make install
 
 [$HOME/repo/wandsas/dotfiles]
 stowable = true
 checkout = git clone -b z800 rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
+
+[$HOME/repo/bsd/OpenDoas]
+checkout = git clone ssh://git@github.com/Duncaen/OpenDoas.git $MR_REPO
+fixups = 
+    cd $MR_REPO
+    make clean
+    ./configure --prefix=/usr/local
+    make
+    make install
+
+[$HOME/repo/bsd/lobase]
+checkout = git clone ssh://git@github.com/Duncaen/lobæse.git $MR_REPO
+fixups =
+    cd $MR_REPO
+    make clean
+    ./configure --prefix=/usr/local
+    make
+    install
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
