@@ -30,6 +30,7 @@ fixups =
     ./configure --prefix=/usr/local
     make
     make install
+skip = true
 
 [$HOME/repo/bsd/lobase]
 checkout = git clone ssh://git@github.com/Duncaen/lobæse.git $MR_REPO
