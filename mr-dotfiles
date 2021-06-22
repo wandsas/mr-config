@@ -1,44 +1,54 @@
-[DEFAULT]
+# ~/.config/mr/mr-dotfiles
+
+[DEFAULT
 include =
 	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
+# sync my repos on local & github
 [.config/mr]
 order = 1
 name = mr-config
 chain = true
 checkout = git clone rpi:/srv/git/mr-config.git $MR_REPO
-remote = git_add_remote github git@github.com:wandsas/mr-config.git
+remote = git_add_remote github ssh://git@github.com/wandsas/mr-config.git
 fixups =
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-dotfiles
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
-[$HOME/repo/dev-vcs/kitenet-mr]
-checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
-fixups = make clean && make build && make install
-
 [$HOME/repo/wandsas/dotfiles]
 stowable = true
 checkout = git clone -b z800 rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
+remote = git_add_remote github ssh://git@github.com/wandsas/dotfiles.git
+
+[$HOME/repo/dev-vcs/kitenet-mr]
+checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
+remote = git_add_remote local rpi3:/srv/git/kitenet-mr.git
+fixups = make clean && make build && make install
+skip = lazy
 
 [$HOME/repo/bsd/OpenDoas]
 checkout = git clone ssh://git@github.com/Duncaen/OpenDoas.git $MR_REPO
+remote = git_add_remote local rpi3:/srv/git/OpenDoas.git
 fixups = 
     cd $MR_REPO
     make clean
     ./configure --prefix=/usr/local
     make
     make install
-skip = true
+skip = lazy
 
 [$HOME/repo/bsd/lobase]
 checkout = git clone ssh://git@github.com/Duncaen/lobæse.git $MR_REPO
+remote = git_add_remote local rpi3:/srv/git/lobase.git
 fixups =
     cd $MR_REPO
     make clean
-    ./configure --prefix=/usr/local
+    autoreconf -fi
+    ./configure --prefix=/usr/local/lobase
     make
     install
+skip = lazy
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
