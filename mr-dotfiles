@@ -1,6 +1,6 @@
 # ~/.config/mr/mr-dotfiles
 
-[DEFAULT
+[DEFAULT]
 include =
 	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
