@@ -31,7 +31,7 @@ fixups_append =
             if [ -x "$s" ]; then
                 info "Running $s ..."
                 if "$s"; then
-                    info "$s succeeded"
+                    success "$s succeeded"
                 else
                     error "$s failed"
                 fi

@@ -16,7 +16,7 @@ MY_HOST=z800
 MY_DOMAIN=homelab
 
 GIT_MY_UPSTREAM=wandsas
-GIT_MY_LOCAL_UPSTREAM=homelab
+GIT_MY_LOCAL=/srv/git
 
 ZDOTDIR=/home/wandsas
 
@@ -300,11 +300,11 @@ git_add_remotes () {
 }
 
 my_upstream_url () {
-    echo "ssh://git@github.com/${GIT_MY_UPSTREAM}/${MR_NAME}.git"
+    echo "ssh://git@github.com/${GIT_UPSTREAM}/${MR_NAME}.git"
 }
 
 my_local_upstream_url () {
-    echo "ssh://git@rpi.gnu.local/${GIT_MY_LOCAL_UPSTREAM}/${MR_NAME}.git"
+    echo "rpi3://${GIT_LOCAL}/${MR_NAME}.git"
 }
 
 my_upstream_remote () {
