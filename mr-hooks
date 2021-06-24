@@ -8,7 +8,6 @@ post_checkout =
         mr remotes
     fi
 
-
 # mr confidential
 fixups_append =
     if confidential_repo; then
@@ -21,7 +20,6 @@ isconfidential =
     else
         echo "public"
     fi
-
 
 # cfg-post.d hooks
 fixups_append =

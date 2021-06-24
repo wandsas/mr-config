@@ -1,23 +1,35 @@
-#!/bin/sh
+
+# ansi colors
+black="\033[0;90m"
+red="\033[0;91m"
+green="\033[0;92m"
+yellow="\033[0;93m"
+blue="\033[0;94m"
+magenta="\033[0;95m"
+cyan="\033[0;96m"
+bold="\033[1m"
+underline="\033[4m"
+reset="\033[m"
 
 MY_USER=wandsas
 MY_HOST=z800
-MY_DOMAIN=home.local
+MY_DOMAIN=homelab
 
 GIT_MY_UPSTREAM=wandsas
-GIT_MY_LOCAL_UPSTREAM=rpi3
+GIT_MY_LOCAL_UPSTREAM=homelab
 
+ZDOTDIR=/home/wandsas
 
 info () {
-	echo "INFO: ${@}"
+	printf "${green}INFO:${reset} ${@}\n" >&2
 }
 
 warn () {
-	echo "WARN: ${@}" >&2
+	printf "${yellow}WARN:${reset} ${@}\n" >&2
 }
 
 error () {
-	echo "ERROR: ${@}" >&2
+	printf "${red}ERROR:${reset} ${@}\n" >&2
 }
 
 die () {
@@ -26,7 +38,7 @@ die () {
 
 debug () {
     if [ -n "$MR_DEBUG_SKIP" ]; then
-        echo "# SKIP $MR_NAME?  $*"
+        printf "# SKIP $MR_NAME?  $*\n"
     fi
 }
 
