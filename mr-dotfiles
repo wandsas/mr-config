@@ -25,7 +25,7 @@ skip = lazy
 
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
-checkout = git clone -b z800 rpi:/srv/git/wandsas/dotfiles.git $MR_REPO
+checkout = git clone -b z800 rpi3:/srv/git/wandsas/dotfiles.git $MR_REPO
 remote = git_add_remote github ssh://git@github.com/wandsas/dotfiles.git
 
 [$HOME/.GIT/bsd/OpenDoas]
