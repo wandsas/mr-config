@@ -416,7 +416,7 @@ on () {
     return 1
 }
 
-my_user_host () {
+my_user@host () {
     on ${MY_USER}@${MY_HOST}
 }
 
