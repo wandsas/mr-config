@@ -416,8 +416,8 @@ on () {
     return 1
 }
 
-my_user@host () {
-    on ${MY_USER}_${MY_HOST}
+my_user_host () {
+    on ${MY_USER}@${MY_HOST}
 }
 
 my_host () {
