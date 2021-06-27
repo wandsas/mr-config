@@ -417,7 +417,7 @@ on () {
 }
 
 my_user@host () {
-    on ${MY_USER}@${MY_HOST}
+    on ${MY_USER}_${MY_HOST}
 }
 
 my_host () {

@@ -36,7 +36,7 @@ fixups =
     ./configure --prefix=/usr/local
     make
     make install
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.GIT/bsd/lobase]
 checkout = git clone git://github.com:Duncaen/lobase.git $MR_REPO
@@ -55,7 +55,7 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
     install --owner=$USER --group=$USER --mode=755 diff-so-fancy $HOME/.local/bin/diff-so-fancy
     install --owner=$USER --group=$USER --mode=644 lib/DiffHighlight.pm $HOME/.local/lib/DiffHighlight.pm
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com:docker/docker-credential-helpers.git $MR_REPO
@@ -63,25 +63,25 @@ remotes = git_add_remote local rpi3.homelab rpi3.homelab:/srv/git/docker-credent
 fixups =
     make pass
     install --owner=$USER --group=$USER --mode=755 bin/docker-credential-pass $HOME/.local/bin/docker-credential-pass
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
 fixups = make
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.local/lib/rbenv]
 checkout = git clone git://github.com/rbenv/rbenv.git $MR_REPO
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.local/lib/pyenv]
 checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
 fixups = cd $MR_REPO && src/configure && make -C src
-skip = ! my_user@host
+skip = ! my_user_host
 
 [$HOME/.local/lib/nvm]
 checkout = git clone git://github.com/nvm-sh/nvm.git $MR_REPO
-skip = ! my_user@host
+skip = ! my_user_host
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
