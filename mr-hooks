@@ -24,14 +24,14 @@ isconfidential =
 # cfg-post.d hooks
 fixups_append =
     dir=.cfg-post.d
-    for f in "$MR_REPO/$dir"/*; do
+    for f in "$MR_REPO/$dir"/*.sh; do
         if [ -x "$f" ]; then
             stowed="${f##*/}"
             s="$ZDOTDIR/$dir/$stowed"
             if [ -x "$s" ]; then
                 info "Running $s ..."
                 if "$s"; then
-                    success "$s succeeded"
+                    info "$s succeeded"
                 else
                     error "$s failed"
                 fi
