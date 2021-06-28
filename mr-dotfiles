@@ -53,7 +53,7 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
     [ -f ~/.local/bin/diff-so-fancy ] || [ -f ~/.local/lib/perl/lib/DiffHighlight.pm ] && return
     install -g users -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
-    install -g users -m 644 lib/DiffHighlight.pm ~/.local/lib/DiffHighlight.pm
+    install -g users -m 644 lib/DiffHighlight.pm ~/.local/lib/perl5/lib/DiffHighlight.pm
 skip = ! my_user_host
 
 [$HOME/.GIT/docker/docker-credential-helpers]
