@@ -417,27 +417,31 @@ on () {
 }
 
 my_workstation () {
-    on ${MY_USER}@${MY_HOST}.${MY_DOMAIN}
+    on ${MY_USER}@${MY_HOST}
 }
 
-debian_container () {
-  on debian@deb2.lxd
+deb2 () {
+  on debian@deb2
 }
 
-ubuntu_container () {
-  on ubuntu@ubu2.lxd || ubuntu@ubu3.lxd
+ubu2 () {
+  on ubuntu@ubu2
 }
 
-void_container () {
-  on anon@void1.lxd
+ubu3 () {
+  on ubuntu@ubu3
 }
 
-alpine_container () {
-  on alpine@alpine1.lxd
+void1 () {
+  on anon@void1
 }
 
-genmusl_container () {
-  on gentoo@genmusl.lxd
+alpine1 () {
+  on alpine@alpine1
+}
+
+genmusl1 () {
+  on gentoo@genmusl1
 }
 
 my_host () {
