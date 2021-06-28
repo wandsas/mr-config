@@ -30,6 +30,11 @@ stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 
+[$HOME/.GIT/void/void-updates]
+checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
+remotes = git_add_remote local rpi3.homelab:/srv/git/void-updates.git
+skip = ! my_workstation
+
 [$HOME/.GIT/bsd/OpenDoas]
 checkout = git clone git://github.com/Duncaen/OpenDoas.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/OpenDoas.git
@@ -38,7 +43,7 @@ fixups =
     make clean
     ./configure --prefix=/usr/local
     make && make install
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.GIT/bsd/lobase]
 checkout = git clone git://github.com/Duncaen/lobase.git $MR_REPO
@@ -48,7 +53,7 @@ fixups =
     autoreconf -fi
     ./configure --prefix=/usr/local/lobase
     make && make install
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.GIT/vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
@@ -58,7 +63,7 @@ fixups =
         install -g users -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
     [ -f ~/.local/lib/perl/lib/DiffHighlight.pm ] || \
         install -g users -m 644 lib/DiffHighlight.pm ~/.local/lib/perl5/lib/DiffHighlight.pm
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
@@ -67,26 +72,26 @@ fixups =
     [ -f ~/.local/bin/docker-credential-pass ] && return
     make clean && make pass
     install -g users -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
 fixups = [ -f ~/.local/bin/gnome-keyring-query ] || make
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
 checkout = git clone git://github.com/rbenv/rbenv.git $MR_REPO
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.local/lib/pyenv]
 checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
 post_checkout =
 fixups = cd $MR_REPO && src/configure && make -C src
-skip = ! my_user_host
+skip = ! my_workstation
 
 [$HOME/.local/lib/nvm]
 checkout = git clone git://github.com/nvm-sh/nvm.git $MR_REPO
-skip = ! my_user_host
+skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:

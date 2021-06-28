@@ -416,8 +416,28 @@ on () {
     return 1
 }
 
-my_user_host () {
+my_workstation () {
     on ${MY_USER}@${MY_HOST}.${MY_DOMAIN}
+}
+
+debian_container () {
+  on debian@deb2.lxd
+}
+
+ubuntu_container () {
+  on ubuntu@ubu2.lxd || ubuntu@ubu3.lxd
+}
+
+void_container () {
+  on anon@void1.lxd
+}
+
+alpine_container () {
+  on alpine@alpine1.lxd
+}
+
+genmusl_container () {
+  on gentoo@genmusl.lxd
 }
 
 my_host () {
