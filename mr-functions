@@ -432,12 +432,4 @@ root () {
     [[ "$USER" = "root" ]]
 }
 
-wandsas_on_z800 () {
-    on wandsas@z800.homelab
-}
-
-ubuntu_on_ubu3 () {
-    on ubuntu@ubu3.lxd
-}
-
 # vim:fenc=utf-8:fenc=utf-8:ft=sh:
