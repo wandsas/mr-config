@@ -13,10 +13,10 @@ reset="\033[m"
 
 MY_USER=wandsas
 MY_HOST=z800
-MY_DOMAIN=homelab
+MY_DOMAIN=homelab_DOMAIN=homelab
 
-GIT_MY_UPSTREAM=wandsas
-GIT_MY_LOCAL=/srv/git
+GIT_MY_UPSTREAM=github
+GIT_MY_LOCAL=local
 
 ZDOTDIR=/home/wandsas
 
@@ -417,7 +417,7 @@ on () {
 }
 
 my_user_host () {
-    on ${MY_USER}@${MY_HOST}
+    on ${MY_USER}@${MY_HOST}.${MY_DOMAIN}
 }
 
 my_host () {
@@ -430,6 +430,14 @@ my_user () {
 
 root () {
     [[ "$USER" = "root" ]]
+}
+
+wandsas_on_z800 () {
+    on wandsas@z800.homelab
+}
+
+ubuntu_on_ubu3 () {
+    on ubuntu@ubu3.lxd
 }
 
 # vim:fenc=utf-8:fenc=utf-8:ft=sh:
