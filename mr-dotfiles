@@ -32,43 +32,42 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 checkout = git clone git://github.com:Duncaen/OpenDoas.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/OpenDoas.git
 fixups = 
-    #make clean
+    make clean
     ./configure --prefix=/usr/local
-    make
-    make install
+    make && make install
 skip = ! my_user_host
 
 [$HOME/.GIT/bsd/lobase]
 checkout = git clone git://github.com:Duncaen/lobase.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/lobase.git
 fixups =
-    #make clean
+    make clean
     autoreconf -fi
     ./configure --prefix=/usr/local/lobase
-    make
-    install
-skip = true
+    make && make install
+skip = ! my_user_host
 
 [$HOME/.GIT/vcs/diff-so-fancy]
 checkout = git clone git://github.com:so-fancy/diff-so-fancy.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
-    install --owner=$USER --group=$USER --mode=755 diff-so-fancy $HOME/.local/bin/diff-so-fancy
-    install --owner=$USER --group=$USER --mode=644 lib/DiffHighlight.pm $HOME/.local/lib/DiffHighlight.pm
+    [ -f ~/.local/bin/diff-so-fancy ] || [ -f ~/.local/lib/perl/lib/DiffHighlight.pm ] && return
+    install -g users -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
+    install -g users -m 644 lib/DiffHighlight.pm ~/.local/lib/DiffHighlight.pm
 skip = ! my_user_host
 
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com:docker/docker-credential-helpers.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab rpi3.homelab:/srv/git/docker-credential-helpers.git
 fixups =
-    make pass
-    install --owner=$USER --group=$USER --mode=755 bin/docker-credential-pass $HOME/.local/bin/docker-credential-pass
+    make clean && make pass
+    install -g users -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
 skip = ! my_user_host
 
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
-fixups = make
+fixups = [ -f ~/.local/bin/gnome-keyring-query ] || make
 skip = ! my_user_host
 
 [$HOME/.local/lib/rbenv]
@@ -77,6 +76,7 @@ skip = ! my_user_host
 
 [$HOME/.local/lib/pyenv]
 checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
+post_checkout =
 fixups = cd $MR_REPO && src/configure && make -C src
 skip = ! my_user_host
 
