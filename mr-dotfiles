@@ -77,9 +77,8 @@ skip = true
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
-        install -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
-        install -m 755 -d ~/local/lib/perl5/lib
-        install -m 644 lib/DiffHighlight.pm ~/.local/lib/perl5/lib/DiffHighlight.pm
+    ./third_party/build_fatpack/build.pl
+    install -m 755 /tmp/diff-so-fancy ~/.local/bin/diff-so-fancy
 skip = ! my_workstation
 
 [$HOME/.GIT/docker/docker-credential-helpers]
@@ -94,7 +93,7 @@ skip = ! my_workstation
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
-fixups = make
+fixups = make PREFIX=$HOME/.local install
 skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
