@@ -41,6 +41,7 @@ remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
 [$HOME/.password-store]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
+skip = ! my_workstation
 
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
