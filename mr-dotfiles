@@ -20,10 +20,7 @@ fixups =
 [$HOME/.GIT/vcs/kitenet-mr]
 checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/kitenet-mr.git
-fixups =
-    [ -f /usr/local/bin/mr ] && return
-    make build && make install
-skip = lazy
+fixups = make install
 
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
@@ -33,8 +30,7 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/vim-config.git
-fixups = 
-    [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
+post_checkout = [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 
 [$HOME/.GIT/wandsas/shlib]
 stowable = true
