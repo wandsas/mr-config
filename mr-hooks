@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# mr remotes
+### mr remotes ###
 forceremotes = MR_OVERWRITE_REMOTES=y mr remotes "$@"
 post_checkout =
     cd "$MR_REPO"
@@ -8,7 +8,7 @@ post_checkout =
         mr remotes
     fi
 
-# mr confidential
+### mr confidential ###
 fixups_append =
     if confidential_repo; then
         chmod go-rwx -R "$MR_REPO"
@@ -21,7 +21,7 @@ isconfidential =
         echo "public"
     fi
 
-# cfg-post.d hooks
+### cfg-post.d hooks ###
 fixups_append =
     dir=.cfg-post.d
     for f in "$MR_REPO/$dir"/*.sh; do
@@ -44,7 +44,6 @@ fixups_append =
 
 # Support for "relocation" in a manner similar to the now obsolete
 # https://github.com/aspiers/cfgctl/blob/master/lib/perl5/Cfg/Pkg/Relocatable.pm
-
 lib =
     symlink_repo_from () {
         if [ $# != 1 ]; then

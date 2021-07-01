@@ -30,12 +30,17 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/vim-config.git
-post_checkout = [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
+post_checkout = 
+    [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 
 [$HOME/.GIT/wandsas/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
+
+[$HOME/.password-store]
+checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
+post_checkout = chmod go-rwx $MR_REPO
 
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
@@ -72,10 +77,9 @@ skip = true
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
-    [ -f ~/.local/bin/diff-so-fancy ] || \
-        install -g users -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
-    [ -f ~/.local/lib/perl/lib/DiffHighlight.pm ] || \
-        install -g users -m 644 lib/DiffHighlight.pm ~/.local/lib/perl5/lib/DiffHighlight.pm
+        install -m 755 -t diff-so-fancy ~/.local/bin/diff-so-fancy
+        install -m 755 -d ~/local/lib/perl5/lib
+        install -m 644 lib/DiffHighlight.pm ~/.local/lib/perl5/lib/DiffHighlight.pm
 skip = ! my_workstation
 
 [$HOME/.GIT/docker/docker-credential-helpers]
@@ -84,13 +88,13 @@ remotes = git_add_remote local rpi3.homelab rpi3.homelab:/srv/git/docker-credent
 fixups =
     [ -f ~/.local/bin/docker-credential-pass ] && return
     make clean && make pass
-    install -g users -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
+    install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
 skip = ! my_workstation
 
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
-fixups = [ -f ~/.local/bin/gnome-keyring-query ] || make
+fixups = make
 skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
@@ -105,6 +109,7 @@ skip = ! my_workstation
 
 [$HOME/.local/lib/nvm]
 checkout = git clone git://github.com/nvm-sh/nvm.git $MR_REPO
+update = git pull origin v0.38.0 
 skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=4:sts=4:sw=4:et:
