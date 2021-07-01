@@ -85,8 +85,7 @@ skip = ! my_workstation
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab rpi3.homelab:/srv/git/docker-credential-helpers.git
 fixups =
-    [ -f ~/.local/bin/docker-credential-pass ] && return
-    make clean && make pass
+    make pass
     install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
 skip = ! my_workstation
 
