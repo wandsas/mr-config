@@ -27,7 +27,7 @@ fixups_append =
     for f in "$MR_REPO/$dir"/*.sh; do
         if [ -x "$f" ]; then
             stowed="${f##*/}"
-            s="$ZDOTDIR/$dir/$stowed"
+            s="$HOME/$dir/$stowed"
             if [ -x "$s" ]; then
                 info "Running $s ..."
                 if "$s"; then
