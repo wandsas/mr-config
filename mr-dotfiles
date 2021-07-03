@@ -22,10 +22,24 @@ checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/kitenet-mr.git
 fixups = make install
 
+[$HOME/.GIT/vcs/stow]
+checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
+remote = git_add_remote rpi3.homelab:/srv/git/stow.git
+# doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
+
+[$HOME/.password-store]
+checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
+post_checkout = chmod go-rwx $MR_REPO
+
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
+
+[$HOME/.GIT/wandsas/shlib]
+stowable = true
+checkout = git clone ssh://git@github.com/wandsas/shlib.git
+remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
 
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
@@ -33,14 +47,8 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/vim-config.git
 post_checkout = 
     [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 
-[$HOME/.GIT/wandsas/shlib]
-stowable = true
-checkout = git clone ssh://git@github.com/wandsas/shlib.git
-remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
-
-[$HOME/.password-store]
-checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
-post_checkout = chmod go-rwx $MR_REPO
+[$HOME/vimwiki]
+checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
 
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
