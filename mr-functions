@@ -36,8 +36,8 @@ die () {
 	local ret="$?"; error "$@"; exit "$ret"
 }
 
-debug () {
-    if [ -n "$MR_DEBUG_SKIP" ]; then
+debug/ () {
+    /if [ -n "$MR_DEBUG_SKIP" ]; then
         printf "# SKIP $MR_NAME?  $*\n"
     fi
 }
@@ -372,7 +372,7 @@ mr_set_stow_target () {
 	:
 }
 
-mr_init_stow () {
+mr_init_stow_package () {
     STOW_TARGET=${1:-$HOME}
     STOW_DIR=${STOW_TARGET}/.STOW
     STOW_PKG_TYPE=directory
