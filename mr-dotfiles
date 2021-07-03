@@ -1,3 +1,4 @@
+# -*- sh -*-
 # ~/.config/mr/mr-dotfiles
 
 [DEFAULT]
@@ -21,15 +22,19 @@ fixups =
 checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/kitenet-mr.git
 fixups = make install
+skip = lazy
 
 [$HOME/.GIT/vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
 remote = git_add_remote rpi3.homelab:/srv/git/stow.git
 # doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
+fixups =
+skip = lazy
 
 [$HOME/.password-store]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
+skip = ! my_workstation
 
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
