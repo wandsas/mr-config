@@ -29,9 +29,10 @@ remote = git_add_remote rpi3.homelab:/srv/git/stow.git
 lib = export STOW_COMMAND=$MR_REPO/.bin/stow
 # doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
 fixups =
-    autoreconf -iv
-    configure --prefix=$HOME
-    make install
+  cpan Test::Output
+  autoreconf -iv
+  configure --prefix=$HOME
+  make install
 skip = lazy
 
 [$HOME/.password-store]
@@ -53,7 +54,7 @@ remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/vim-config.git
 post_checkout = 
-    [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
+  [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 
 [$HOME/vimwiki]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
@@ -62,53 +63,53 @@ checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/void-updates.git
 fixups = 
-    # Are we are running a voidlinux system
-    if [ -d /etc/xbps.d ]; then
-        info "We are running a voidlinux system."
-        install -g users -m 755 void-updates.sh /usr/local/bin/void-updates
-    fi
+  # Are we are running a voidlinux system
+  if [ -d /etc/xbps.d ]; then
+    info "We are running a voidlinux system."
+    install -g users -m 755 void-updates.sh /usr/local/bin/void-updates
+  fi
 skip = ! my_workstation
 
 [$HOME/.GIT/bsd/OpenDoas]
 checkout = git clone git://github.com/Duncaen/OpenDoas.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/OpenDoas.git
 fixups = 
-    [ -f /usr/local/bin/doas ] && return
-    make clean
-    ./configure --prefix=/usr/local
-    make && make install
+  make clean
+  ./configure --prefix=/usr/local
+  make install
 skip = ! my_workstation
 
 [$HOME/.GIT/bsd/lobase]
 checkout = git clone git://github.com/Duncaen/lobase.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/lobase.git
 fixups =
-    make clean
-    autoreconf -fi
-    ./configure --prefix=/usr/local/lobase
-    make && make install
+  make clean
+  autoreconf -fi
+  ./configure --prefix=/usr/local/lobase
+  make install
 skip = true
 
 [$HOME/.GIT/vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups =
-    ./third_party/build_fatpack/build.pl
-    install -m 755 /tmp/diff-so-fancy ~/.local/bin/diff-so-fancy
+  ./third_party/build_fatpack/build.pl
+  install -m 755 /tmp/diff-so-fancy ~/.local/bin/diff-so-fancy
 skip = ! my_workstation
 
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab rpi3.homelab:/srv/git/docker-credential-helpers.git
 fixups =
-    make pass
-    install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
+  make pass
+  install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
 skip = ! my_workstation
 
 [$HOME/.GIT/gnome/gnome-keyring-query]
 checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/gnome-keyring-query.git
-fixups = make PREFIX=$HOME/.local install
+fixups =
+  make PREFIX=$HOME/.local install
 skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
@@ -118,7 +119,7 @@ skip = ! my_workstation
 [$HOME/.local/lib/pyenv]
 checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
 post_checkout =
-fixups = cd $MR_REPO && src/configure && make -C src
+fixups = src/configure && make -C src
 skip = ! my_workstation
 
 [$HOME/.local/lib/nvm]
