@@ -27,11 +27,11 @@ skip = lazy
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
 remote = git_add_remote rpi3.homelab:/srv/git/stow.git
 lib = export STOW_COMMAND=$MR_REPO/.bin/stow
+# Install: cpan Test::Output
 # doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
 fixups =
-  cpan Test::Output
   autoreconf -iv
-  configure --prefix=$HOME
+  configure --prefix=$HOME/.local
   make install
 skip = lazy
 
