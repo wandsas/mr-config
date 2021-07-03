@@ -36,8 +36,8 @@ die () {
 	local ret="$?"; error "$@"; exit "$ret"
 }
 
-debug/ () {
-    /if [ -n "$MR_DEBUG_SKIP" ]; then
+debug () {
+    if [ -n "$MR_DEBUG_SKIP" ]; then
         printf "# SKIP $MR_NAME?  $*\n"
     fi
 }
