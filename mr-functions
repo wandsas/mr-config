@@ -21,15 +21,15 @@ GIT_MY_LOCAL=local
 ZDOTDIR=/home/wandsas
 
 info () {
-	printf "${green}INFO:${reset} ${@}\n" >&2
+	printf "${bold}${yellow}INFO:${reset} ${@}\n" >&2
 }
 
 warn () {
-	printf "${yellow}WARN:${reset} ${@}\n" >&2
+	printf "${bold}${yellow}WARN:${reset} ${@}\n" >&2
 }
 
 error () {
-	printf "${red}ERROR:${reset} ${@}\n" >&2
+	printf "${bold}${red}ERROR:${reset} ${@}\n" >&2
 }
 
 die () {
