@@ -432,6 +432,10 @@ ubu3 () {
   on ubuntu@ubu3
 }
 
+ubu4 () {
+  on ubuntu@ubu4
+}
+
 void1 () {
   on anon@void1
 }
