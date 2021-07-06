@@ -49,6 +49,7 @@ remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remotes = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
+skip = ! my_workstation
 
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
@@ -58,6 +59,7 @@ post_checkout =
 
 [$HOME/vimwiki]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
+skip = ! my_workstation
 
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
@@ -132,11 +134,13 @@ fixups =
   cd build
   cmake .. -DPREFIX=$HOME/.local -DCMAKE_BUILD_TYPE=Release
   make install
+skip = ! my_workstation
 
 [$HOME/.GIT/cmdline/direnv]
 checkout = git clone git://github.com/direnv/direnv.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/direnv.git
 fixups =
   make DESTDIR=$HOME/.local install
+skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
