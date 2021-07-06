@@ -143,4 +143,11 @@ fixups =
   make DESTDIR=$HOME/.local install
 skip = ! my_workstation
 
+[$HOME/android/myandroid]
+checkout = git clone ssh://git@github.com/wandsas/myandroid.git $MR_REPO
+remotes = git_add_remote github ssh://git@github.com/wandsas/myandroid.git
+skip = !ubu2 || !ubu3 || !ubu4 
+
+
+
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
