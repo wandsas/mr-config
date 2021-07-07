@@ -152,11 +152,8 @@ skip = ! is_android_dev
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git
 remotes = git_add_remote origin rpi:repo/musl-cross-make.git
 fixups =
-  cd $MR_REPO && make clean
-  env TARGET=x86_64-linux-musl \
-    GCC_VER=11-20210228 \
-    OUTPUT=/home/wandsas/dist/gcc-${GCC_VER}-${TARGET} \
-    make install
+  make TARGET=x86_64-linux-musl GCC_VER=11-20210228 \
+    OUTPUT=/home/wandsas/dist/gcc-${GCC_VER}-${TARGET} install
 skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
