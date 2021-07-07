@@ -436,4 +436,8 @@ is_debian () {
   [ -f /etc/debian_version ]
 }
 
+is_android_dev () {
+  [ -f ~/.android_development_environment ]
+}
+
 # vim:fenc=utf-8:fenc=utf-8:ft=sh:
