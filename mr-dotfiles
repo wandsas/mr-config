@@ -146,7 +146,7 @@ skip = ! my_workstation
 [$HOME/android/myandroid]
 checkout = git clone ssh://git@github.com/wandsas/myandroid.git $MR_REPO
 remotes = git_add_remote github ssh://git@github.com/wandsas/myandroid.git
-skip = !ubu2 || !ubu3 || !ubu4 
+skip = ! is_debian 
 
 
 

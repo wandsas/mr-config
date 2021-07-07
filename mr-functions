@@ -417,47 +417,23 @@ on () {
 }
 
 my_workstation () {
-    on ${MY_USER}@${MY_HOST}
-}
-
-deb2 () {
-  on debian@deb2
-}
-
-ubu2 () {
-  on ubuntu@ubu2
-}
-
-ubu3 () {
-  on ubuntu@ubu3
-}
-
-ubu4 () {
-  on ubuntu@ubu4
-}
-
-void1 () {
-  on anon@void1
-}
-
-alpine1 () {
-  on alpine@alpine1
-}
-
-genmusl1 () {
-  on gentoo@genmusl1
+    on $MY_USER@$MY_HOST
 }
 
 my_host () {
-    [[ "$(hostname)" = ${MY_HOST} ]]
+    [ $(hostname) = $MY_HOST ]
 }
 
 my_user () {
-    [[ "${USER}" = ${MY_USER} ]]
+  [ $USER = $MY_USER ]
 }
 
 root () {
-    [[ "$USER" = "root" ]]
+  [ "$USER" = "root" ]
+}
+
+is_debian () {
+  [ -f /etc/debian_version ]
 }
 
 # vim:fenc=utf-8:fenc=utf-8:ft=sh:
