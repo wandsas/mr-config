@@ -168,6 +168,6 @@ fixups =
    COMMON_CONFIG += CFLAGS="-O2 -march=westmere -pipe -flto=8 -fuse-linker-plugin"
    COMMON_CONFIG += CXXFLAGS="${CFLAGS}" LDFLAGS="-Wl,-O1 -Wl,--as needed"
    OUTPUT=/home/wandsas/dist/wandsas/gcc-${GCC_VER}-${TARGET} install
-skip =  true  # ! my_workstation
+skip =  true
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
