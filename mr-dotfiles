@@ -154,6 +154,8 @@ skip = ! my_workstation
 [$HOME/android/myandroid]
 checkout = git clone ssh://git@github.com/wandsas/myandroid.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/myandroid.git
+fixups =
+  [ -L ~/android/envsetup.sh ] || ln -s ~/android/myandroid/envsetup.sh ~/android
 skip = ! is_android_dev
 
 [$HOME/mr-repo/toolchain/musl-cross-make]
