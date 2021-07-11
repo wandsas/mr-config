@@ -72,8 +72,28 @@ fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
 skip = ! my_workstation
 
 [$HOME/.GIT/void/void-mklive]
-checkout = git clone git://github.com/void-linux/void-mklive.git $MR_REPO
-remotes = git_add_remote local rpi3.homelab:/srv/git/void-mklive.giot
+checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
+remotes =
+  git_add_remotes "
+    local rpi3.homelab:/srv/git/void-mklive.git
+    upstream git://github.com/void-linux/void-mklive.git"
+update =
+  git fetch upstream
+  git rebase upstream/master master
+  git push origin master
+skip = ! my_workstation
+
+[$HOME/void-packages]
+checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
+remotes =
+  git_add_remotes "
+    local rpi3:/srv/git/void-packages.git
+    upsteam git://github.com/void-linux/void-packages.git"
+update =
+  git fetch upstream
+  git rebase upstream/master master
+  git push origin master
+  git push local master
 skip = ! my_workstation
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
