@@ -68,6 +68,9 @@ skip = ! my_workstation
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/void-updates.git
+update =
+  git pull origin master
+  git push local master
 fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
 skip = ! my_workstation
 
@@ -78,9 +81,12 @@ remotes =
     local rpi3.homelab:/srv/git/void-mklive.git
     upstream git://github.com/void-linux/void-mklive.git"
 update =
+  git pull origin master
+  git pull local master
   git fetch upstream
   git rebase upstream/master master
   git push origin master
+  git pull local master
 skip = ! my_workstation
 
 [$HOME/void-packages]
@@ -90,6 +96,8 @@ remotes =
     local rpi3:/srv/git/void-packages.git
     upsteam git://github.com/void-linux/void-packages.git"
 update =
+  git pull origin master
+  git pull local master
   git fetch upstream
   git rebase upstream/master master
   git push origin master
