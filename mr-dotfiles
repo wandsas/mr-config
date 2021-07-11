@@ -86,22 +86,17 @@ update =
   git fetch upstream
   git rebase upstream/master master
   git push origin master
-  git pull local master
+  git push local master
 skip = ! my_workstation
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
-remotes =
-  git_add_remotes "
-    local rpi3:/srv/git/void-packages.git
-    upsteam git://github.com/void-linux/void-packages.git"
+remotes = git_add_remote upsteam git://github.com/void-linux/void-packages.git
 update =
   git pull origin master
-  git pull local master
   git fetch upstream
   git rebase upstream/master master
   git push origin master
-  git push local master
 skip = ! my_workstation
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
