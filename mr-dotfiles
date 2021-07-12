@@ -207,6 +207,7 @@ checkout =
       curl -fLO https://www.syntevo.com/downloads/smartgit/smartgit-linux-21_1_0.tar.gz
       tar -xzvf smartgit-linux-21_1_0.tar.gz
       rm smartgit-linux-21_1_0.tar.gz
+      echo jre=/usr/lib/jvm/openjdk11 > ~/.local/share/smartgit/bin/smartgit.vmoptions
   fi
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
