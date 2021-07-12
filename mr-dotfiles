@@ -200,4 +200,13 @@ fixups =
 #   OUTPUT=/home/wandsas/dist/wandsas/gcc-${GCC_VER}-${TARGET} install
 skip =  true
 
+[$HOME/.local/share/smartgit]
+checkout =
+  if [ ! -d ~/.local/share/smartgit ]; then
+      cd ~/.local/share
+      curl -fLO https://www.syntevo.com/downloads/smartgit/smartgit-linux-21_1_0.tar.gz
+      tar -xzvf smartgit-linux-21_1_0.tar.gz
+      rm smartgit-linux-21_1_0.tar.gz
+  fi
+
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
