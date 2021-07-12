@@ -436,8 +436,12 @@ is_debian () {
   [ -f /etc/debian_version ]
 }
 
-is_android_dev () {
+is_android_env () {
   [ -f ~/.android_development_environment ]
+}
+
+is_arm-linux-gnueabihf_env () {
+  [ -f ~/.arm-linux-gnueabihf_uboot_environment ]
 }
 
 # vim:fenc=utf-8:fenc=utf-8:ft=sh:

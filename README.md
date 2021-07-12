@@ -7,4 +7,4 @@ Managing dotfiles and version control repositories with:
 Checkout this fork of mr with stow integration & more:
 * kitenet-mr  https://github.com/wandsas/kitenet-mr.git
 *
-*2021.07.04* Cheers wandsas
+*2021.07.04* wandsas

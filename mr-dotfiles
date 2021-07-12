@@ -6,6 +6,9 @@ include =
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
+include =
+  cat ~/.config/mr/mr-bootstrap
+
 # sync my repos on local & github
 [.config/mr]
 order = 1
@@ -196,5 +199,7 @@ fixups =
 #   COMMON_CONFIG += CXXFLAGS="${CFLAGS}" LDFLAGS="-Wl,-O1 -Wl,--as needed"
 #   OUTPUT=/home/wandsas/dist/wandsas/gcc-${GCC_VER}-${TARGET} install
 skip =  true
+
+
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:

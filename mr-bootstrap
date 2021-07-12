@@ -1,0 +1,15 @@
+### Bootstrap ###
+
+[$HOME/.GIT/bootstrap/busybox]
+checkout = git clone git://git.busybox.net/busybox/ $MR_REPO
+skip = lazy
+
+[$HOME/.GIT/bootstrap/busybox-chroots]
+checkout = git clone git://github.com/just-containers/busybox-chroots
+skip = lazy
+
+[$HOME/.GIT/bootstrap/lh-bootstrap]
+checkout = git clone git://github.com/skarnet/lh-bootstrap
+skip = lazy
+
+# vim:fenc=utf-8:ft=dosini:ts=2:

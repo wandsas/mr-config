@@ -1,0 +1,35 @@
+### Net ###
+
+[$HOME/.GIT/net/torproxy]
+checkout = git clone git://github.com/dperson/torproxy.git
+skip = lazy
+
+[$HOME/.GIT/net/docker-tor]
+checkout = git clone git://github.com/wandsas/docker-tor.git
+skip = lazy
+
+[$HOME/.GIT/net/docker-privoxy]
+checkout = git clone git://github.com/wandsas/docker-privoxy
+skip = lazy
+
+[$HOME/.GIT/net/doh-server]
+checkout = git clone git://github.com/jedisct1/doh-server.git
+skip = lazy
+
+[$HOME/.GIT/net/encrypted-dns-server]
+checkout = git clone git://github.com/jedisct1/encrypted-dns-server.git
+skip = lazy
+
+[$HOME/.GIT/net/cloudflared]
+checkout = git clone git://github.com/cloudflare/cloudflared.git
+skip = lazy
+
+[$HOME/.GIT/net/dnscrypt-proxy]
+checkout = git clone git://github.com/DNSCrypt/dnscrypt-proxy.git
+skip = lazy
+
+[$HOME/.GIT/net/tor]
+checkout = git clone https://git.torproject.org/tor.git
+skip = lazy
+
+# vim:fenc=utf-8:ft=dosini:ts=2:
