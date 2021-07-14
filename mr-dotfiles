@@ -6,8 +6,8 @@ include =
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
-include =
-  cat ~/.config/mr/groups.d/mr-bootstrap
+#include =
+#  cat ~/.config/mr/groups.d/mr-bootstrap
 
 # sync my repos on local & github
 [.config/mr]
