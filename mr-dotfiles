@@ -217,6 +217,7 @@ checkout =
       ln -s ~/.local/share/smartgit/bin/smartgit.sh ~/.local/bin/smartgit
   fi
 update = :
+status = :
 skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
