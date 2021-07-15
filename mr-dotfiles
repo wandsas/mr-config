@@ -65,7 +65,7 @@ post_checkout =
   [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 skip = ! my_workstation
 
-[$HOME/.vim]
+[$HOME/.SpaceVim]
 checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
 skip = ! is_android_dev_env
 
