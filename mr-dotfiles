@@ -76,6 +76,11 @@ skip = ! is_android_dev_env
 checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
 skip = ! my_workstation
 
+[$HOME/.GIT/web/wandsas.github.io]
+checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
+remotes = git_add_remote rpi3.homelab:/srv/git/wandsas.github.io.git
+skip = ! my_workstation
+
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/void-updates.git
