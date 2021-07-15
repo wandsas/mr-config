@@ -63,10 +63,13 @@ checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
 remotes = git_add_remote local rpi3.homelab:/srv/git/wandsas/vim-config.git
 post_checkout = 
   [ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
+  [ -f ~/.gvimrc ] || ln -s ~/.vim/gvimrc.wandsas ~/.gvimrc
 skip = ! my_workstation
 
 [$HOME/.SpaceVim]
 checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
+post_checkout =
+  [ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
 skip = ! is_android_dev_env
 
 [$HOME/vimwiki]
