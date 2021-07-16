@@ -161,7 +161,7 @@ fixups =
 skip = ! my_workstation
 
 [$HOME/.GIT/gnome/lssecret]
-checkout = git clone git://gitlab.com/GrantMoyer/lssecret.git $MR_REPO
+checkout = git clone https://gitlab.com/GrantMoyer/lssecret.git $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
