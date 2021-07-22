@@ -436,7 +436,7 @@ is_debian () {
   [ -f /etc/debian_version ]
 }
 
-is_android_dev_env () {
+android_dev_env () {
   [ -f ~/.android_dev_env ]
 }
 
