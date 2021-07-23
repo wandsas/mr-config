@@ -277,7 +277,6 @@ git_add_remote () {
 # except for lines where localhost nickname equals EXCEPTION
 git_add_remotes () {
     cd "$MR_REPO"
-    read_localhost_nickname
     # Needs to be exported to while-read subshell
     export LOCALHOST_NICKNAME="$localhost_nickname"
     echo "$*" | while read remote url exception; do
