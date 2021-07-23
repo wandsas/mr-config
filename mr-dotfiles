@@ -28,7 +28,7 @@ skip = lazy
 
 [$HOME/.GIT/vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
-remote = git_add_remote rpi3.homelab:/srv/git/stow.git
+remote = git_add_remote local rpi3.homelab:/srv/git/stow.git
 lib = #export STOW_COMMAND=$MR_REPO/.bin/stow
 # Install: cpan Test::Output
 # doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
@@ -55,7 +55,7 @@ remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 [$HOME/.GIT/wandsas/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
-remote = git_add_remote rpi3.homelab:/srv/git/wandsas/shlib.git
+remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/shlib.git
 skip = ! my_workstation
 
 [$HOME/.vim]
@@ -79,7 +79,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/web/wandsas.github.io]
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
-remote = git_add_remote rpi3.homelab:/srv/git/wandsas.github.io.git
+remote = git_add_remote local rpi3.homelab:/srv/git/wandsas.github.io.git
 skip = ! my_workstation
 
 [$HOME/.GIT/void/void-updates]
@@ -91,7 +91,7 @@ skip = ! my_workstation
 [$HOME/.GIT/void/void-mklive]
 checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
 remote =
-  git_add_remote "
+  git_add_remotes "
     local rpi3.homelab:/srv/git/void-mklive.git
     upstream git://github.com/void-linux/void-mklive.git"
 update =
@@ -182,7 +182,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/cmdline/taskwarrior]
 checkout = git clone git://github.com/GothenburgBitFactory/taskwarrior.git
-remote = git_add_remote rpi3.homelab:/srv/git/taskwarrior.git
+remote = git_add_remote local rpi3.homelab:/srv/git/taskwarrior.git
 fixups =
   [ -d build ] || mkdir build
   cd build
@@ -229,6 +229,7 @@ checkout =
       doas ln -s ~/.local/share/smartgit/bin/smartgit-32.png /usr/share/icons/smartgit.png
       ln -s ~/.local/share/smartgit/bin/smartgit.sh ~/.local/bin/smartgit
   fi
+remote = :
 update = :
 status = :
 skip = ! my_workstation
