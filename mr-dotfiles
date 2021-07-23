@@ -241,7 +241,7 @@ remote =
     upstream git://github.com/orbot.git"
 skip = ! android_dev_env
 
-[$HOME/src/orbot]
+[$HOME/src/k-9]
 checkout = git clone ssh://git@github.com/wandsas/k-9.git $MR_REPO
 remote =
   git_add_remotes "
