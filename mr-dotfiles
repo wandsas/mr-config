@@ -91,11 +91,7 @@ skip = ! my_workstation
 [$HOME/.GIT/void/void-mklive]
 checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
 remote =
-<<<<<<< HEAD
-  git_add_remotes "
-=======
   git_add_remote "
->>>>>>> 98159c1 (foo)
     local rpi3.homelab:/srv/git/void-mklive.git
     upstream git://github.com/void-linux/void-mklive.git"
 update =
