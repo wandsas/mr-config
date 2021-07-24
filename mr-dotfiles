@@ -73,7 +73,7 @@ post_checkout =
   [ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
 skip = ! android_dev_env
 
-[$HOME/vimwiki]
+[$HOME/.vimwiki]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
 skip = ! my_workstation
 
