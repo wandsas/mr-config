@@ -239,7 +239,7 @@ checkout = git clone ssh://git@github.com/wandsas/orbot.git $MR_REPO
 remote = 
   git_add_remotes "
     local rpi3.homelab:/srv/git/orbot.git
-    upstream git://github.com/orbot.git"
+    upstream git://github.com/guardianproject/orbot.git"
 skip = ! android_dev_env
 
 [$HOME/src/k-9]
