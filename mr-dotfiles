@@ -75,13 +75,6 @@ skip = ! android_dev_env
 
 [$HOME/.vimwiki]
 checkout = git clone rpi3.homelab:/srv/git/wandsas/vimwiki.git $MR_REPO
-update =
-  [ -z $(git status --porcelain) ] || git stash save mr-repo
-  git pull origin master
-  [ -z $(git stash list) ] || git stash pop mr-repo
-  git add .
-  git commit -am "mr-repo $(date '%Y/%m/%d %H:%M:%S')"
-  git push origin master
 skip = ! my_workstation
 
 [$HOME/.GIT/web/wandsas.github.io]
