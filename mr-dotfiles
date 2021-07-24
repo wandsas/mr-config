@@ -250,4 +250,12 @@ remote =
     upstream git://github.com/k9mail/k-9.git"
 skip = ! android_dev_env
 
+[$HOME/src/open-keychain]
+checkout = git clone ssh://git@github.com/wandsas/open-keychain.git $MR_REPO
+remote =
+  git_add_remotes "
+    local rpi3.homelab:/srv/git/open-keychain.git
+    upstream git://github.com/open-keychain/open-keychain.git"
+skip = ! android_dev_env
+
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
