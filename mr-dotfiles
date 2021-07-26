@@ -266,5 +266,6 @@ remote =
   git_add_remotes "
     local wandsas@rpi3.homelab:/srv/git/bouncycastle.git
     upstream git://github.com/bcgit/bc-java.git"
+skip = ! android_dev_env
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
