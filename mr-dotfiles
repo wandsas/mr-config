@@ -259,8 +259,6 @@ remote =
 	  upstream git://github.com/open-keychain/open-keychain.git"
 skip = ! android_dev_env
 
-# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
-
 [$HOME/src/bouncycastle]
 checkout = git clone ssh://git@github.com/crosshatcher/bouncycastle.git $MR_REPO
 remote =
