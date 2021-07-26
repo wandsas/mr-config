@@ -43,8 +43,9 @@ checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
-[$HOME/.pass-android]
-checkout = git clone rpi3.homelab:/srv/git/wandsas/pass-android.git $MR_REPO
+[$HOME/.pass-crosshatcher]
+checkout = git clone rpi3.homelab:/srv/git/crosshatcher/pass-crosshatcher.git $MR_REPO
+post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.GIT/wandsas/dotfiles]
