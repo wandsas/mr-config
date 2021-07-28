@@ -260,15 +260,3 @@ remote =
 skip = ! android_dev_env
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
-
-[.GIT/lxd/anbox-modules]
-checkout = git clone 'git://github.com/anbox/anbox-modules.git' 'anbox-modules'
-
-[.GIT/lxd/android-emulator-container-scripts]
-checkout = git clone 'git://github.com/google/android-emulator-container-scripts.git' 'android-emulator-container-scripts'
-
-[.GIT/lxd/lxc-for-Android-7.1.2]
-checkout = git clone 'git://github.com/clondroid/lxc-for-Android-7.1.2.git' 'lxc-for-Android-7.1.2'
-
-[.GIT/lxd/lxdui]
-checkout = git clone 'https://github.com/AdaptiveScale/lxdui.git' 'lxdui'
