@@ -245,7 +245,7 @@ skip = ! android_dev_env
 checkout = git clone ssh://git@github.com/crosshatcher/k9mail.git $MR_REPO
 remote = 
 	git_add_remotes "
-	  local wandsas@rpi3.homelab:/srv/git/k-9.git
+	  local wandsas@rpi3.homelab:/srv/git/k9mail.git
 	  upstream git://github.com/k9mail/k-9.git"
 skip = ! android_dev_env
 
