@@ -31,8 +31,8 @@ remote = git_add_remote local rpi3.homelab:/srv/git/stow.git
 lib = #export STOW_COMMAND=$MR_REPO/.bin/stow
 # Install: cpan Test::Output
 # doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
-fixups = 
 # autoreconf -iv
+fixups = 
 	./configure --prefix=$HOME/.local
 	make install
 skip = lazy
