@@ -121,14 +121,11 @@ remote = git_add_remote local rpi3.homelab:/srv/git/alpine-chroot-install.git $M
 skip = ! my_workstation
 
 [$HOME/.GIT/bsd/OpenDoas]
-stowable = true
 checkout = git clone git://github.com/Duncaen/OpenDoas.git $MR_REPO
 remote = git_add_remote local rpi3.homelab:/srv/git/OpenDoas.git
-lib = mr_init_stow_package /usr/local
 fixups = 
 	./configure --prefix=/usr/local
-	make install prefix=${STOW_PKG_PATH}
-	mr_restow_regardless
+	make install
 skip = ! my_workstation
 
 [$HOME/.GIT/bsd/lobase]
@@ -141,7 +138,7 @@ fixups =
     fi
     ./configure --prefix=/usr/local/lobase
     make -j12
-    make -j12 install
+    make install
 skip = true
 
 [$HOME/.GIT/vcs/diff-so-fancy]
@@ -266,13 +263,11 @@ skip = ! android_dev_env
 
 [$HOME/.GIT/media/recordmydesktop]
 checkout = git clone % git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
-lib = mr_init_stow_package $[{HOME}/.local
 fixups =
   if [ ! -f configure ]; then
     sh autogen.sh
   fi
-  ./configure --prefix=${HOME}/.local
-  make && make install prefix=${STOW_PKG_PATH}
-  mr_restow_regardless
+  ./configure --prefix=/usr/local
+  make install
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
