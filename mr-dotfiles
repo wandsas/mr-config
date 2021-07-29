@@ -127,7 +127,7 @@ remote = git_add_remote local rpi3.homelab:/srv/git/OpenDoas.git
 lib = mr_init_stow_package /usr/local
 fixups = 
 	./configure --prefix=/usr/local
-	make install prefix=${STOW_PKG_PATH
+	make install prefix=${STOW_PKG_PATH}
 	mr_restow_regardless
 skip = ! my_workstation
 
@@ -142,6 +142,7 @@ fixups =
     ./configure --prefix=/usr/local/lobase
     make -j12
     make -j12 install
+skip = true
 
 [$HOME/.GIT/vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
