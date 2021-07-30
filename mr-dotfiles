@@ -269,5 +269,6 @@ fixups =
   fi
   ./configure --prefix=/usr/local
   make install
+skip = ! my_workstation
 
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
