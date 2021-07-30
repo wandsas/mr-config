@@ -56,7 +56,7 @@ remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/dotfiles.git
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/shlib.git
-skip = ! my_workstation | ! android_dev_env
+skip = ! my_workstation
 
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
