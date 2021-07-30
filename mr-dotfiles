@@ -262,7 +262,7 @@ remote =
 skip = ! android_dev_env
 
 [$HOME/.GIT/media/recordmydesktop]
-checkout = git clone % git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
+checkout = git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
 fixups =
   cd $MR_REPO/recordmydesktop
   if [ ! -f configure ]; then
