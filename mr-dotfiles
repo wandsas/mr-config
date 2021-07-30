@@ -261,12 +261,22 @@ remote =
 	  upstream git://github.com/open-keychain/open-keychain.git"
 skip = ! android_dev_env
 
+[$HOME/.GIT/lib/popt]
+checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO
+fixups =
+  if [ ! configure ]; then
+    sh autogen.sh
+  fi
+  ./configure --prefix=/usr/local
+  make install
+skip = ! my_workstation
+
 [$HOME/.GIT/media/recordmydesktop]
 checkout = git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
 fixups =
   cd $MR_REPO/recordmydesktop
   if [ ! -f configure ]; then
-    sh ./autogen.sh
+    sh autogen.sh
   fi
   ./configure --prefix=/usr/local
   make install
