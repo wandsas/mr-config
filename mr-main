@@ -9,6 +9,19 @@ lib = . ~/.config/mr/mr-functions
 #include =
 #  cat ~/.config/mr/groups.d/mr-bootstrap
 
+include =
+  for d in ~/.config/mr/groups.d/*; do
+    if [ -d "$d" ]; then
+      for f in $d; do
+        _ignore_lib "$f" && continue
+        echo "# INCLUDED FROM: $f"
+        cat "$f"
+        echo # Needed in case file isn't terminated with a newline
+      done
+    fi
+  done
+
+
 # sync my repos on local & github
 [.config/mr]
 order = 1
@@ -103,7 +116,7 @@ update =
 	git pull origin master
 	git push origin master
 	git push local master
-skip = ! my_workstation || ([ "$1" = update ] && ! hours_since "$1" 12)
+skip = ! my_workstation
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
@@ -116,7 +129,7 @@ update =
 	git rebase upstream/master master
 	git pull origin master
 	git push origin master
-skip = ! my_workstation || ([ "$1" = update ] && ! hours_since "$1" 12)
+skip = ! my_workstation
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
 checkout = git clone git://github.com/alpinelinux/alpine-chroot-install $MR_REPO
