@@ -30,7 +30,7 @@ chain = true
 checkout = git clone ssh://git@github.com/wandsas/mr-config.git $MR_REPO
 remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/mr-config.git
 fixups = 
-	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-dotfiles
+	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-main
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
 [$HOME/.GIT/dev-vcs/kitenet-mr]
