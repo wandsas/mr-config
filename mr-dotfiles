@@ -106,7 +106,9 @@ skip = ! my_workstation
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
-remote = git_add_remote upsteam git://github.com/void-linux/void-packages.git
+remote = git_add_remotes "
+  local ssh://wandsas@rpi3.homelab/srv/git/void-packages.git
+  upstream git://github.com/void-linux/void-packages.git"
 update = 
 	git pull origin master
 	git fetch upstream
