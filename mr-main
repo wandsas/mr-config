@@ -19,13 +19,14 @@ remote = git_add_remote local rpi3.homelab:/srv/git/wandsas/mr-config.git
 fixups = 
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-dotfiles
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
-[$HOME/.GIT/vcs/kitenet-mr]
+
+[$HOME/.GIT/dev-vcs/kitenet-mr]
 checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
 remote = git_add_remote local rpi3.homelab:/srv/git/kitenet-mr.git
 fixups = make install
 skip = lazy
 
-[$HOME/.GIT/vcs/stow]
+[$HOME/.GIT/dev-vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
 remote = git_add_remote local rpi3.homelab:/srv/git/stow.git
 #lib = export STOW_COMMAND=$MR_REPO/.bin/stow
@@ -143,7 +144,7 @@ fixups =
     make install
 skip = true
 
-[$HOME/.GIT/vcs/diff-so-fancy]
+[$HOME/.GIT/dev-vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
 remote = git_add_remote local rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups = 
