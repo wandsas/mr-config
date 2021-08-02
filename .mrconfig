@@ -2,17 +2,11 @@
 
 
 [DEFAULT]
-lib =
-    ignore () {
+include =
+    for file in ~/.config/mr/groups.d/*; do
         case "${1##*/}" in
             *.orig|*.disabled|*~|README*|\#'\#) return 0 ;;
         esac
-        return 1
-    }
-
-include =
-    for file in ~/.config/mr/groups.d/*; do
-        _ignore_lib "$file" && continue
         echo "# INCLUDED FROM: $file"
         cat "$file"
         echo # Needed in case file isn't terminated with a newline
