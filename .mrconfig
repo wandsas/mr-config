@@ -5,7 +5,7 @@
 include =
     for file in ~/.config/mr/groups.d/*; do
         case "${1##*/}" in
-            *.orig|*.disabled|*~|README*|\#'\#) return 0 ;;
+            *.orig|*.disabled|*~|README*|\#*\#) return 0 ;;
         esac
         echo "# INCLUDED FROM: $file"
         cat "$file"
