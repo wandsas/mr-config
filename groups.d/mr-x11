@@ -1,7 +1,5 @@
-### x11 ###
-
 [$HOME/.GIT/x11/alacritty]
-checkout = git clone git://github.com/alacritty/alacritty.git
+checkout = git clone git://github.com/alacritty/alacritty.git $MR_REPO
 skip = lazy
 
 [$HOME/.GIT/x11/alacritty-themes]
