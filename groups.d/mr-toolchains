@@ -2,15 +2,15 @@
 
 [$HOME/.GIT/toolchain/musl-utils]
 checkout = git clone git@github.com:wandsas/musl-utils.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/toolchain/android-tools]
 checkout = git clone git@github.com:wandsas/android-tools.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/toolchain/llvm-toolchain]
 checkout = git clone git://github.com/llvm/llvm-project.git 
-skip = lazy
+skip = android_dev_env
 
 
 # vim:fenc=utf-8:ft=dosini:ts=2:

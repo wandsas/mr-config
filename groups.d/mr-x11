@@ -1,9 +1,9 @@
 [$HOME/.GIT/x11/alacritty]
 checkout = git clone git://github.com/alacritty/alacritty.git $MR_REPO
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/x11/alacritty-themes]
 checkout = git clone git://github.com/rajasegar/alacritty-themes.git
-skip = lazy
+skip = android_dev_env
 
 # vim:fenc=utf-8:ft=dosini:ts=2:

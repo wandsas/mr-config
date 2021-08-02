@@ -3,21 +3,21 @@
 [$HOME/.GIT/bootstrap/busybox]
 checkout = git clone git://git.busybox.net/busybox/ $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/busybox.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/bootstrap/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots.GIT $MR_REPO
 remote = git_add_remote
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap.git $MR_REPO
 remote = git_add_remote wandsas@rpi3.homelab:/srv/git/lh-bootstrap
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/bootstrap/s6-overlay]
 checkout = git clone git://github.com/just-containers/s6-overlay.git $MR_REPO
 remote = git_add_remote wandsas@rpi3.homelab:/srv/git/s6-overlay
-skip = lazy
+skip = android_dev_env
 
 # vim:fenc=utf-8:ft=dosini:ts=2:

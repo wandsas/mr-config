@@ -1,26 +1,26 @@
 [$HOME/.GIT/net/cloudflared]
 checkout = git clone git://github.com/cloudflare/cloudflared.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/cloudflared.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/net/dnscrypt-proxy]
 checkout = git clone git://github.com/DNSCrypt/dnscrypt-proxy.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/dnscrypt-proxy.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/net/tor]
 checkout = git clone -b release-0.4.6 https://git.torproject.org/tor.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/tor.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/net/tordns]
 checkout = git clone git://github.com/onionmail/tordns.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/tordns.git
-skip = lazy
+skip = android_dev_env
 
 [$HOME/.GIT/net/ntu]
 checkout = git clone git://github.com/onionmail/ntu.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/ntu.git
-skip = lazy
+skip = android_dev_env
 
 # vim:fenc=utf-8:ft=dosini:ts=2:
