@@ -13,7 +13,7 @@ reset="\033[m"
 
 MY_USER=wandsas
 MY_HOST=z800
-MY_DOMAIN=homelab_DOMAIN=homelab
+MY_DOMAIN=homelab
 
 GIT_MY_UPSTREAM=github
 GIT_MY_LOCAL=local
