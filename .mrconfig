@@ -1,0 +1,14 @@
+[DEFAULT]
+include =
+    for dir in ~/.config/mr/groups.d/*; do
+    if [ -d "$dir" ]; then
+      # include files in groups.d dir
+      for file in $dir; do
+        _ignore_lib "$file" && continue
+        echo "# INCLUDED FROM: $file"
+        cat "$file"
+        echo # Needed in case file isn't terminated with a newline
+      done
+    fi
+  done
+

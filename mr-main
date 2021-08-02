@@ -6,23 +6,7 @@ include =
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
-#include =
-#  cat ~/.config/mr/groups.d/mr-bootstrap
-
-include =
-  for d in ~/.config/mr/groups.d/*; do
-    if [ -d "$d" ]; then
-      for f in $d; do
-        _ignore_lib "$f" && continue
-        echo "# INCLUDED FROM: $f"
-        cat "$f"
-        echo # Needed in case file isn't terminated with a newline
-      done
-    fi
-  done
-
-
-# sync my repos on local & github
+# Start to sync my repos
 [.config/mr]
 order = 1
 name = mr-config
@@ -104,7 +88,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/void/void-mklive]
 checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
-remote = 
+remote =
 	git_add_remotes "
 	  local rpi3.homelab:/srv/git/void-mklive.git
 	  upstream git://github.com/void-linux/void-mklive.git"
