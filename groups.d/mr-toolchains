@@ -1,16 +1,16 @@
 ### Toolchain ###
 
-[$HOME/.GIT/toolchain/musl-utils]
+[$HOME/.GIT/toolchains/musl-utils]
 checkout = git clone git@github.com:wandsas/musl-utils.git
-skip = android_dev_env
+skip = android_dev_env | my_workstation
 
-[$HOME/.GIT/toolchain/android-tools]
+[$HOME/.GIT/toolchains/android-tools]
 checkout = git clone git@github.com:wandsas/android-tools.git
-skip = android_dev_env
+skip = android_dev_env | my_workstation
 
-[$HOME/.GIT/toolchain/llvm-toolchain]
+[$HOME/.GIT/toolchains/llvm-toolchain]
 checkout = git clone git://github.com/llvm/llvm-project.git 
-skip = android_dev_env
+skip = android_dev_env | my_workstation
 
 
 # vim:fenc=utf-8:ft=dosini:ts=2:
