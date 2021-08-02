@@ -100,7 +100,7 @@ update =
 	git pull origin master
 	git push origin master
 	git push local master
-skip = ! my_workstation
+skip = ! my_workstation || ([ "$1" = update && ! hours_since "$1" 12) 
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
