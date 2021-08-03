@@ -15,7 +15,7 @@ checkout = git clone git://github.com/skarnet/execline
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/execline.git
 skip = android_dev_env
 
-[$HOME/.GIT/s6/$HOME/.GIT/bootstrap/lh-bootstrap]
+[$HOME/.GIT/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/lh-bootstrap.git
 skip = android_dev_env
