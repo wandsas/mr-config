@@ -1,25 +1,17 @@
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
 
-# @DEPRECATED
-[$HOME/.GIT/toolchains/musl-utils]
-checkout = git clone git@github.com:wandsas/musl-utils.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-utils.git
-skip = true
-
-[$HOME/.GIT/toolchains/android-tools]
-checkout = git clone git@github.com:wandsas/android-tools.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/android-utils.git
-skip = true
-
-[$HOME/.GIT/toolchains/gcc]
-checkout = git clone 'git://github.com/gcc-mirror/gcc.git' $MR_REPO
-skip = android_dev_env
-
+# LLVM/Clang
 [$HOME/.GIT/toolchains/llvm]
 checkout = git clone git://github.com/llvm/llvm-project.git 
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/llvm.git
 skip = android_dev_env
 
+# x86-linux-gnu
+[$HOME/.GIT/toolchains/gcc]
+checkout = git clone 'git://github.com/gcc-mirror/gcc.git' $MR_REPO
+skip = android_dev_env
+
+# x86_64-linux-musl
 [$HOME/.GIT/toolchains/musl-cross-make-x86_64]
 name = musl-cross-make-x86_64
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git
@@ -31,6 +23,7 @@ fixups =
   OUTPUT=/home/wandsas/dist/wandsas/gcc-${GCC_VER}-${TARGET} install
 skip =  android_dev_env
 
+# aarch64-linux-musl
 [$HOME/.GIT/toolchains/musl-cross-make-aarch64]
 name = musl-cross-make-aarch64
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git
@@ -42,8 +35,19 @@ fixups =
 	  OUTPUT=/home/wandsas/dist/wandsas/gcc-${GCC_VER}-${TARGET} install
 skip =  android_dev_env
 
+# Openssl static binary, linked against musl
 [$HOME/toolchains/cross-compile-openssl]
 checkout = git clone git://github.com/mzpqnxow/cross-compile-openssl.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/cross-compile-openssl.git
 skip = android_dev_env
 
+# @DEPRECATED
+[$HOME/.GIT/toolchains/musl-utils]
+checkout = git clone git@github.com:wandsas/musl-utils.git
+remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-utils.git
+skip = true
+
+[$HOME/.GIT/toolchains/android-tools]
+checkout = git clone git@github.com:wandsas/android-tools.git
+remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/android-utils.git
+skip = true
