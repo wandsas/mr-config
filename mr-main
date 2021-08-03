@@ -36,7 +36,7 @@ fixups =
 skip = lazy
 
 [$HOME/.password-store]
-checkout = git clone rpi3.homelab:/srv/git/wandsas/pass.git $MR_REPO
+checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
