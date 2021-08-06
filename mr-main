@@ -26,24 +26,25 @@ skip = lazy
 [$HOME/.GIT/dev-vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
-#lib = export STOW_COMMAND=$MR_REPO/.bin/stow
-# Install: cpan Test::Output
-# doas xbps-install perl-Module-Build perl-IO-stringy perl-Test-Output
-#  autoreconf -iv
 fixups = 
+  [ ! -f configure ] && autoreconf -iv
 	./configure --prefix=$HOME/.local
 	make install
 skip = lazy
 
 [$HOME/.password-store]
-checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass.git $MR_REPO
+name = pass-wandsas
+checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass-wandsas.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
-[$HOME/.pass-crosshatcher]
+skip = ! my_workstation
+
+[$HOME/.password-store]
+name = pass-crosshatcher
 checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatcher.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
-skip = ! my_workstation | ! android_dev_env
+skip = ! android_dev_env
 
 [$HOME/.GIT/wandsas/dotfiles]
 stowable = true
@@ -69,7 +70,7 @@ checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/SpaceVim.git
 post_checkout = 
 	[ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
-skip = ! android_dev_env
+skip = true
 
 [$HOME/.vimwiki]
 checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/vimwiki.git $MR_REPO
@@ -79,67 +80,6 @@ skip = ! my_workstation
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas.github.io.git
 skip = ! my_workstation
-
-[$HOME/.GIT/void/void-updates]
-checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-updates.git
-fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
-skip = ! my_workstation
-
-[$HOME/.GIT/void/void-mklive]
-checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
-remote =
-	git_add_remotes "
-	  local ssh://git@rpi3.homelab/srv/git/void-mklive.git
-	  upstream git://github.com/void-linux/void-mklive.git"
-update = 
-	git pull origin master
-	git pull local master
-	git fetch upstream
-	git rebase upstream/master master
-	git pull origin master
-	git push origin master
-	git push local master
-skip = ! my_workstation
-
-[$HOME/void-packages]
-checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
-remote = git_add_remotes "
-  local ssh://git@rpi3.homelab/srv/git/void-packages.git
-  upstream git://github.com/void-linux/void-packages.git"
-update = 
-	git pull origin master
-	git fetch upstream
-	git rebase upstream/master master
-	git pull origin master
-	git push origin master
-skip = ! my_workstation
-
-[$HOME/.GIT/alpine/alpine-chroot-install]
-checkout = git clone git://github.com/alpinelinux/alpine-chroot-install $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/alpine-chroot-install.git $MR_REPO
-skip = ! my_workstation
-
-[$HOME/.GIT/bsd/OpenDoas]
-checkout = git clone git://github.com/Duncaen/OpenDoas.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/OpenDoas.git
-fixups = 
-	./configure --prefix=/usr/local
-	make install
-skip = ! my_workstation
-
-[$HOME/.GIT/bsd/lobase]
-checkout = git clone git://github.com/Duncaen/lobase.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/lobase.git
-lib = mr_init_stow_package /usr/local/lobase
-fixups = 
-    if ! [ -e configure ]; then
-        autoreconf -fi
-    fi
-    ./configure --prefix=/usr/local/lobase
-    make -j12
-    make install
-skip = true
 
 [$HOME/.GIT/dev-vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
@@ -155,17 +95,6 @@ remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/docker-credential-h
 fixups = 
 	make pass
 	install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
-skip = ! my_workstation
-
-[$HOME/.GIT/gnome/gnome-keyring-query]
-checkout = git clone ssh://git@github.com/wandsas/gnome-keyring-query.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/gnome-keyring-query.git
-fixups = 
-	make PREFIX=$HOME/.local install
-skip = ! my_workstation
-
-[$HOME/.GIT/gnome/lssecret]
-checkout = git clone https://gitlab.com/GrantMoyer/lssecret.git $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.local/lib/rbenv]
@@ -199,37 +128,6 @@ remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/direnv.git
 fixups = 
 	make DESTDIR=$HOME/.local install
 skip = ! my_workstation
-
-[$HOME/android/myandroid]
-checkout = git clone ssh://git@github.com/wandsas/myandroid.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/myandroid.git
-fixups = 
-	[ -L ~/android/envsetup.sh ] || ln -s ~/android/myandroid/envsetup.sh ~/android
-skip = ! android_dev_env
-
-[$HOME/src/orbot]
-checkout = git clone ssh://git@github.com/crosshatcher/orbot.git $MR_REPO
-remote = 
-	git_add_remotes "
-	  local ssh://git@rpi3.homelab/srv/git/orbot.git
-	  upstream git://github.com/guardianproject/orbot.git"
-skip = ! android_dev_env
-
-[$HOME/src/k9mail]
-checkout = git clone ssh://git@github.com/crosshatcher/k9mail.git $MR_REPO
-remote = 
-	git_add_remotes "
-	  local ssh://git@rpi3.homelab/srv/git/k9mail.git
-	  upstream git://github.com/k9mail/k-9.git"
-skip = ! android_dev_env
-
-[$HOME/src/open-keychain]
-checkout = git clone ssh://git@github.com/crosshatcher/open-keychain.git $MR_REPO
-remote = 
-	git_add_remotes "
-	  local ssh://git@rpi3.homelab/srv/git/open-keychain.git
-	  upstream git://github.com/open-keychain/open-keychain.git"
-skip = ! android_dev_env
 
 [$HOME/.GIT/lib/popt]
 checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO

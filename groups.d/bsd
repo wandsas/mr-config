@@ -1,0 +1,21 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/bsd/OpenDoas]
+checkout = git clone git://github.com/Duncaen/OpenDoas.git $MR_REPO
+remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/OpenDoas.git
+fixups = 
+	./configure --prefix=/usr/local
+	make install
+skip = ! my_workstation
+
+[$HOME/.GIT/bsd/lobase]
+checkout = git clone git://github.com/Duncaen/lobase.git $MR_REPO
+remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/lobase.git
+fixups = 
+    if ! [ -e configure ]; then
+        autoreconf -fi
+    fi
+    ./configure --prefix=/usr/local/lobase
+    make -j12
+    make install
+skip = true

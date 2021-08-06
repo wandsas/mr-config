@@ -1,0 +1,12 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/lib/musl]
+checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO
+remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/popt.git
+fixups =
+  if [ ! configure ]; then
+    sh autogen.sh
+  fi
+  ./configure --prefix=/usr/local
+  make install
+skip = ! my_workstation
