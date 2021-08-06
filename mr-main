@@ -29,7 +29,7 @@ remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
 fixups =
   [ ! -f configure ] && autoreconf -iv
   ./configure --prefix=$HOME/.local
-	make install
+  make install
 skip = lazy
 
 [$HOME/.password-store]
@@ -39,7 +39,6 @@ post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.password-store]
-name = pass-crosshatcher
 checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatcher.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! android_dev_env
@@ -68,14 +67,7 @@ checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/SpaceVim.git
 post_checkout = 
 	[ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
-<<<<<<< HEAD
 skip = true
-=======
-#skip = ! android_dev_env
-skip = true
-# Disable SpaceVim on Android Development Environment.
-# To slow on such a huge development machine
->>>>>>> 88ee4896925290e19cc900c43920ed6658cb54a3
 
 [$HOME/.vimwiki]
 checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/vimwiki.git $MR_REPO
