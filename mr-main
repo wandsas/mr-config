@@ -26,9 +26,9 @@ skip = lazy
 [$HOME/.GIT/dev-vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
-fixups = 
+fixups =
   [ ! -f configure ] && autoreconf -iv
-	./configure --prefix=$HOME/.local
+  ./configure --prefix=$HOME/.local
 	make install
 skip = lazy
 
