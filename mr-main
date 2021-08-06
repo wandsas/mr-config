@@ -45,12 +45,12 @@ checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatch
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation | ! android_dev_env
 
-[$HOME/.GIT/wandsas/dotfiles]
+[$HOME/.GIT/${USER}/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/dotfiles.git
 
-[$HOME/.GIT/wandsas/shlib]
+[$HOME/.GIT/${USER}/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/shlib.git
