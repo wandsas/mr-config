@@ -38,8 +38,6 @@ checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass-wandsas.git $MR
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
-skip = ! my_workstation
-
 [$HOME/.password-store]
 name = pass-crosshatcher
 checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatcher.git $MR_REPO
