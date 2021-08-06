@@ -46,12 +46,12 @@ checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatch
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! android_dev_env
 
-[$HOME/.GIT/wandsas/dotfiles]
+[$HOME/.GIT/${USER}/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/dotfiles.git
 
-[$HOME/.GIT/wandsas/shlib]
+[$HOME/.GIT/${USER}/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/shlib.git
@@ -70,7 +70,14 @@ checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
 remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/SpaceVim.git
 post_checkout = 
 	[ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
+<<<<<<< HEAD
 skip = true
+=======
+#skip = ! android_dev_env
+skip = true
+# Disable SpaceVim on Android Development Environment.
+# To slow on such a huge development machine
+>>>>>>> 88ee4896925290e19cc900c43920ed6658cb54a3
 
 [$HOME/.vimwiki]
 checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/vimwiki.git $MR_REPO
