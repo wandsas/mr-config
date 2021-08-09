@@ -33,12 +33,11 @@ fixups =
 skip = lazy
 
 [$HOME/.password-store]
-name = pass-wandsas
 checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass-wandsas.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
-[$HOME/.password-store]
+[$HOME/.pass-crosshatcher]
 checkout = git clone ssh://git@rpi3.homelab/srv/git/crosshatcher/pass-crosshatcher.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! android_dev_env
