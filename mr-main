@@ -125,17 +125,6 @@ fixups =
 	make DESTDIR=$HOME/.local install
 skip = ! my_workstation
 
-[$HOME/.GIT/lib/popt]
-checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/popt.git
-fixups =
-  if [ ! configure ]; then
-    sh autogen.sh
-  fi
-  ./configure --prefix=/usr/local
-  make install
-skip = ! my_workstation
-
 [$HOME/.GIT/media/recordmydesktop]
 checkout = git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/recordmydesktop.git
