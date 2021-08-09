@@ -12,20 +12,20 @@ order = 1
 name = mr-config
 chain = true
 checkout = git clone ssh://git@github.com/wandsas/mr-config.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/mr-config.git
+remotess = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/mr-config.git
 fixups = 
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-main
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
 [$HOME/.GIT/dev-vcs/kitenet-mr]
 checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/kitenet-mr.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/kitenet-mr.git
 fixups = make install
 skip = lazy
 
 [$HOME/.GIT/dev-vcs/stow]
 checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
 fixups =
   [ ! -f configure ] && autoreconf -iv
   ./configure --prefix=$HOME/.local
@@ -45,17 +45,17 @@ skip = ! android_dev_env
 [$HOME/.GIT/${USER}/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/dotfiles.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/dotfiles.git
 
 [$HOME/.GIT/${USER}/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/shlib.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/shlib.git
 skip = ! my_workstation
 
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/vim-config.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/vim-config.git
 post_checkout = 
 	[ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 	[ -f ~/.gvimrc ] || ln -s ~/.vim/gvimrc.wandsas ~/.gvimrc
@@ -63,7 +63,7 @@ skip = ! my_workstation
 
 [$HOME/.SpaceVim]
 checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/SpaceVim.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/SpaceVim.git
 post_checkout = 
 	[ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
 skip = true
@@ -74,12 +74,12 @@ skip = ! my_workstation
 
 [$HOME/.GIT/web/wandsas.github.io]
 checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas.github.io.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas.github.io.git
 skip = ! my_workstation
 
 [$HOME/.GIT/dev-vcs/diff-so-fancy]
 checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab:/srv/git/diff-so-fancy.git
+remotes = git_add_remote local ssh://git@rpi3.homelab:/srv/git/diff-so-fancy.git
 fixups = 
 	./third_party/build_fatpack/build.pl
 	install -m 755 /tmp/diff-so-fancy ~/.local/bin/diff-so-fancy
@@ -87,7 +87,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/docker-credential-helpers.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/docker-credential-helpers.git
 fixups = 
 	make pass
 	install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
@@ -110,7 +110,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/cmdline/taskwarrior]
 checkout = git clone git://github.com/GothenburgBitFactory/taskwarrior.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/taskwarrior.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/taskwarrior.git
 fixups = 
 	[ -d build ] || mkdir build
 	cd build
@@ -120,14 +120,14 @@ skip = ! my_workstation
 
 [$HOME/.GIT/cmdline/direnv]
 checkout = git clone git://github.com/direnv/direnv.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/direnv.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/direnv.git
 fixups = 
 	make DESTDIR=$HOME/.local install
 skip = ! my_workstation
 
 [$HOME/.GIT/lib/popt]
 checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/popt.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/popt.git
 fixups =
   if [ ! configure ]; then
     sh autogen.sh
@@ -138,7 +138,7 @@ skip = ! my_workstation
 
 [$HOME/.GIT/media/recordmydesktop]
 checkout = git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/recordmydesktop.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/recordmydesktop.git
 fixups =
   cd $MR_REPO/recordmydesktop
   [ ! -f configure ] && sh autogen.sh

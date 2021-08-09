@@ -2,25 +2,25 @@
 
 [$HOME/.GIT/suckless/dmenu]
 checkout = git clone git://git.suckless.org/dmenu $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/dmenu.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dmenu.git
 skip = android_dev_env
 
 [$HOME/.GIT/suckless/dwm]
 checkout = git clone git://git.suckless.org/dwm $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm.git
 skip = android_dev_env
 
 [$HOME/.GIT/suckless/dwm-anybar]
 checkout = git clone git://github.com/mihirlad55/dwm-anybar.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm-anybar.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm-anybar.git
 skip = android_dev_env
 
 [$HOME/.GIT/suckless/dwmstatus]
 checkout = git clone git://github.com/mchackorg/dwmstatus.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
 skip = android_dev_env
 
 [$HOME/.GIT/suckless/st]
 checkout = git clone git://git.suckless.org/st $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
 skip = android_dev_env

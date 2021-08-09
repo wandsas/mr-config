@@ -2,13 +2,13 @@
 
 [$HOME/.GIT/void/void-updates]
 checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-updates.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-updates.git
 fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
 skip = ! my_workstation
 
 [$HOME/.GIT/void/void-mklive]
 checkout = git clone git://github.com/wandsas/void-mklive.git $MR_REPO
-remote =
+remotes =
 	git_add_remotes "
 	  local ssh://git@rpi3.homelab/srv/git/void-mklive.git
 	  upstream git://github.com/void-linux/void-mklive.git"
@@ -24,7 +24,7 @@ skip = ! my_workstation
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/wandsas/void-packages.git $MR_REPO
-remote = git_add_remotes "
+remotes = git_add_remotes "
   local ssh://git@rpi3.homelab/srv/git/void-packages.git
   upstream git://github.com/void-linux/void-packages.git"
 update = 
@@ -37,5 +37,5 @@ skip = ! my_workstation
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
 checkout = git clone git://github.com/alpinelinux/alpine-chroot-install $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/alpine-chroot-install.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/alpine-chroot-install.git $MR_REPO
 skip = ! my_workstation

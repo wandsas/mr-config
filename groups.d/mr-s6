@@ -2,95 +2,95 @@
 
 [$HOME/.GIT/s6/bcnm]
 checkout = git clone git://github.com/skarnet/bcnm $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/bcnm.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/bcnm.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/dnsfunnel]
 checkout = git clone git://github.com/skarnet/dnsfunnel $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/dnsfunnel.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dnsfunnel.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/execline]
 checkout = git clone git://github.com/skarnet/execline
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/execline.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/execline.git
 skip = android_dev_env
 
 [$HOME/.GIT/bootstrap/lh-bootstrap]
 checkout = git clone git://github.com/skarnet/lh-bootstrap.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/lh-bootstrap.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/lh-bootstrap.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/mdevd]
 checkout = git clone git://github.com/skarnet/mdevd $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/mdevd.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/mdevd.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/nsss]
 checkout = git clone git://github.com/skarnet/nsss $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/nsss.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/nsss.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/pamela]
 checkout = git clone git://github.com/skarnet/pamela $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/pamela.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/pamela.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6]
 checkout = git clone git://github.com/skarnet/s6 $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-dns]
 checkout = git clone git://github.com/skarnet/s6-dns $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-dns.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-dns.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-frontend]
 checkout = git clone git://github.com/skarnet/s6-frontend $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-fronted.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-fronted.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-linux-init]
 checkout = git clone git://github.com/skarnet/s6-linux-init $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-linux-init.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-linux-init.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-linux-utils]
 checkout = git clone git://github.com/skarnet/s6-linux-utils $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-linux-utils.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-linux-utils.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-networking]
 checkout = git clone git://github.com/skarnet/s6-networking $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-networking.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-networking.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-portable-utils]
 checkout = git clone git://github.com/skarnet/s6-portable-utils $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/s6-portable-utils.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/s6-portable-utils.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/s6-rc]
 checkout = git clone git://github.com/skarnet/s6-rc $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-rc.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-rc.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/skabus]
 checkout = git clone git://github.com/skarnet/skabus $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/skabus.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/skabus.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/skalibs]
 checkout = git clone git://github.com/skarnet/skalibs $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/skalibs.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/skalibs.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/smtpd-starttls-proxy]
 checkout = git clone git://github.com/skarnet/smtpd-starttls-proxy $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/smtpd-starttls-proxy.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/smtpd-starttls-proxy.git
 skip = android_dev_env
 
 [$HOME/.GIT/s6/utmps]
 checkout = git clone git://github.com/skarnet/utmps $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/utmps.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/utmps.git
 skip = android_dev_env

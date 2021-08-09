@@ -2,14 +2,14 @@
 
 [$HOME/android/myandroid]
 checkout = git clone ssh://git@github.com/wandsas/myandroid.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/myandroid.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/myandroid.git
 fixups = 
 	[ -L ~/android/envsetup.sh ] || ln -s ~/android/myandroid/envsetup.sh ~/android
 skip = ! android_dev_env
 
 [$HOME/src/orbot]
 checkout = git clone ssh://git@github.com/crosshatcher/orbot.git $MR_REPO
-remote = 
+remotes = 
 	git_add_remotes "
 	  local ssh://git@rpi3.homelab/srv/git/orbot.git
 	  upstream git://github.com/guardianproject/orbot.git"
@@ -17,7 +17,7 @@ skip = ! android_dev_env
 
 [$HOME/src/k9mail]
 checkout = git clone ssh://git@github.com/crosshatcher/k9mail.git $MR_REPO
-remote = 
+remotes = 
 	git_add_remotes "
 	  local ssh://git@rpi3.homelab/srv/git/k9mail.git
 	  upstream git://github.com/k9mail/k-9.git"
@@ -25,7 +25,7 @@ skip = ! android_dev_env
 
 [$HOME/src/open-keychain]
 checkout = git clone ssh://git@github.com/crosshatcher/open-keychain.git $MR_REPO
-remote = 
+remotes = 
 	git_add_remotes "
 	  local ssh://git@rpi3.homelab/srv/git/open-keychain.git
 	  upstream git://github.com/open-keychain/open-keychain.git"

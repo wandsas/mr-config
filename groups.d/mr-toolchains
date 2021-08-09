@@ -3,7 +3,7 @@
 # LLVM/Clang
 [$HOME/.GIT/toolchains/llvm-project]
 checkout = git clone git://github.com/llvm/llvm-project.git 
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/llvm.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/llvm.git
 skip = android_dev_env
 
 # x86-linux-gnu
@@ -15,7 +15,7 @@ skip = android_dev_env
 [$HOME/.GIT/toolchains/musl-cross-make-x86_64]
 name = musl-cross-make-x86_64
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-cross-make.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-cross-make.git
 fixups = 
   make TARGET=x86_64-linux-musl GCC_VER=11-20210228
   COMMON_CONFIG += CFLAGS="-O2 -march=westmere -pipe -flto=8 -fuse-linker-plugin"
@@ -27,7 +27,7 @@ skip =  android_dev_env
 [$HOME/.GIT/toolchains/musl-cross-make-aarch64]
 name = musl-cross-make-aarch64
 checkout = git clone https://git.zv.io/toolchains/musl-cross-make.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-cross-make.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-cross-make.git
 fixups = 
 	make TARGET=aarch64-linux-musl GCC_VERS=11-20210228
 	  COMMON_CONFIG += CC="aarch64-linux-musl-gcc -static --static"
@@ -38,7 +38,7 @@ skip =  android_dev_env
 # Openssl static binary, linked against musl
 [$HOME/toolchains/musl-cross-openssl]
 checkout = git clone git://github.com/mzpqnxow/cross-compile-openssl.git $MR_REPO
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/cross-compile-openssl.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/cross-compile-openssl.git
 skip = android_dev_env
 
 
@@ -47,10 +47,10 @@ skip = android_dev_env
 # @DEPRECATED
 [$HOME/.GIT/toolchains/musl-utils]
 checkout = git clone git@github.com:wandsas/musl-utils.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-utils.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-utils.git
 skip = true
 
 [$HOME/.GIT/toolchains/android-tools]
 checkout = git clone git@github.com:wandsas/android-tools.git
-remote = git_add_remote local ssh://git@rpi3.homelab/srv/git/android-utils.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/android-utils.git
 skip = true
