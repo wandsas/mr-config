@@ -13,14 +13,14 @@ skip = true
 [$HOME/.GIT/net/tor]
 checkout = git clone -b release-0.4.6 https://git.torproject.org/tor.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/tor.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/net/tordns]
 checkout = git clone git://github.com/onionmail/tordns.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/tordns.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/net/ntu]
 checkout = git clone git://github.com/onionmail/ntu.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/ntu.git
-skip = android_dev_env
+skip = true

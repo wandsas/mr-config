@@ -14,3 +14,4 @@ skip = ! my_workstation
 [$HOME/.GIT/lib/musl]
 checkout = git clone git://git.musl-libc.org/musl $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl.git
+skip = ! my_workstation

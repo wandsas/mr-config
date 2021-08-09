@@ -116,7 +116,7 @@ fixups =
 	cd build
 	cmake .. -DPREFIX=$HOME/.local -DCMAKE_BUILD_TYPE=Release
 	make install
-skip = ! my_workstation
+skip = true
 
 [$HOME/.GIT/cmdline/direnv]
 checkout = git clone git://github.com/direnv/direnv.git $MR_REPO

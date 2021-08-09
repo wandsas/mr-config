@@ -3,7 +3,7 @@
 [$HOME/.GIT/editors/vim]
 checkout = git clone git://github.com/vim/vim.git $MR_REPO
 remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/vim.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/editors/neovim]
 checkout = git clone git://github.com/neovim/neovim.git $MR_REPO
@@ -13,14 +13,14 @@ skip = true
 [$HOME/.GIT/editors/SpaceVim]
 checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
 remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/SpaceVim.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/editors/lightline.vim]
 checkout = git clone git://github.com/itchyny/lightline.vim $MR_REPO
 remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/lightline.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/editors/lightline-powerful]
 checkout = git clone git://github.com/itchyny/lightline-powerful $MR_REPO
 remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/lightline-powerful.git
-skip = android_dev_env
+skip = true

@@ -3,15 +3,16 @@
 [$HOME/.GIT/bootstrap/busybox]
 checkout = git clone git://git.busybox.net/busybox/ $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/busybox.git
-skip = android_dev_env
+skip = true
 
 [$HOME/.GIT/bootstrap/busybox-chroots]
 checkout = git clone git://github.com/just-containers/busybox-chroots.GIT $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/busybox-chroots.GIT
 remotes = git_add_remote
-skip = android_dev_env
+skip = ! my_workstation
 
 [$HOME/.GIT/bootstrap/s6-overlay]
 checkout = git clone git://github.com/just-containers/s6-overlay.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-overlay.git
-skip = android_dev_env
+skip = ! my_workstation
+
