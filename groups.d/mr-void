@@ -13,8 +13,7 @@ skip = ! my_workstation
 
 [$HOME/void-packages]
 checkout = git clone ssh://git@github.com/void-linux/void-packages.git $MR_REPO
-remotes = git_add_remotes "
-  local ssh://git@rpi3.homelab/srv/git/void-packages.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-packages.git
 skip = ! my_workstation
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
