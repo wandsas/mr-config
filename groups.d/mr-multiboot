@@ -1,0 +1,15 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/boot/multiboot]
+checkout = git clone git://github.com/aguslr/multibootusb $MR_REPO
+skip = ! my_workstation
+
+[$HOME/boot/glim]
+checkout = git clone git://github.com/thias/glim.git $MR_REPO
+skip = ! my_workstation
+
+[$HOME/boot/multibootusb]
+checkout = git clone git://github.com/mbusb/multibootusb.git $MR_REPO
+skip = ! my_workstation
+
+
