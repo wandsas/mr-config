@@ -18,12 +18,17 @@ skip = ! my_workstation
 
 
 [$HOME/.GIT/void/void-mklive]
-checkout = git clone git://github.com/void-linux/void-mklive.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-mklive.git
+checkout = git clone ssh://git@rpi3.homelab/srv/git/void-mklive.git
+remotes = git_add_remote upstream git://github.com/void-linux/void-mklive.git $MR_REPO
 skip = ! my_workstation
 
 
 [$HOME/.GIT/alpine/alpine-chroot-install]
 checkout = git clone git://github.com/alpinelinux/alpine-chroot-install $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/alpine-chroot-install.git $MR_REPO
+skip = ! my_workstation
+
+[$HOME/.GIT/gentoo/gentoo-docker-images]
+checkout = git clone https://github.com/gentoo/gentoo-docker-images.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/gentoo-docker-images.git
 skip = ! my_workstation
