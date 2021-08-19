@@ -1,5 +1,10 @@
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
 
+[$HOME/.GIT/lib/libarchive]
+checkout = git clone git://github.com/libarchive/libarchive.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/libarchive.git
+skip = ! my_workstation
+
 [$HOME/.GIT/lib/popt]
 checkout = git clone git://github.com/rpm-software-management/popt.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/popt.git
