@@ -1,0 +1,33 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/vcs/git]
+checkout = git clone https://github.com/git/git.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/git.git
+skip = ! my_workstation
+
+[$HOME/.GIT/vcs/stow]
+checkout = git clone https://github.com/git/git.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
+skip = ! my_workstation
+
+[$HOME/.GIT/vcs/kitenet-mr]
+checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
+remotes = git_add_remotes "
+    local ssh://git@rpi3.homelab/srv/git/kitenet-mr.git
+    upstream git://github.com/aspiers/kitenet-mr.git
+"
+
+[$HOME/.GIT/vcs/diff-so-fancy]
+checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/diff-so-fancy.git
+skip = ! my_workstation
+
+[$HOME/.GIT/vcs/fancy-git]
+checkout = git clone git://github.com/diogocavilha/fancy-git.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/fancy-git.git
+skip = ! my_workstation
+
+[$HOME/.GIT/vcs/gbackup]
+checkout = git clone git://github.com/maxking/gbackup.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/gbackup.git
+skip = ! my_workstation
