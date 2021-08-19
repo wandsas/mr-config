@@ -1,0 +1,13 @@
+build-tools
+cmdline
+desktop
+dev-lang
+dev-vcs
+filesystem
+mail
+media
+net
+shell
+toolchains
+web
+X11

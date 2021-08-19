@@ -15,4 +15,3 @@ skip = ! my_workstation
 checkout = git clone git://github.com/just-containers/s6-overlay.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/s6-overlay.git
 skip = ! my_workstation
-

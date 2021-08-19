@@ -1,26 +1,26 @@
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:
 
-[$HOME/.GIT/suckless/dmenu]
+[$HOME/.GIT/desktop/suckless/dmenu]
 checkout = git clone git://git.suckless.org/dmenu $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dmenu.git
 skip = true
 
-[$HOME/.GIT/suckless/dwm]
+[$HOME/.GIT/desktop/suckless/dwm]
 checkout = git clone git://git.suckless.org/dwm $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm.git
 skip = true
 
-[$HOME/.GIT/suckless/dwm-anybar]
+[$HOME/.GIT/desktop/suckless/dwm-anybar]
 checkout = git clone git://github.com/mihirlad55/dwm-anybar.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dwm-anybar.git
 skip = true
 
-[$HOME/.GIT/suckless/dwmstatus]
+[$HOME/.GIT/desktop/suckless/dwmstatus]
 checkout = git clone git://github.com/mchackorg/dwmstatus.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
 skip = true
 
-[$HOME/.GIT/suckless/st]
+[$HOME/.GIT/desktop/suckless/st]
 checkout = git clone git://git.suckless.org/st $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/st.git
 skip = true

@@ -52,3 +52,14 @@ skip = true
 checkout = git clone git@github.com:wandsas/android-tools.git
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/android-utils.git
 skip = true
+
+[$HOME/.GIT/toolchains/buildroot]
+checkout = git clone git://github.com/buildroot/buildroot.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/buildroot.git
+skip = ! my_workstation
+
+[$HOME/.GIT/toolchains/crosstool-ng]
+checkout = git clone git://github.com/crosstool-ng/crosstool-ng $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/crosstool-ng
+skip = ! my_workstation
+
