@@ -15,4 +15,3 @@ skip = ! my_workstation
 [$HOME/.GIT/boot/mkinitramfs]
 checkout = git clone git://github.com/thias/mkinitramfs.git $MR_REPO
 skip = ! my_workstation
-
