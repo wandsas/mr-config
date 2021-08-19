@@ -62,4 +62,3 @@ skip = ! my_workstation
 checkout = git clone git://github.com/crosstool-ng/crosstool-ng $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/crosstool-ng
 skip = ! my_workstation
-
