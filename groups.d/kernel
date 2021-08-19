@@ -1,0 +1,50 @@
+# ~/kernel/.mrconfig
+
+[DEFAULT]
+include = 
+	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
+	cat ~/.config/mr/mr-hooks 2>/dev/null || true
+lib = . ~/.config/mr/mr-functions
+
+[.GIT/linux/linux]
+checkout = git clone 'git://github.com/torvalds/linux.git' 'linux'
+
+# Gentoo Patches
+[.GIT/gentoo/linux-patches]
+checkout = git clone 'https://anongit.gentoo.org/git/proj/linux-patches.git' 'linux-patches'
+
+# Linux firmware-nonfree
+[.GIT/linux/firmware-nonfree]
+checkout = git clone 'git://github.com/RPi-Distro/firmware-nonfree.git' 'firmware-nonfree'
+
+[.GIT/linux/common]
+checkout = git clone 'git://github.com/containers/common.git' 'common'
+
+[.GIT/linux/kconfig-hardened-check]
+checkout = git clone 'git://github.com/a13xp0p0v/kconfig-hardened-check.git' 'kconfig-hardened-check'
+
+[.GIT/linux/kernel-build-containers]
+checkout = git clone 'git://github.com/a13xp0p0v/kernel-build-containers.git' 'kernel-build-containers'
+
+[.GIT/linux/kernel-hack-drill]
+checkout = git clone 'git://github.com/a13xp0p0v/kernel-hack-drill.git' 'kernel-hack-drill'
+
+[.GIT/linux/korg-helpers]
+checkout = git clone 'git://git.kernel.org/pub/scm/linux/kernel/git/mricon/korg-helpers.git' 'korg-helpers'
+
+[.GIT/linux/libseccomp]
+checkout = git clone 'git://github.com/seccomp/libseccomp.git' 'libseccomp'
+
+[.GIT/linux/libseccomp-golang]
+checkout = git clone 'git://github.com/seccomp/libseccomp-golang.git' 'libseccomp-golang'
+
+[.GIT/linux/linux-kernel-defence-map]
+checkout = git clone 'git://github.com/a13xp0p0v/linux-kernel-defence-map.git' 'linux-kernel-defence-map'
+
+[.GIT/linux/linux-security-papers]
+checkout = git clone 'git://github.com/maxking/linux-security-papers.git' 'linux-security-papers'
+
+[.GIT/linux/nftables-managed-with-git]
+checkout = git clone 'git://github.com/aborrero/nftables-managed-with-git.git' 'nftables-managed-with-git'
+
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
