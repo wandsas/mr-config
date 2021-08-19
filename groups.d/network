@@ -1,0 +1,23 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/network/cloudflared]
+checkout = git clone git://github.com/cloudflare/cloudflared.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/cloudflared.git
+skip = true
+
+[$HOME/.GIT/network/dnscrypt-proxy]
+checkout = git clone git://github.com/DNSCrypt/dnscrypt-proxy.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/dnscrypt-proxy.git
+skip = true
+
+[$HOME/.GIT/network/tor]
+checkout = git clone -b release-0.4.6 https://git.torproject.org/tor.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/tor.git
+
+[$HOME/.GIT/network/tordns]
+checkout = git clone git://github.com/onionmail/tordns.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/tordns.git
+
+[$HOME/.GIT/network/ntu]
+checkout = git clone git://github.com/onionmail/ntu.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/ntu.git
