@@ -10,5 +10,4 @@ include =
         echo "# INCLUDED FROM: $file"
         cat "$file"
         echo # Needed in case file isn't terminated with a newline
-    A
     done
