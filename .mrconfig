@@ -1,6 +1,3 @@
-# .mrconfig
-
-
 [DEFAULT]
 include =
     for file in ~/.config/mr/groups.d/*; do
