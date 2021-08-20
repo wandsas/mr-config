@@ -1,4 +1,4 @@
-# ~/.config/mr/mr-dotfiles
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
 
 [DEFAULT]
 include = 
@@ -6,7 +6,6 @@ include =
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
-# Start to sync my repos
 [.config/mr]
 order = 1
 name = mr-config
@@ -16,21 +15,6 @@ remotess = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas/mr-config
 fixups = 
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-main
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
-
-[$HOME/.GIT/dev-vcs/kitenet-mr]
-checkout = git clone ssh://git@github.com/wandsas/kitenet-mr.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/kitenet-mr.git
-fixups = make install
-skip = lazy
-
-[$HOME/.GIT/dev-vcs/stow]
-checkout = git clone https://git.savannah.gnu.org/git/stow.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/stow.git
-fixups =
-  [ ! -f configure ] && autoreconf -iv
-  ./configure --prefix=$HOME/.local
-  make install
-skip = lazy
 
 [$HOME/.password-store]
 checkout = git clone ssh://git@rpi3.homelab/srv/git/wandsas/pass-wandsas.git $MR_REPO
@@ -77,52 +61,12 @@ checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/wandsas.github.io.git
 skip = ! my_workstation
 
-[$HOME/.GIT/dev-vcs/diff-so-fancy]
-checkout = git clone git://github.com/so-fancy/diff-so-fancy.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab:/srv/git/diff-so-fancy.git
-fixups = 
-	./third_party/build_fatpack/build.pl
-	install -m 755 /tmp/diff-so-fancy ~/.local/bin/diff-so-fancy
-skip = ! my_workstation
-
 [$HOME/.GIT/docker/docker-credential-helpers]
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/docker-credential-helpers.git
 fixups = 
 	make pass
 	install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
-skip = ! my_workstation
-
-[$HOME/.local/lib/rbenv]
-checkout = git clone git://github.com/rbenv/rbenv.git $MR_REPO
-skip = ! my_workstation
-
-[$HOME/.local/lib/pyenv]
-checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
-post_checkout = 
-fixups = src/configure && make -C src
-skip = ! my_workstation
-
-[$HOME/.local/lib/nvm]
-checkout = git clone git://github.com/nvm-sh/nvm.git $MR_REPO
-update = git pull origin v0.38.0 
-skip = ! my_workstation
-
-[$HOME/.GIT/cmdline/taskwarrior]
-checkout = git clone git://github.com/GothenburgBitFactory/taskwarrior.git
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/taskwarrior.git
-fixups = 
-	[ -d build ] || mkdir build
-	cd build
-	cmake .. -DPREFIX=$HOME/.local -DCMAKE_BUILD_TYPE=Release
-	make install
-skip = true
-
-[$HOME/.GIT/cmdline/direnv]
-checkout = git clone git://github.com/direnv/direnv.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/direnv.git
-fixups = 
-	make DESTDIR=$HOME/.local install
 skip = ! my_workstation
 
 [$HOME/.GIT/media/recordmydesktop]
@@ -134,5 +78,3 @@ fixups =
   ./configure --prefix=/usr/local
   make install
 skip = ! my_workstation
-
-# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:

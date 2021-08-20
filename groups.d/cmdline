@@ -1,0 +1,18 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/cmdline/direnv]
+checkout = git clone git://github.com/direnv/direnv.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/direnv.git
+fixups = 
+	make DESTDIR=$HOME/.local install
+skip = ! my_workstation
+
+[$HOME/.GIT/cmdline/recordmydesktop]
+checkout = git clone git://github.com/Enselic/recordmydesktop.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/recordmydesktop.git
+fixups =
+  cd $MR_REPO/recordmydesktop
+  [ ! -f configure ] && sh autogen.sh
+  ./configure --prefix=/usr/local
+  make install
+skip = ! my_workstation

@@ -1,0 +1,16 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.local/lib/rbenv]
+checkout = git clone git://github.com/rbenv/rbenv.git $MR_REPO
+skip = ! my_workstation
+
+[$HOME/.local/lib/pyenv]
+checkout = git clone git://github.com/pyenv/pyenv.git $MR_REPO
+post_checkout = 
+fixups = src/configure && make -C src
+skip = ! my_workstation
+
+[$HOME/.local/lib/nvm]
+checkout = git clone git://github.com/nvm-sh/nvm.git $MR_REPO
+update = git pull origin v0.38.0 
+skip = ! my_workstation
