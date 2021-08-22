@@ -11,35 +11,35 @@ order = 1
 name = mr-config
 chain = true
 checkout = git clone ssh://git@github.com/wandsas/mr-config.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas/mr-config.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/mr-config.git
 fixups = 
 	ensure_symlink_exists ~/.mrconfig $MR_REPO/mr-main
 	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
 
 [$HOME/.password-store]
-checkout = git clone ssh://git@rpi3.homelab/var/git/wandsas/pass-wandsas.git $MR_REPO
+checkout = git clone ssh://git@rpi3.homelab/var/git/pass-wandsas.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.pass-crosshatcher]
-checkout = git clone ssh://git@rpi3.homelab/var/git/crosshatcher/pass-crosshatcher.git $MR_REPO
+checkout = git clone ssh://git@rpi3.homelab/var/git/pass-crosshatcher.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! android_dev_env
 
 [$HOME/.GIT/${USER}/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas/dotfiles.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/dotfiles.git
 
 [$HOME/.GIT/${USER}/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas/shlib.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/shlib.git
 skip = ! my_workstation
 
 [$HOME/.vim]
 checkout = git clone ssh://git@github.com/wandsas/vim-config.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas/vim-config.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/vim-config.git
 post_checkout = 
 	[ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
 	[ -f ~/.gvimrc ] || ln -s ~/.vim/gvimrc.wandsas ~/.gvimrc
@@ -53,7 +53,7 @@ post_checkout =
 skip = true
 
 [$HOME/.vimwiki]
-checkout = git clone ssh://git@rpi3.homelab/var/git/wandsas/vimwiki.git $MR_REPO
+checkout = git clone ssh://git@rpi3.homelab/var/git/vimwiki.git $MR_REPO
 skip = ! my_workstation
 
 [$HOME/.GIT/web/wandsas.github.io]
