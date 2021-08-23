@@ -2,7 +2,7 @@
 
 [DEFAULT]
 include =
-    for file in "~/.config/mr/groups.d/*"; do
+    for file in ~/.config/mr/groups.d/*; do
         case "${1##*/}" in
             *.md|*.txt|*.log|*.orig|*.disabled|*~|README*|\#*\#) return 0 ;;
         esac
