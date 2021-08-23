@@ -1,0 +1,31 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[DEFAULT]
+include = 
+	cat ~/.config/mr/mr-stow-plugin 2>/dev/null || true
+	cat ~/.config/mr/mr-hooks 2>/dev/null || true
+lib = . ~/.config/mr/mr-functions
+
+[.config/mr]
+order = 1
+name = mr-config
+chain = true
+checkout = git clone ssh://git@github.com/wandsas/mr-config.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/mr-config.git
+fixups = 
+	ensure_symlink_exists ~/.mrconfig $MR_REPO/mrconfig
+	ensure_symlink_exists ~/.stow-global-ignore $MR_REPO/.stow-global-ignore
+
+[$HOME/.GIT/$USER/dotfiles]
+stowable = true
+checkout = git clone ssh://git@rpi3.homelab/var/git/dotfiles.git
+
+[$HOME/.GIT/$USER/shlib]
+stowable = true
+checkout = git clone ssh://git@rpi3.homelab/var/git/shlib.git
+
+[$HOME/.vim]
+checkout = git clone ssh://git@rpi3.homelab/var/git/vim-config.git $MR_REPO
+post_checkout = 
+	[ -f ~/.vimrc ] || ln -s ~/.vim/vimrc.wandsas ~/.vimrc
+	[ -f ~/.gvimrc ] || ln -s ~/.vim/gvimrc.wandsas ~/.gvimrc
