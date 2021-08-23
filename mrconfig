@@ -61,7 +61,7 @@ checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas.github.io.git
 skip = ! my_workstation
 
-[$HOME/.GIT/docker/docker-credential-helpers]
+[$HOME/.GIT/container/docker/docker-credential-helpers]
 checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/docker-credential-helpers.git
 fixups = 
