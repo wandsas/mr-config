@@ -1,0 +1,9 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/container/docker/docker-credential-helpers]
+checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/docker-credential-helpers.git
+fixups = 
+	make pass
+	install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
+skip = ! my_workstation

@@ -21,17 +21,13 @@ checkout = git clone ssh://git@rpi3.homelab/var/git/pass-wandsas.git $MR_REPO
 post_checkout = chmod go-rwx $MR_REPO
 skip = ! my_workstation
 
-[$HOME/.pass-crosshatcher]
-checkout = git clone ssh://git@rpi3.homelab/var/git/pass-crosshatcher.git $MR_REPO
-post_checkout = chmod go-rwx $MR_REPO
-skip = ! android_dev_env
-
-[$HOME/.GIT/${USER}/dotfiles]
+[$HOME/.GIT/wandsas/dotfiles]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/dotfiles.git
 remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/dotfiles.git
+skip = ! my_workstation
 
-[$HOME/.GIT/${USER}/shlib]
+[$HOME/.GIT/wandsas/shlib]
 stowable = true
 checkout = git clone ssh://git@github.com/wandsas/shlib.git
 remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/shlib.git
@@ -45,27 +41,6 @@ post_checkout =
 	[ -f ~/.gvimrc ] || ln -s ~/.vim/gvimrc.wandsas ~/.gvimrc
 skip = ! my_workstation
 
-[$HOME/.SpaceVim]
-checkout = git clone git://github.com/SpaceVim/SpaceVim.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/SpaceVim.git
-post_checkout = 
-	[ -d ~/.vim ] || ln -s ~/.SpaceVim ~/.vim
-skip = true
-
 [$HOME/.vimwiki]
 checkout = git clone ssh://git@rpi3.homelab/var/git/vimwiki.git $MR_REPO
 skip = ! my_workstation
-
-[$HOME/.GIT/web/wandsas.github.io]
-checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas.github.io.git
-skip = ! my_workstation
-
-[$HOME/.GIT/container/docker/docker-credential-helpers]
-checkout = git clone git://github.com/docker/docker-credential-helpers.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/docker-credential-helpers.git
-fixups = 
-	make pass
-	install -m 755 bin/docker-credential-pass ~/.local/bin/docker-credential-pass
-skip = ! my_workstation
-

@@ -3,10 +3,10 @@
 [DEFAULT]
 include =
     for file in ~/.config/mr/groups.d/*; do
-        case "${1##*/}" in
+        case ${1##*/} in
             *.md|*.txt|*.log|*.orig|*.disabled|*~|README*|\#*\#) return 0 ;;
         esac
         echo "# INCLUDED FROM: $file"
-        cat "$file"
+        cat $file
         echo # Needed in case file isn't terminated with a newline
     done

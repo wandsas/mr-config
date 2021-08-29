@@ -1,121 +1,63 @@
 # vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:
 
-[$HOME/void/docs]
-checkout = git clone ssh://git@github.com/void-linux/void-docs.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-docs.git
-
-[$HOME/void/packages]
+[$HOME/void-packages]
 checkout = git clone ssh://git@github.com/void-linux/void-packages.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-packages.git
-skip = true
-
-[$HOME/.GIT/linux/void/void-updates]
-checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-updates.git
-fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
-skip = true
-
-[$HOME/.GIT/linux/void/void-runit]
-checkout = git clone git://github.com/void-linux/void-runit.git $MR_REPO
-remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/void-runit.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/runit]
-checkout = git clone git://github.com/void-linux/runit.git $MR_REPO
-remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/runit.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/void-infrastructure]
-checkout = git clone git://github.com/void-linux/void-infrastructure.git $MR_REPO
-remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/void-infrastructure.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/repo-exporter]
-checkout = git clone git://github.com/void-linux/repo-exporter.git $MR_REPO
-remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/repo-exporter.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/void-docker]
-checkout = git clone git://github.com/void-linux/void-docker.git $MR_REPO
-remotes = git_add_remote ssh://git@rpi3.homelab/srv/git/void-docker.git
-skip = ! my_workstation
-
-
-[$HOME/.GIT/linux/void/void-mklive]
-checkout = git clone ssh://git@rpi3.homelab/srv/git/void-mklive.git
-remotes = git_add_remote upstream git://github.com/void-linux/void-mklive.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/void-packages.git
 skip = ! my_workstation
 
 [$HOME/.GIT/linux/void/xbps]
 checkout = git clone  git://github.com/the-maldridge/xbps.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3/srv/git/xbps.git
+remotes = git_add_remote local ssh://git@rpi3/var/git/xbps.git
 skip = ! my_workstation
 
-[$HOME/.GIT/linux/void/xbps-mini-builder]
-checkout = git clone  git://github.com/the-maldridge/xbps-mini-builder.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3/srv/git/xbps-mini-builder.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/ircbot]
-checkout = git clone git://github.com/void-linux/ircbot.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/ircbot.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/man-site]
-checkout = git clone git://github.com/void-linux/man-site.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/man-site.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/xmandump]
-checkout = git clone git://github.com/void-linux/xmandump.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/xmandump.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/void-wiki]
-checkout = git clone git://github.com/void-linux/void-wiki.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/void-wiki.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/socklog-void]
-checkout = git clone git://github.com/void-linux/socklog-wiki.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/socklog-void.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/netbsd-wtf]
-checkout = git clone git://github.com/void-linux/netbsd-wtf.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/netbsd-wtf.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/oss-fuzz]
-checkout = git clone git://github.com/google/oss-fuzz.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/oss-fuzz.git
-skip = ! my_workstation
-
-[$HOME/.GIT/linux/void/buildbot-config]
-checkout = git clone git://github.com/void-linux/buildbot-config.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/oss-fuzz.git
+[$HOME/.GIT/linux/void/void-updates]
+checkout = git clone git://github.com/void-linux/void-updates.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/void-updates.git
+fixups = install -m755 void-updates.sh /usr/local/bin/void-updates
 skip = ! my_workstation
 
 [$HOME/.GIT/linux/void/musl-fts]
 checkout = git clone git://github.com/void-linux/musl-fts.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/musl-fuzz.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/musl-fuzz.git
 skip = ! my_workstation
 
 ###############################################################################
-# Alpine Linux
+# Void Runit
 ###############################################################################
 
-[$HOME/.GIT/linux/alpine/alpine-chroot-install]
-checkout = git clone git://github.com/alpinelinux/alpine-chroot-install $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/alpine-chroot-install.git $MR_REPO
+[$HOME/.GIT/linux/void/runit]
+checkout = git clone git://github.com/void-linux/runit.git $MR_REPO
+remotes = git_add_remote ssh://git@rpi3.homelab/var/git/runit.git
 skip = ! my_workstation
 
+[$HOME/.GIT/linux/void/void-runit]
+checkout = git clone git://github.com/void-linux/void-runit.git $MR_REPO
+remotes = git_add_remote ssh://git@rpi3.homelab/var/git/void-runit.git
+skip = ! my_workstation
 
 ###############################################################################
-# Gentoo Linux
+# Socklog
 ###############################################################################
 
-[$HOME/.GIT/linux/gentoo/gentoo-docker-images]
-checkout = git clone https://github.com/gentoo/gentoo-docker-images.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/gentoo-docker-images.git
+[$HOME/.GIT/linux/void/socklog-void]
+checkout = git clone git://github.com/void-linux/socklog-wiki.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/socklog-void.git
+skip = ! my_workstation
+
+###############################################################################
+# Void Docker container
+###############################################################################
+
+[$HOME/.GIT/linux/void/void-docker]
+checkout = git clone git://github.com/void-linux/void-docker.git $MR_REPO
+remotes = git_add_remote ssh://git@rpi3.homelab/var/git/void-docker.git
+skip = ! my_workstation
+
+###############################################################################
+# Void live images
+###############################################################################
+
+[$HOME/.GIT/linux/void/void-mklive]
+checkout = git clone ssh://git@rpi3.homelab/var/git/void-mklive.git
+remotes = git_add_remote upstream git://github.com/void-linux/void-mklive.git $MR_REPO
 skip = ! my_workstation

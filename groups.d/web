@@ -1,0 +1,6 @@
+# vim:fenc=utf-8:ft=dosini:ts=2:sts=2:sw=2:et:
+
+[$HOME/.GIT/web/wandsas.github.io]
+checkout = git clone ssh://git@github.com/wandsas/wandsas.github.io.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/wandsas.github.io.git
+skip = ! my_workstation

@@ -21,3 +21,4 @@ remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/tordns.git
 [$HOME/.GIT/network/ntu]
 checkout = git clone git://github.com/onionmail/ntu.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/srv/git/ntu.git
+skip = true

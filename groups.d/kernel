@@ -2,46 +2,69 @@
 
 [$HOME/.GIT/linux/kernel/linux]
 checkout = git clone git://github.com/torvalds/linux.git $MR_REPO
-remotes = git_add_remote local ssh://git@rpi3.homelab/var/linux/linux.git
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/linux-source.git
+skip = ! my_workstation
 
 # Gentoo Patches
 [$HOME/.GIT/linux/gentoo-patches]
 checkout = git clone https://anongit.gentoo.org/git/proj/linux-patches.git $MR_REPO
 remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/gentoo-linux-patches.git
+skip = ! my_workstation
 
 # Linux firmware-nonfree
 [$HOME/.GIT/linux/kernel/firmware-nonfree]
 checkout = git clone git://github.com/RPi-Distro/firmware-nonfree.git $MR_REPO
+skip = true
 
 [$HOME/.GIT/linux/kernel/common]
 checkout = git clone git://github.com/containers/common.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/common.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/kconfig-hardened-check]
 checkout = git clone git://github.com/a13xp0p0v/kconfig-hardened-check.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/kconfig-hardened-check.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/kernel-build-containers]
 checkout = git clone git://github.com/a13xp0p0v/kernel-build-containers.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/kernel-build-containers-git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/kernel-hack-drill]
 checkout = git clone git://github.com/a13xp0p0v/kernel-hack-drill.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/kernel-hack-drill.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/korg-helpers]
 checkout = git clone git://git.kernel.org/pub/scm/linux/kernel/git/mricon/korg-helpers.gi $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/korg-helpers.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/libseccomp]
 checkout = git clone git://github.com/seccomp/libseccomp.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/libseccomp.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/libseccomp-golang]
 checkout = git clone git://github.com/seccomp/libseccomp-golang.git $MR_REPO
+remotes = git_add_remote local ssh://rpi3.homelab/var/git/libseccomp-golang.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/linux-kernel-defence-map]
 checkout = git clone git://github.com/a13xp0p0v/linux-kernel-defence-map.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/linux-kernel-defence-map.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/linux-security-papers]
 checkout = git clone git://github.com/maxking/linux-security-papers.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/linux-security-papers.git
+skip = ! my_workstation
 
 [$HOME/.GIT/linux/kernel/nftables-managed-with-git]
 checkout = git clone git://github.com/aborrero/nftables-managed-with-git.git $MR_REPO
+remotes = git_add_remote local ssh://git@rpi3.homelab/var/git/nftables-managed-with-git.git
+skip = ! my_workstation
 
 # Userland chroot bubblewrap
 [$HOME/.GIT/linux/kernel/bubblewrap]

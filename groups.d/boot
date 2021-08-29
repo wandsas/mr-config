@@ -4,7 +4,7 @@
 checkout = git clone git://github.com/thias/glim.git $MR_REPO
 skip = ! my_workstation
 
-[$HOME/.GIT/multiboot]
+[$HOME/.GIT/boot/multiboot]
 checkout = git clone git://github.com/aguslr/multibootusb $MR_REPO
 skip = ! my_workstation
 
