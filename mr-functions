@@ -12,7 +12,7 @@ underline="\033[4m"
 reset="\033[m"
 
 MY_USER=wandsas
-MY_HOST=z800
+MY_HOST=z620
 MY_DOMAIN=homelab
 
 GIT_MY_UPSTREAM=github
