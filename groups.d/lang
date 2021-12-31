@@ -10,7 +10,10 @@ post_checkout =
   src/configure && make -C src
 skip = ! my_workstation
 
+[$HOME/.local/lib/pyenv/plugins/pyenv-virtualenv]
+checkout = git clöone git://github.com/pyenv/pyenv-virtualenv.git
+
 [$HOME/.local/lib/nvm]
-checkout = git clone -b v0.38.0 git://github.com/nvm-sh/nvm.git $MR_REPO
-update = git pull origin v0.38.0 
+checkout = git clone -b v16.13.1 git://github.com/nvm-sh/nvm.git $MR_REPO
+update = git pull origin v16.13.1 
 skip = ! my_workstation
